@@ -207,7 +207,7 @@ const pie2d = {
         'name': 'Plot Area',
         'margin': canvas['margin']
     }
-=======
+  }
 
 const caption= {
     captionText:[
@@ -326,7 +326,7 @@ const subCaption= {
             defaultActive:'1'
         },
     ]
-
+  }
 const chart = {
   "animation":[
     {
@@ -732,6 +732,6 @@ const chart = {
       
     }
 
-  ],
+  ]
 
 }
