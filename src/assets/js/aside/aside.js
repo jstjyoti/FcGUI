@@ -1,3 +1,4 @@
+
 function showHideDetail(e) {
     let dom = e.target
     const sideNav = document.querySelector('.aside-detail')
@@ -188,3 +189,4 @@ function aside() {
     const aside = document.getElementById('aside')
     aside.appendChild(render(skeleton))
 }
+
