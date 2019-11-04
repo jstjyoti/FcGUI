@@ -7,15 +7,23 @@
  function savePath(e){
      const path=document.getElementById('fileUpload');
      const fileText=document.getElementById('fileText');
-    //  if(path.value){
-    //     fileText.innerHTML=path.value;
-    // }
-     if(path.files[0].name){
-         fileText.innerHTML=path.files[0].name;
-     }
-     else{
-        fileText.innerHTML="No file Chosen";
-     }
+    // //  if(path.value){
+    // //     fileText.innerHTML=path.value;
+    // // }
+    //  if(path.files[0].name){
+    //      fileText.innerHTML=path.files[0].name;
+    //  }
+    //  else{
+    //     fileText.innerHTML="No file Chosen";
+    //  }
+    const reader = new FileReader();
+    reader.onload = function(){
+        const lines = reader.result.split("\n").map(function(lines){
+            return lines.split(',');
+        });
+        console.log(lines)
+    }
+    reader.readAsText(path.files[0]);
  }
 function nav() {
   const skeleton = {
