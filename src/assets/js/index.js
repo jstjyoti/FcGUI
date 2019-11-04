@@ -1,6 +1,6 @@
 (function index() {
     header()
-    // nav()
+    nav()
     aside()
     // chart()
     // footer()

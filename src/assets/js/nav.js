@@ -32,39 +32,58 @@
 //       return 1
 //   }
 // }
+function uploadCSV(e){
+    const dom=e.target;
+    const actionelement=document.querySelector('.nav-dataloadButton-container');
+    console.log(actionelement.hasChildNodes()) 
+    
+    const input={
+        'parent':{
+            'name' : 'input',
+            'property':{
+                'type':'file',
+                'accept':'.csv'
+            }
+        }
+    }
+    dom.appendChild(render(input));
+    remove
+
+} 
 function nav() {
   const skeleton = {
       'parent': {
           'name': 'div',
           'property': {
-              'class': 'nav-container'
+              'class': 'navbar-container'
           },
       },
       'children': [{
           'parent': {
               'name': 'ul',
               'property': {
-                  'class': 'nav-nav'
+                  'class': 'navbar-nav'
               }
           },
           'children': [{
               'parent': {
                   'name': 'li',
                   'property': {
-                      'class': 'nav-link-container'
+                      'class': 'nav-dataloadButton-container'
                   },
+                  "text":"Upload CSV"
+                  ,
                   'event': function () {
                       // onclick will open nav-detail tab, each tab
                       // will open a different width
                       // will add class
                       this.addEventListener('click', function (e) {
-                          showHideDetail(e)
+                          uploadCSV(e);
                       })
 
                   }
               },
-              'children': [{
-              }]
+              
       }]
     }]
   }
