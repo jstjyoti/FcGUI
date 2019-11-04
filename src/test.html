@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(document.getElementById('text').addEventListener('click', () => console.log(1)))    
+    </script>
+    <input id="text" type="text" value="" placeholder="">
+    <input id="number" type="number" value="" placeholder="">
+    <input id="range" type="range" min="10" max="20">
+    <input id= "checkbox" type="checkbox">
+    <select id="dropdown">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <script>
+        const text = document.getElementById('text') 
+        const number = document.getElementById('number') 
+        const range = document.getElementById('range') 
+        const checkbox = document.getElementById('checkbox') 
+        const dropdown = document.getElementById('dropdown')
+        
+        text.addEventListener('input', function(e) {
+            console.log('text', e.target.value)
+        })
+        number.addEventListener('input', function(e) {
+            console.log('number',e.target.value)
+        })
+        range.addEventListener('input', function(e) {
+            console.log(e.target.value)
+        })
+        checkbox.addEventListener('input', function(e) {
+            console.log(e.target.checked)
+        })
+        dropdown.addEventListener('input', function(e) {
+            console.log(e.target.value)
+        })
+        text.value = 'sdsdsdsd'
+    </script>
+</body>
+</html>
