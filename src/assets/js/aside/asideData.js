@@ -236,7 +236,7 @@ const canvas = {
         'defaultActive': '1',
         'location': 'chart'
     }]
-
+}
 
 const dataplot = {
   features: [{
@@ -1290,6 +1290,5 @@ const chart = {
     }
 
   ]
-
 
 }
