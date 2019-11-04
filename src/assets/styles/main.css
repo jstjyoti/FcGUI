@@ -11,10 +11,15 @@
 body {
     overflow: hidden;
     margin: 0;
-    background-color: #fff;
     padding: 0;
+    display: flex;
+    flex-flow: column;
 }
-
+.container {
+    display: flex;
+    height: 100vh;
+    flex-flow: row nowrap;
+}
 ul {
     list-style-type: none;
     padding: 0;
@@ -71,12 +76,19 @@ ul {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
 }
 #aside {
-    background: #fff;
+    max-width: 50vw;
+    background-color: rgba(87, 87, 87, 0.199);
+}
+#main {
+    padding: 15px;
+    margin: 0 15px;
+    background-color: #000;
 }
 
 .aside-container {
     display: flex;
-    flex-flow: row wrap;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
 }
 
 .aside-link-container {
@@ -99,7 +111,7 @@ ul {
 
 .aside-customize {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
 }
 
 .customize-item {
@@ -138,13 +150,13 @@ ul {
 
 .input>div {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
 }
 
 .customize-input-field {
     overflow-y: scroll;
-    height: 500px;
+    height: 90vh;
 }
 
 ::-webkit-scrollbar {
