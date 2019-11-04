@@ -883,7 +883,7 @@ const subCaption = {
     },
   ]
 }
-const chart = {
+const chartDS = {
   "animation": [{
       "label": "Enable",
       "inputFieldType": "check",
