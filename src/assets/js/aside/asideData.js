@@ -286,6 +286,14 @@ const dataplot = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
+            }, 0)
+        })
+    
       //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
     }
   }, {
@@ -326,6 +334,12 @@ const dataplot = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
+          }, 0)
+      })
       //background_plotBorderDashLen,background_plotBorderDashGap
     }
   }, {
@@ -356,7 +370,13 @@ const dataplot = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
-      // gradient_plotGradientColor,gradient_plotFillAlpha,gradient_plotFillRatio,gradient_plotFillAngle
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
+          }, 0)
+      })
+      // 'gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle'
     }
   }, {
     label: 'Color',
@@ -405,7 +425,13 @@ const dataplot = {
     note: 'Remove theme to apply this',
     defaultActive: '0',
     willActivate: function () {
-      //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+          }, 0)
+      })
+      //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
     }
   }, {
     label: 'Hover data plots',
@@ -416,6 +442,12 @@ const dataplot = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+          }, 0)
+      })
       //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
     }
   }, {
@@ -471,6 +503,12 @@ const dataplot = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
+          }, 0)
+      })
       //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
     }
   }, {
@@ -501,6 +539,12 @@ const dataplot = {
     note: '',
     defaultActive: '1',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_crossLineColor' ,'background_crossLineAlpha', 'background_crossLineAnimation', 'background_crossLineAnimationDuration' ,'background_drawCrossLineOnTop']))
+          }, 0)
+      })
       //background_crossLineColor ,background_crossLineAlpha,background_crossLineAnimation,background_crossLineAnimationDuration,background_drawCrossLineOnTop
     }
   }, {
@@ -558,6 +602,12 @@ const plotValue = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['features_rotateValues','features_placeValuesInside', 'font-properties']))
+          }, 0)
+      })
       //features_rotateValues,features_placeValuesInside, font-properties
     }
   }, {
@@ -665,6 +715,12 @@ const plotValue = {
     note: '',
     defaultActive: '0',
     willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_valueBorderDashLen', 'border_valueBorderDashGap']))
+          }, 0)
+      })
       //border_valueBorderDashLen, border_valueBorderDashGap
     }
   }, {
@@ -893,6 +949,14 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "willActivate": () => {
+        var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['animation_animationDuration']))
+          }, 0)
+      })
+      
+    
         //enable Animation Duration
       }
     },
@@ -948,7 +1012,13 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "willActivate": () => {
-        //event Listeners
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgAlpha","background_bgRatio","background_bgAngle"]))
+            }, 0)
+        })
+        
       }
 
     },
@@ -969,7 +1039,7 @@ const chartDS = {
       "inputFieldType": "text",
       "placeHolder": "40,60",
       "value": "",
-      "id": "background_bgAlpha",
+      "id": "background_bgRatio",
       "note": "comma separated Value ",
       "defaultActive": "0"
     },
@@ -994,8 +1064,15 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "willActivate": () => {
-        //event Listeners
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgImageAlpha","background_bgImageDisplayMode","background_bgImageVAlign","background_bgImageHAlign","background_bgImageScale"]))
+            }, 0)
+        })
+        
       }
+      
     },
 
     {
@@ -1100,7 +1177,14 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "willActivate": () => {
-        //event Listeners
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["chartBorder_borderColor","chartBorder_borderThickness","chartBorder_borderAlpha"]))
+            }, 0)
+        })
+        
+      
       }
 
     },
@@ -1111,7 +1195,7 @@ const chartDS = {
       "value": "",
       "id": "chartBorder_borderColor",
       "note": "",
-      "defaultActive": "1",
+      "defaultActive": "0",
 
     },
     {
@@ -1121,7 +1205,7 @@ const chartDS = {
       "value": "",
       "id": "chartBorder_borderThickness",
       "note": "",
-      "defaultActive": "0s",
+      "defaultActive": "0",
     },
     {
       "label": "Opacity",
@@ -1183,7 +1267,13 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "willActivate": () => {
-        //event Listeners
+  
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["logo_logoLeftMargin","logo_logoRightMargin","logo_logoPosition","logo_logoAlpha","logo_logoLink","logo_logoScale"]))
+            }, 0)
+        })
       }
 
     },
