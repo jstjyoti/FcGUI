@@ -1,55 +1,22 @@
-// function showHideDetail(e) {
-//   let dom = e.target
-//   const sideNav = document.querySelector('.nav-detail')
-//   function deleteNode() {
-//       while (sideNav.hasChildNodes()) {
-//           sideNav.removeChild(sideNav.lastChild)
-//       }
-//   }
-//   while (dom.tagName !== 'LI') {
-//       dom = dom.parentElement
-//   }
-//   if (dom.classList.contains('nav-link-active')) {
-//       sideNav.classList.add('nav-detail-hide')
-//       deleteNode()
-//       dom.classList.remove('nav-link-active')
-//       return 0
-//   } else {
-//       // remove if someone has it
-//       const nodes = Array.from(document.querySelectorAll('.nav-link-container'))
-//       for (var node of nodes) {
-//           if (node.classList.contains('nav-link-active')) {
-//               node.classList.remove('nav-link-active')
-//               break;
-//           }
-//       }
-//       dom.classList.add('nav-link-active')
-//       if (sideNav.classList.contains('nav-detail-hide') === false) {
-//           deleteNode()
-//       } else {
-//           sideNav.classList.remove('nav-detail-hide')
-//       }
-//       return 1
-//   }
-// }
-function uploadCSV(e){
-    const dom=e.target;
-    const actionelement=document.querySelector('.nav-dataloadButton-container');
-    console.log(actionelement.hasChildNodes()) 
-    
-    const input={
-        'parent':{
-            'name' : 'input',
-            'property':{
-                'type':'file',
-                'accept':'.csv'
-            }
-        }
-    }
-    dom.appendChild(render(input));
-    remove
+ function fileClick(e) {
 
-} 
+     document.getElementById('fileUpload').click();
+    //TODO do something with fileList. 
+    //console.log(fileList);
+ }
+ function savePath(e){
+     const path=document.getElementById('fileUpload');
+     const fileText=document.getElementById('fileText');
+    //  if(path.value){
+    //     fileText.innerHTML=path.value;
+    // }
+     if(path.files[0].name){
+         fileText.innerHTML=path.files[0].name;
+     }
+     else{
+        fileText.innerHTML="No file Chosen";
+     }
+ }
 function nav() {
   const skeleton = {
       'parent': {
@@ -71,18 +38,57 @@ function nav() {
                   'property': {
                       'class': 'nav-dataloadButton-container'
                   },
-                  "text":"Upload CSV"
-                  ,
-                  'event': function () {
-                      // onclick will open nav-detail tab, each tab
-                      // will open a different width
-                      // will add class
-                      this.addEventListener('click', function (e) {
-                          uploadCSV(e);
-                      })
-
-                  }
+                  
+                  
               },
+              'children':[
+                 {
+                    'parent':{
+                        'name' : 'input',
+                        'property':{
+                            'type':'file',
+                            'id':'fileUpload',
+                            'class':'filestyle',
+                            'data-classButton':"btn btn-primary",
+                            'data-input':"false",
+                            'data-classIcon':"icon-plus",
+                            'data-buttonText':"Upload CSV",
+                            'accept':'.csv',
+                            'hidden':'hidden'
+                        },
+                        'event':function(){
+                            this.addEventListener("change",function(e){
+                                savePath(e)
+                            })
+                        }
+                    }
+                 },
+                 {
+                     'parent':{
+                         'name':'button',
+                         'property':{
+                            'type':'button',
+                            'id':'fileButton'
+                         },
+                         'text':'Choose CSV file',
+                         'event':function(){
+                            this.addEventListener("click",function(e){
+                                fileClick(e);
+                            })
+                        }
+                     }
+                 },
+                 {
+                    'parent':{
+                        'name':'span',
+                        'property':{
+                           'id':'fileText'
+                        },
+                        "text":'No File Chosen yet'
+                    }
+                },
+
+              ]
               
       }]
     }]

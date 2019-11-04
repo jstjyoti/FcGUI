@@ -195,3 +195,16 @@ ul {
     color: #fff;
     text-align: center;
 }
+#fileButton{
+    padding: 10px;
+    color:#000;
+    background-color: #ddd;
+    border:1px solid  #000;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#fileText{
+    margin-left: 10px;
+    color:#aaa;
+    
+}
