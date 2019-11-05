@@ -826,119 +826,13 @@ const pie2d = {
     'margin': canvas['margin']
   }
 }
-
-const caption = {
-  captionText: [{
-    label: 'Heading',
-    inputFieldType: 'text',
-    placeholder: 'My Heading',
-    value: '',
-    id: 'caption_caption',
-    note: '',
-    defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
-
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_captionFontSize', 'caption_captionFont',
-      'caption_captionFontColor', 'caption_captionFontBold')
-  }, ],
-  captionFont: [{
-      label: 'Font Size',
-      inputFieldType: "range",
-      min: '6',
-      max: '72',
-      value: '',
-      placeholder: '14',
-      id: 'caption_captionFontSize',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Style',
-      inputFieldType: "text",
-      value: '',
-      placeholder: 'Arial',
-      id: 'caption_captionFont',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Color',
-      inputFieldType: "color",
-      value: '',
-      placeholder: '#dddddd',
-      id: 'caption_captionFontColor',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Bold',
-      inputFieldType: "checkbox",
-      value: '',
-      id: 'caption_captionFontBold',
-      note: '',
-      defaultActive: '1'
-    },
-  ]
-}
-const subCaption = {
-  subCaptionText: [{
-    label: 'Sub-Heading',
-    inputFieldType: 'text',
-    placeholder: 'My Sub Heading',
-    value: '',
-    id: 'caption_subCaption',
-    note: '',
-    defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
-
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_subCaptionFontSize', 'caption_subCaptionFont',
-      'caption_subCaptionFontColor', 'caption_subCaptionFontBold')
-  }, ],
-  subCaptionFont: [{
-      label: 'Font Size',
-      inputFieldType: "range",
-      min: '6',
-      max: '72',
-      value: '',
-      placeholder: '14',
-      id: 'caption_subCaptionFontSize',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Style',
-      inputFieldType: "text",
-      value: '',
-      placeholder: 'Arial',
-      id: 'caption_subCaptionFont',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Color',
-      inputFieldType: "color",
-      value: '',
-      placeholder: '#dddddd',
-      id: 'caption_subCaptionFontColor',
-      note: '',
-      defaultActive: '1'
-    },
-    {
-      label: 'Font Bold',
-      inputFieldType: "checkbox",
-      value: '',
-      id: 'caption_subCaptionFontBold',
-      note: '',
-      defaultActive: '1'
-    },
-  ]
-}
+// shifted caption and subCaption Attrs into chartDS
+// const caption = {
+  
+// }
+// const subCaption = {
+  
+// }
 const chartDS = {
   "animation": [{
       "label": "Enable",
@@ -1219,6 +1113,126 @@ const chartDS = {
       "defaultActive": "0",
     },
   ],
+  captionText: [{
+    label: 'Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Heading',
+    value: '',
+    id: 'caption_caption',
+    note: '',
+    defaultActive: '1',
+    willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+              'caption_captionFontSize', 'caption_captionFont',
+              'caption_captionFontColor', 'caption_captionFontBold']))
+          }, 0)
+      })
+      //'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+      // 'caption_captionFontSize', 'caption_captionFont',
+      // 'caption_captionFontColor', 'caption_captionFontBold' will get activated
+    },
+  }],
+  captionFont: [{
+      label: 'Font Size',
+      inputFieldType: "range",
+      min: '6',
+      max: '72',
+      value: '',
+      placeholder: '14',
+      id: 'caption_captionFontSize',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Style',
+      inputFieldType: "text",
+      value: '',
+      placeholder: 'Arial',
+      id: 'caption_captionFont',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Color',
+      inputFieldType: "color",
+      value: '',
+      placeholder: '#dddddd',
+      id: 'caption_captionFontColor',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Bold',
+      inputFieldType: "checkbox",
+      value: '',
+      id: 'caption_captionFontBold',
+      note: '',
+      defaultActive: '1'
+    },
+  ],
+  subCaptionText: [{
+    label: 'Sub-Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Sub Heading',
+    value: '',
+    id: 'caption_subCaption',
+    note: '',
+    defaultActive: '1',
+    willActivate: function () {
+      var self = this
+      new Promise(function (resolve, reject) {
+          setTimeout(() => {
+              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, 
+                ['caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+              'caption_subCaptionFontSize', 'caption_subCaptionFont',
+              'caption_subCaptionFontColor', 'caption_subCaptionFontBold']))
+          }, 0)
+      })
+      //'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+      // 'caption_subCaptionFontSize', 'caption_subCaptionFont',
+      // 'caption_subCaptionFontColor', 'caption_subCaptionFontBold' will get activated
+    },
+  }, ],
+  subCaptionFont: [{
+    label: 'Font Size',
+    inputFieldType: "range",
+    min: '6',
+    max: '72',
+    value: '',
+    placeholder: '14',
+    id: 'caption_subCaptionFontSize',
+    note: '',
+    defaultActive: '1'
+  },
+  {
+    label: 'Font Style',
+    inputFieldType: "text",
+    value: '',
+    placeholder: 'Arial',
+    id: 'caption_subCaptionFont',
+    note: '',
+    defaultActive: '1'
+  },
+  {
+    label: 'Font Color',
+    inputFieldType: "color",
+    value: '',
+    placeholder: '#dddddd',
+    id: 'caption_subCaptionFontColor',
+    note: '',
+    defaultActive: '1'
+  },
+  {
+    label: 'Font Bold',
+    inputFieldType: "checkbox",
+    value: '',
+    id: 'caption_subCaptionFontBold',
+    note: '',
+    defaultActive: '1'
+  }],
   captionAlignment: [{
       label: 'Alignment',
       inputFieldType: "select",
@@ -1229,8 +1243,17 @@ const chartDS = {
       note: '',
       defaultActive: '1',
       willActivate: function () {
-        document.getElementById(this.id).addEventListener('change', () => {})
-      }.bind(null, 'caption_captionHorizontalPadding')
+        var self = this
+        new Promise(function (resolve, reject) {
+            setTimeout(() => {
+              if(self['value']!='center'){
+                document.getElementById(self['id']).addEventListener('change', handleInputs.bind(null, 
+                  ['caption_captionHorizontalPadding']))
+                }
+            }, 0)
+        })
+        // 'caption_captionHorizontalPadding',  will get activated only when captionAlignment is other than 'center'
+      },
     },
     {
       label: 'Alignment wrt Plot Area',
@@ -1257,7 +1280,7 @@ const chartDS = {
     id: 'caption_captionHorizontalPadding',
     note: 'Applicable only for left and right alignment',
     defaultActive: '1',
-  }, ],
+  }],
   "logo": [{
       "label": "SourceLink",
       "inputFieldType": "url",
