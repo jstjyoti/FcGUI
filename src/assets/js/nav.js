@@ -10,51 +10,72 @@
      const fileText=document.getElementById('fileText');
     const reader = new FileReader();
     reader.onload = function(){
-        const lines = reader.result.split("\n").map(function(lines){
+        let lines;
+        var p = new Promise(function(resolve,reject){
+            lines = reader.result.split("\n").map(function(lines)
+            {
             return lines.split(',');
-        });
+            })
+            resolve(function(){
+                    CreateSelects()
+            }
+            )
+            
+        })
+        p.then(function(val) {
+            val();
         console.log(lines);
+
+        })
         data=lines;
         fileText.innerHTML=path.files[0].name;
 
     }
     reader.readAsText(path.files[0])
-
-    
-    
+      
  }
  function CreateSelects(){
     
-    if(document.getElementById('xAxis'))
-    {
-        while(document.getElementById('xAxis').hasChildNodes()) {
-            document.getElementById('xAxis').removeChild(document.getElementById('xAxis').lastChild);
-            document.getElementById('yAxis').removeChild(document.getElementById('yAxis').lastChild)
-        }
-    }
+    // if(document.getElementById('xAxis'))
+    // {
+    //     while(document.getElementById('xAxis').hasChildNodes()) {
+    //         document.getElementById('xAxis').removeChild(document.getElementById('xAxis').lastChild);
+    //         document.getElementById('yAxis').removeChild(document.getElementById('yAxis').lastChild)
+    //     }
+    // }
     
         const selectX=document.createElement('select');
         const selectY=document.createElement('select');
     //selectX.setAttribute('class','selectpicker');
-        selectX.setAttribute('id','xAxix');
+        selectX.setAttribute('id','xAxis');
         selectY.setAttribute('class','selectpicker');
         selectY.setAttribute('id','selectpicker');
         selectY.setAttribute('multiple',"1");
+        selectY.setAttribute('data-live-search',"true");
+        selectY.setAttribute("multiple","multiple");
+    for (j=0;j<data[0].length;j++){
+        //console.log(i,opt);
+        const opt= document.createElement('option');
+        opt.setAttribute('value',data[0][j]);
+        opt.innerHTML=data[0][j];
+        
+        selectX.appendChild(opt);
+        
+    }
     
-    for (j=0;j<2;j++){
+    for (j=0;j<data[0].length;j++){
         //console.log(i,opt);
        const opt= document.createElement('option');
        opt.setAttribute('value',data[0][j]);
        opt.setAttribute('text',data[0][j]);
-       selectX.appendChild(opt);
+       
        selectY.appendChild(opt);
        
-
     }
-    if(!document.getElementById('xAxis').hasChildNodes()){
+    //if(!document.getElementById('xAxis').hasChildNodes()){
         document.getElementById('selectx-container').appendChild(selectX);
         document.getElementById('selecty-container').appendChild(selectY);
-    }
+    //}
 }
 
  
@@ -100,14 +121,8 @@ function nav() {
                         },
                         'event':function(){
                             
-                                this.addEventListener("change",function(e){
-                             new Promise(function(resolve,reject){ savePath(e)}).
-                             then(function()
-                             {
-                                 setTimeout(CreateSelects(),0)}
-                             ).catch(
-                                 console.log(data,"data")
-                             )
+                            this.addEventListener("change",function(e){
+                                 savePath(e);
                             })
                         }
                     }
@@ -149,8 +164,6 @@ function nav() {
             'property':{
                 
                 'id':'selectx-container',
-                
-
             }
         }
     },

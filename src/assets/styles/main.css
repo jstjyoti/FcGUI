@@ -17,6 +17,8 @@ body {
 }
 .container {
     display: flex;
+    margin:0!important;
+    padding:0!important;
     height: 100vh;
     flex-flow: row nowrap;
 }
