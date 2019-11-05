@@ -1,3 +1,4 @@
+ var data;
  function fileClick(e) {
 
      document.getElementById('fileUpload').click();
@@ -7,24 +8,56 @@
  function savePath(e){
      const path=document.getElementById('fileUpload');
      const fileText=document.getElementById('fileText');
-    // //  if(path.value){
-    // //     fileText.innerHTML=path.value;
-    // // }
-    //  if(path.files[0].name){
-    //      fileText.innerHTML=path.files[0].name;
-    //  }
-    //  else{
-    //     fileText.innerHTML="No file Chosen";
-    //  }
     const reader = new FileReader();
     reader.onload = function(){
         const lines = reader.result.split("\n").map(function(lines){
             return lines.split(',');
         });
-        console.log(lines)
+        console.log(lines);
+        data=lines;
+        fileText.innerHTML=path.files[0].name;
+
     }
-    reader.readAsText(path.files[0]);
+    reader.readAsText(path.files[0])
+
+    
+    
  }
+ function CreateSelects(){
+    
+    if(document.getElementById('xAxis'))
+    {
+        while(document.getElementById('xAxis').hasChildNodes()) {
+            document.getElementById('xAxis').removeChild(document.getElementById('xAxis').lastChild);
+            document.getElementById('yAxis').removeChild(document.getElementById('yAxis').lastChild)
+        }
+    }
+    
+        const selectX=document.createElement('select');
+        const selectY=document.createElement('select');
+    //selectX.setAttribute('class','selectpicker');
+        selectX.setAttribute('id','xAxix');
+        selectY.setAttribute('class','selectpicker');
+        selectY.setAttribute('id','selectpicker');
+        selectY.setAttribute('multiple',"1");
+    
+    for (j=0;j<2;j++){
+        //console.log(i,opt);
+       const opt= document.createElement('option');
+       opt.setAttribute('value',data[0][j]);
+       opt.setAttribute('text',data[0][j]);
+       selectX.appendChild(opt);
+       selectY.appendChild(opt);
+       
+
+    }
+    if(!document.getElementById('xAxis').hasChildNodes()){
+        document.getElementById('selectx-container').appendChild(selectX);
+        document.getElementById('selecty-container').appendChild(selectY);
+    }
+}
+
+ 
 function nav() {
   const skeleton = {
       'parent': {
@@ -40,7 +73,8 @@ function nav() {
                   'class': 'navbar-nav'
               }
           },
-          'children': [{
+          'children': [
+            {
               'parent': {
                   'name': 'li',
                   'property': {
@@ -65,8 +99,15 @@ function nav() {
                             'hidden':'hidden'
                         },
                         'event':function(){
-                            this.addEventListener("change",function(e){
-                                savePath(e)
+                            
+                                this.addEventListener("change",function(e){
+                             new Promise(function(resolve,reject){ savePath(e)}).
+                             then(function()
+                             {
+                                 setTimeout(CreateSelects(),0)}
+                             ).catch(
+                                 console.log(data,"data")
+                             )
                             })
                         }
                     }
@@ -98,8 +139,33 @@ function nav() {
 
               ]
               
-      }]
-    }]
+            },
+           
+          ],
+    },
+    {
+        'parent':{
+            'name':'div',
+            'property':{
+                
+                'id':'selectx-container',
+                
+
+            }
+        }
+    },
+    {
+        'parent':{
+            'name':'div',
+            'property':{
+                
+                'id':'selecty-container',
+                
+
+            }
+        }
+    }
+]
   }
 
   const nav = document.getElementById('nav')
