@@ -150,14 +150,6 @@ function aside() {
                     'name': 'li',
                     'property': {
                         'class': 'aside-link-container'
-                    },
-                    'event': function () {
-                        // onclick will open aside-detail tab, each tab
-                        // will open a different width
-                        // will add class
-                        this.addEventListener('click', function (e) {
-                            showHideDetail(e)
-                        })
                     }
                 },
                 'children': [{
@@ -165,6 +157,15 @@ function aside() {
                         'name': 'a',
                         'property': {
                             'class': 'aside-link'
+                        },
+                        'event': function () {
+                            // onclick will open aside-detail tab, each tab
+                            // will open a different width
+                            // will add class
+                            this.addEventListener('click', function (e) {
+                                e.preventDefault()
+                                exportHTML()
+                            })
                         }
                     },
                     'children': [{
@@ -176,7 +177,43 @@ function aside() {
                         }
                     }]
                 }]
-            }]
+            }, {
+                'parent': {
+                    'name': 'li',
+                    'property': {
+                        'class': 'aside-link-container'
+                    },
+                    'event': function () {
+                        // onclick will open aside-detail tab, each tab
+                        // will open a different width
+                        // will add class
+                        this.addEventListener('click', function (e) {
+                           if(showHideDetail(e) === 1) {
+                               // executejson
+                               editJson() 
+                           }
+                        })
+                    },
+                },
+                    'children':[
+                        {
+                            'parent': {
+                                'name': 'a',
+                                'property': {
+                                    'class': 'aside-link'
+                                }
+                            },
+                            'children': [{
+                                'parent': {
+                                    'name': 'i',
+                                    'property': {
+                                        'class': 'fa fa-file-text aside-icon'
+                                    }
+                                }
+                            }]
+                        }
+                    ]
+                }   ]
         }, {
             'parent': {
                 'name': 'div',

@@ -146,3 +146,12 @@ ul {
     color: #fff;
     text-align: center;
 }
+.json-textarea {
+    overflow: auto;
+    background-color: rgb(37, 34, 34);
+    color: #00ff00;
+    height: 400px;
+    word-spacing: 2px;
+    line-height: 1.8;
+    resize: none;
+}
