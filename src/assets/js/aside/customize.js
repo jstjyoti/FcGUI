@@ -23,6 +23,21 @@ function createLabel(value) {
     }
 }
 
+function handleChartChanges() {
+    debugger
+    const value = arguments[0]
+    const event = arguments[1]
+    if (value['location'] === 'chart') {
+        if (value['inputFieldType'] === 'checkbox') {
+            chart.setChartAttribute(value['id'].split('_')[1], event.target.checked ? '1' : '0')
+        } else {
+            chart.setChartAttribute(value['id'].split('_')[1], event.target.value)
+        }
+    } else if (typeof value['location'] === 'object') {
+
+    }
+}
+
 function inputCheckBox(value) {
     const skeleton = {
         'parent': {
@@ -47,9 +62,6 @@ function inputCheckBox(value) {
                                 'id': value['id'],
                                 'type': 'checkbox'
                             }
-                            if (value['placeholder'].length !== 0) {
-                                skeleton['placeholder'] = value['placeholder']
-                            }
                             if (value['checked'] === 0) {
                                 // skeleton['checked'] = will either have current value or will have 
                                 // default value
@@ -61,7 +73,10 @@ function inputCheckBox(value) {
                                 value.willActivate()
                             }
                             return skeleton
-                        })()
+                        })(),
+                        'event': function () {
+                            this.addEventListener('input', handleChartChanges.bind(null, value))
+                        }
                     }
                 }
             ]
@@ -88,7 +103,7 @@ function inputText(value) {
             }, {
                 'parent': {
                     'name': 'input',
-                    'property': ((value) => {
+                    'property': (() => {
                         const skeleton = {
                             'class': 'input-text',
                             'id': value['id'],
@@ -108,7 +123,10 @@ function inputText(value) {
                             value.willActivate()
                         }
                         return skeleton
-                    })(value)
+                    })(),
+                    'event': function () {
+                        this.addEventListener('input', handleChartChanges.bind(null, value))
+                    }
                 }
             }]
         }]
@@ -134,23 +152,56 @@ function inputDropDown(value) {
             }, {
                 'parent': {
                     'name': 'select',
-                    'property': {
-                        'class': 'input-select'
+                    'property': (() => {
+                        const skeleton = {
+                            'class': 'input-select'
+                        }
+                        if (value['value'] === 0) {
+                            // skeleton['value'] = will either have current value or will have 
+                            // default value
+                        }
+                        if (+value['defaultActive'] === 0 && !skeleton['value']) {
+                            skeleton['disabled'] = ''
+                        }
+                        if (value['willActivate']) {
+                            value.willActivate()
+                        }
+                        return skeleton
+                    })(),
+                    'event': function() {
+                        debugger
+                        this.addEventListener('input', handleChartChanges.bind(null, value))
                     }
                 },
                 'children': (() => {
                     const children = []
-                    for (var option of value['selectValues']) {
-                        children.push({
-                            'parent': {
-                                'name': 'option',
-                                'property': {
-                                    'class': 'input-option',
-                                    'value': option
-                                },
-                                'text': option
-                            }
-                        })
+                    if (Array.isArray(value['selectValues'])) {
+                        for (var option of value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': option
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
+                    } else {
+                        // if it is an object
+                        for(var option in value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': value['selectValues'][option]
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
                     }
                     return children
                 })()
@@ -162,7 +213,6 @@ function inputDropDown(value) {
 }
 
 function inputColor(value) {
-    let disableColorPicker = false
     let parentOfColorPicker;
     const skeleton = {
         'parent': {
@@ -200,14 +250,30 @@ function inputColor(value) {
                                 // default value
                             }
                             if (+value['defaultActive'] === 0 && !skeleton['value']) {
-                                // skeleton['disabled'] = ''
-                                // disableColorPicker = true
+                                skeleton['disabled'] = ''
                             }
                             if (value['willActivate']) {
                                 value.willActivate()
                             }
                             return skeleton
-                        })()
+                        })(),
+                        'event': function () {
+                            this.addEventListener('input', handleChartChanges.bind(null, value))
+                            // create an observer instance
+                            var observer = new MutationObserver(function (mutations) {
+                                mutations.forEach(function (mutation) {
+                                    if (mutation.type === 'attributes') {
+                                        // console.log(mutation.target.value)
+                                        handleChartChanges(value, mutation)
+                                    }
+                                    // or do whatever you want here
+                                });
+                            });
+                            // configuration of the observer:
+                            var config = { attributes: true, characterData: true, attributeFilter:['value'] };
+                            // pass in the target node, as well as the observer options
+                            observer.observe(this, config);
+                        }
                     }
                 }, {
                     'parent': {
@@ -219,7 +285,6 @@ function inputColor(value) {
                                     const pickr = Pickr.create({
                                         el: self,
                                         theme: 'nano',
-                                        disabled: disableColorPicker,
                                         container: parentOfColorPicker,
                                         swatches: [
                                             'rgba(244, 67, 54, 1)',
@@ -251,7 +316,17 @@ function inputColor(value) {
                                     });
 
                                     function changeColor(e) {
-                                        pickr.options.container.childNodes[0].value = e.toHEXA().toString()
+                                        const element = pickr.options.container.childNodes[0]
+                                        const value = e.toHEXA().toString()
+                                        if (!element.disabled) {
+                                            if (element.value.length !== 0) {
+                                                element.value += ',' + value
+                                                element.setAttribute('value', element.value+',' + value)
+                                            } else {
+                                                element.value = value
+                                                element.setAttribute('value', value)
+                                            }
+                                        }
                                     }
 
                                     function handleSaveNClear(e) {
@@ -310,7 +385,7 @@ function inputRange(value) {
                                     // default value
                                 }
                                 if (+value['defaultActive'] === 0 && !skeleton['value']) {
-                                    // skeleton['disabled'] = ''
+                                    skeleton['disabled'] = ''
                                 }
                                 if (value['willActivate']) {
                                     value.willActivate()
@@ -318,8 +393,8 @@ function inputRange(value) {
                                 return skeleton
                             })(),
                             'event': function () {
+                                this.addEventListener('input', handleChartChanges.bind(null, value))
                                 this.addEventListener('input', (e) => {
-                                    console.log('hello')
                                     this.nextSibling.innerHTML = e.target.value
                                 })
                             }
@@ -358,7 +433,7 @@ function inputNumber(value) {
             }, {
                 'parent': {
                     'name': 'input',
-                    'property': ((value) => {
+                    'property': (() => {
                         const skeleton = {
                             'class': 'input-number',
                             'id': value['id'],
@@ -378,7 +453,10 @@ function inputNumber(value) {
                             value.willActivate()
                         }
                         return skeleton
-                    })(value)
+                    })(),
+                    'event': function () {
+                        this.addEventListener('input', handleChartChanges.bind(null, value))
+                    }
                 }
             }]
         }]
@@ -455,7 +533,7 @@ function customize() {
             },
             'children': (() => {
                 const children = []
-                for (var part in type) {
+                for (let part in type) {
                     const dom = {
                         'parent': {
                             'name': 'li',

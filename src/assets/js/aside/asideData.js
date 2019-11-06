@@ -1,6 +1,36 @@
 // create a variable for each component like canvas, chart, dataplot, caption etc..p5.BandPass()
 // inside each variable give the object as shown
 
+function showOrHide(state, nodes) {
+    for (var node of nodes) {
+        document.getElementById(node).disabled = state
+    }
+}
+
+function handleInputs() {
+    const event = arguments[1]
+    const nodes = arguments[0]
+    const type = event.target.classList
+    if (type.contains('input-checkbox')) {
+        if (event.target.checked) {
+            showOrHide(false, nodes)
+        } else {
+            showOrHide(true, nodes)
+        }
+    } else if (type.contains('input-text') || type.contains('input-number') || type.contains('input-range') || type.contains('input-select')) {
+        if (event.target.value.length !== 0) {
+            showOrHide(false, nodes)
+        } else {
+            showOrHide(true, nodes)
+        }
+    } else if (type.contains('input-color')) {
+        if (event.target.value.includes(',')) {
+            showOrHide(false, nodes)
+        } else {
+            showOrHide(true, nodes)
+        }
+    }
+}
 const canvas = {
     'padding': [{
         'label': 'Left & Right Padding',
@@ -9,6 +39,7 @@ const canvas = {
         'value': '',
         'id': 'padding_canvasPadding',
         'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Left Padding',
         'inputFieldType': 'number',
@@ -16,7 +47,8 @@ const canvas = {
         'value': '',
         'id': 'padding_canvasLeftPadding',
         'defaultActive': '1',
-        'note': 'This will override Left & Right Padding'
+        'note': 'This will override Left & Right Padding',
+        'location': 'chart'
     }, {
         'label': 'Right Padding',
         'inputFieldType': 'number',
@@ -24,21 +56,24 @@ const canvas = {
         'value': '',
         'id': 'padding_canvasRightPadding',
         'defaultActive': '1',
-        'note': 'This will override Left & Right Padding'
+        'note': 'This will override Left & Right Padding',
+        'location': 'chart'
     }, {
         'label': 'Top Padding',
         'inputFieldType': 'number',
         'placeholder': 'Eg:- 5',
         'value': '',
         'id': 'padding_canvasTopPadding',
-        'defaultActive': '1'
+        'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Bottom Padding',
         'inputFieldType': 'number',
         'placeholder': 'Eg:- 5',
         'value': '',
         'id': 'padding_canvasBottomPadding',
-        'defaultActive': '1'
+        'defaultActive': '1',
+        'location': 'chart'
     }],
     'margin': [{
         'label': 'Left Margin',
@@ -47,6 +82,7 @@ const canvas = {
         'value': '',
         'id': 'margin_canvasLeftMargin',
         'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Right Margin',
         'inputFieldType': 'number',
@@ -54,6 +90,7 @@ const canvas = {
         'value': '',
         'id': 'margin_canvasRightMargin',
         'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Top Margin',
         'inputFieldType': 'number',
@@ -61,6 +98,7 @@ const canvas = {
         'value': '',
         'id': 'margin_canvasTopMargin',
         'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Bottom Margin',
         'inputFieldType': 'number',
@@ -68,18 +106,23 @@ const canvas = {
         'value': '',
         'id': 'margin_canvasBottomMargin',
         'defaultActive': '1',
+        'location': 'chart'
     }],
     'backgroundColor': [{
         'label': 'Show Background Color',
         'inputFieldType': 'checkbox',
-        'placeholder': '',
         'value': '',
         'id': 'backgroundColor_showCanvasBg',
         'defaultActive': '1',
         'note': 'Turn off theme to see changes',
+        'location': 'chart',
         'willActivate': function () {
-            // will have a event listener
-            // will activate color when checked
+            var self = this
+            new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['backgroundColor_canvasBgColor']))
+                }, 0)
+            })
         }
     }, {
         'label': 'Color',
@@ -88,9 +131,14 @@ const canvas = {
         'value': '',
         'id': 'backgroundColor_canvasBgColor',
         'defaultActive': '0',
+        'location': 'chart',
         'willActivate': function () {
-            // will have a event listener
-            // when multiple colors are selected then color ratio will be online
+            const self = this
+            new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['backgroundColor_canvasBgRatio', 'backgroundColor_canvasBgAngle']))
+                }, 0)
+            })
         }
     }, {
         'label': 'Gradient Color Ratio',
@@ -99,34 +147,41 @@ const canvas = {
         'value': '',
         'id': 'backgroundColor_canvasBgRatio',
         'defaultActive': '0',
+        'location': 'chart'
     }, {
         'label': 'Gradient Color Orientation',
         'inputFieldType': 'range',
         'min': '0',
         'max': '360',
-        'placeholder': '',
         'value': '',
         'id': 'backgroundColor_canvasBgAngle',
         'defaultActive': '0',
+        'location': 'chart'
     }, {
         'label': 'Opacity',
         'inputFieldType': 'range',
         'min': '0',
         'max': '100',
-        'placeholder': '',
         'value': '',
         'id': 'backgroundColor_canvasBgAlpha',
         'defaultActive': '1',
+        'location': 'chart'
     }],
     'border': [{
         'label': 'Show Border',
         'inputFieldType': 'checkbox',
-        'placeholder': '',
         'value': '',
         'id': 'border_showCanvasBorder',
         'defaultActive': '1',
+        'location': 'chart',
         'willActivate': function () {
             // will add a event listener
+            const self = this
+            new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_canvasBorderColor', 'border_canvasBorderAlpha', 'border_canvasBorderThickness']))
+                }, 0)
+            })
             // will activate bordercolor,borderalpha,borderthickness when checked
         }
     }, {
@@ -136,15 +191,16 @@ const canvas = {
         'value': '',
         'id': 'border_canvasBorderColor',
         'defaultActive': '0',
+        'location': 'chart'
     }, {
         'label': 'Border Opacity',
         'inputFieldType': 'range',
         'min': '0',
         'max': '100',
-        'placeholder': '',
         'value': '',
         'id': 'border_canvasBorderAlpha',
-        'defaultActive': '0'
+        'defaultActive': '0',
+        'location': 'chart'
     }, {
         'label': 'Border Thickness',
         'inputFieldType': 'number',
@@ -152,6 +208,7 @@ const canvas = {
         'value': '',
         'id': 'border_canvasBorderThickness',
         'defaultActive': '0',
+        'location': 'chart'
     }],
     'outsidePlotArea': [{
         'label': 'Font Style',
@@ -160,15 +217,16 @@ const canvas = {
         'value': '',
         'id': 'border_outCnvBaseFont',
         'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Size',
         'inputFieldType': 'range',
         'min': '5',
         'max': '72',
-        'placeholder': '',
         'value': '',
         'id': 'border_outCnvBaseFontSize',
-        'defaultActive': '1'
+        'defaultActive': '1',
+        'location': 'chart'
     }, {
         'label': 'Color',
         'inputFieldType': 'color',
@@ -176,175 +234,641 @@ const canvas = {
         'value': '',
         'id': 'outsideCanvas_outCnvBaseFontColor',
         'defaultActive': '1',
+        'location': 'chart'
     }]
 }
 
-const column2d = {
-    'canvas': {
-        'name': 'Plot Area',
-        'properties': {
-            'padding': canvas['padding'],
-            'margin': canvas['margin'],
-            'backgroundColor': canvas['backgroundColor'],
-            'border': canvas['border'],
-            'outsidePlotArea': canvas['outsidePlotArea']
-        }
+const dataplot = {
+  features: [{
+    label: 'Colors',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'features_paletteColors',
+    note: '',
+    defaultActive: '1',
+
+  }, {
+    label: 'Round edge',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'features_useRoundEdges',
+    note: '',
+    defaultActive: '0',
+
+  }, {
+    label: 'Shadow',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'features_showShadow',
+    note: '',
+    defaultActive: '0',
+
+  }, {
+    label: 'Max Column Width',
+    inputFieldType: 'number',
+    placeholder: '10',
+    value: '',
+    id: 'features_maxColWidth',
+    note: '',
+    defaultActive: '0',
+
+  }],
+
+  border: [{
+    label: 'Show Border',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'border_showPlotBorder',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
     }
-}
-const area2d = {
-    'canvas': column2d['canvas']
-}
+  }, {
+    label: 'Border Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'border_plotBorderColor',
+    note: '',
+    defaultActive: '0',
 
-const bar2d = {
-    'canvas': column2d['canvas']
-}
+  }, {
+    label: 'Border Thickness',
+    inputFieldType: 'number',
+    placeholder: 'eg-4',
+    value: '',
+    id: 'border_plotBorderThickness',
+    note: '',
+    defaultActive: '0',
 
-const line = {
-    'canvas': column2d['canvas']
-}
-const pie2d = {
-    'canvas': {
-        'name': 'Plot Area',
-        'margin': canvas['margin']
+  }, {
+    label: 'Border opacity',
+    inputFieldType: 'range',
+    min: '0',
+    max: '100',
+    placeholder: '',
+    value: '',
+    id: 'border_plotBorderAlpha',
+    note: '',
+    defaultActive: '0',
+
+  }, {
+    label: 'Border dashed',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'border_plotBorderDashed',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //background_plotBorderDashLen,background_plotBorderDashGap
     }
-  }
+  }, {
+    label: 'Border dashed length',
+    inputFieldType: 'number',
+    placeholder: 'eg-5',
+    value: '',
+    id: 'border_plotBorderDashLen',
+    note: '',
+    defaultActive: '0',
 
-const caption= {
-    captionText:[
-        {
-            label:'Heading',
-            inputfieldType:'text',
-            placeholder:'My Heading',
-            value:'',
-            id: 'caption_caption',
-            note:'',
-            defaultActive:'1',
-            willActivate: function(){
-                document.getElementById(this.id).addEventListener('change',()=>{
+  }, {
+    label: 'Border dashed gap',
+    inputFieldType: 'number',
+    placeholder: 'eg-3',
+    value: '',
+    id: 'border_plotBorderDashGap',
+    note: '',
+    defaultActive: '0',
+  }],
 
-                })   
-            }.bind(null,'caption_captionAlignment','caption_alignCaptionWithCanvas','caption_captionOnTop',
-            'caption_captionHorizontalPadding','caption_captionFontSize','caption_captionFont',
-            'caption_captionFontColor','caption_captionFontBold')
-        },
-    ],
-    captionFont:[
-        {
-            label:'Font Size',
-            inputfieldType:"range",
-            min:'6',
-            max:'72',
-            value:'',
-            placeholder:'14',
-            id: 'caption_captionFontSize',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Style',
-            inputfieldType:"text",
-            value:'',
-            placeholder:'Arial',
-            id: 'caption_captionFont',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Color',
-            inputfieldType:"color",
-            value:'',
-            placeholder:'#dddddd',
-            id: 'caption_captionFontColor',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Bold',
-            inputfieldType:"checkbox",
-            value:'',
-            id: 'caption_captionFontBold',
-            note:'',
-            defaultActive:'1'
-        },
-    ]
+  gradient: [{
+    label: 'Show gradient',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'gradient_usePlotGradientColor',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      // gradient_plotGradientColor,gradient_plotFillAlpha,gradient_plotFillRatio,gradient_plotFillAngle
+    }
+  }, {
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#ffffff',
+    value: '',
+    id: 'gradient_plotGradientColor',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '20',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'gradient_plotFillAlpha',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Color ratio',
+    inputFieldType: 'text',
+    placeholder: 'eg-40,60',
+    value: '',
+    id: 'gradient_plotFillRatio',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Color orientation',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '360',
+    value: '',
+    id: 'gradient_plotFillAngle',
+    note: '',
+    defaultActive: '0',
+  }],
+
+  hover: [{
+    label: 'Hover all elements',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'hover_showHoverEffect',
+    note: 'Remove theme to apply this',
+    defaultActive: '0',
+    willActivate: function () {
+      //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed
+    }
+  }, {
+    label: 'Hover data plots',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'hover_plotHoverEffect',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
+    }
+  }, {
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'hover_plotFillHoverColor',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Color opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'hover_plotFillHoverAlpha',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Border color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'hover_plotBorderHoverColor',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Border color opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'hover_plotBorderHoverAlpha',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Border thickness',
+    inputFieldType: 'number',
+    placeholder: '5',
+    value: '',
+    id: 'hover_plotBorderHoverThickness',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Border dashed',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'hover_plotBorderHoverDashed',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
+    }
+  }, {
+    label: 'Border dashed length',
+    inputFieldType: 'number',
+    placeholder: '5',
+    value: '',
+    id: 'hover_plotBorderHoverDashLen',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Border dashed gap',
+    inputFieldType: 'number',
+    placeholder: '5',
+    value: '',
+    id: 'hover_plotBorderHoverDashGap',
+    note: '',
+    defaultActive: '0',
+  }],
+
+
+  background: [{ //for cross-line
+    label: 'Show background',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'background_drawCrossLine',
+    note: '',
+    defaultActive: '1',
+    willActivate: function () {
+      //background_crossLineColor ,background_crossLineAlpha,background_crossLineAnimation,background_crossLineAnimationDuration,background_drawCrossLineOnTop
+    }
+  }, {
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'background_crossLineColor',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'background_crossLineAlpha',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Animate',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'background_crossLineAnimation',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Animation Duration',
+    inputFieldType: 'number',
+    placeholder: '2',
+    value: '',
+    id: 'background_crossLineAnimationDuration',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Overlap',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'background_drawCrossLineOnTop',
+    note: '',
+    defaultActive: '0',
+  }]
 }
-const subCaption= {
-    subCaptionText:[
-        {
-            label:'Sub-Heading',
-            inputfieldType:'text',
-            placeholder:'My Sub Heading',
-            value:'',
-            id: 'caption_subCaption',
-            note:'',
-            defaultActive:'1',
-            willActivate: function(){
-                document.getElementById(this.id).addEventListener('change',()=>{
 
-                })   
-            }.bind(null,'caption_captionAlignment','caption_alignCaptionWithCanvas','caption_captionOnTop',
-            'caption_captionHorizontalPadding','caption_subCaptionFontSize','caption_subCaptionFont',
-            'caption_subCaptionFontColor','caption_subCaptionFontBold')
-        },
-    ],
-    subCaptionFont:[
-        {
-            label:'Font Size',
-            inputfieldType:"range",
-            min:'6',
-            max:'72',
-            value:'',
-            placeholder:'14',
-            id: 'caption_subCaptionFontSize',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Style',
-            inputfieldType:"text",
-            value:'',
-            placeholder:'Arial',
-            id: 'caption_subCaptionFont',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Color',
-            inputfieldType:"color",
-            value:'',
-            placeholder:'#dddddd',
-            id: 'caption_subCaptionFontColor',
-            note:'',
-            defaultActive:'1'
-        },
-        {
-            label:'Font Bold',
-            inputfieldType:"checkbox",
-            value:'',
-            id: 'caption_subCaptionFontBold',
-            note:'',
-            defaultActive:'1'
-        },
-    ]
-  }
-const chart = {
-  "animation":[
+const plotValue = {
+  features: [{
+    label: 'Show values',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'features_showValues',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //features_rotateValues,features_placeValuesInside, font-properties
+    }
+  }, {
+    label: 'Rotate values',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'features_rotateValues',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Values inside',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'features_placeValuesInside',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'border_valueAlpha',
+    note: '',
+    defaultActive: '0',
+  }],
+
+  font: [{
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#ff0000',
+    value: '',
+    id: 'font_valueFontColor',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Size',
+    inputFieldType: 'number',
+    placeholder: '14',
+    value: '',
+    id: 'font_valueFontSize',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Bold',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'font_valueFontBold',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Italic',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'font_valueFontItalic',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Style',
+    inputFieldType: 'text',
+    placeholder: 'Arial',
+    value: '',
+    id: 'font_valueFont',
+    note: '',
+    defaultActive: '1',
+  }, {
+    label: 'Outline',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'font_textOutline',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'font_valueFontAlpha',
+    note: '',
+    defaultActive: '1',
+  }],
+
+  border: [{
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'border_valueBorderColor',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Dashed',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'border_valueBorderDashed',
+    note: '',
+    defaultActive: '0',
+    willActivate: function () {
+      //border_valueBorderDashLen, border_valueBorderDashGap
+    }
+  }, {
+    label: 'Dashed length',
+    inputFieldType: 'number',
+    placeholder: 'eg-04',
+    value: '',
+    id: 'border_valueBorderDashLen',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Dashed gap',
+    inputFieldType: 'number',
+    placeholder: 'eg-04',
+    value: '',
+    id: 'border_valueBorderDashGap',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'border_valueBorderAlpha',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Thickness',
+    inputFieldType: 'number',
+    placeholder: 'eg-04',
+    value: '',
+    id: 'border_valueBorderThickness',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Padding',
+    inputFieldType: 'number',
+    placeholder: 'eg-04',
+    value: '',
+    id: 'border_valueBorderPadding',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Radius',
+    inputFieldType: 'number',
+    placeholder: 'eg-04',
+    value: '',
+    id: 'border_valueBorderRadius',
+    note: '',
+    defaultActive: '0',
+  }],
+
+  background: [{
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'border_valueBgColor',
+    note: '',
+    defaultActive: '0',
+  }, {
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'border_valueBgAlpha',
+    note: '',
+    defaultActive: '0',
+  }]
+}
+
+const caption = {
+  captionText: [{
+    label: 'Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Heading',
+    value: '',
+    id: 'caption_caption',
+    note: '',
+    defaultActive: '1',
+    willActivate: function () {
+      document.getElementById(this.id).addEventListener('change', () => {
+
+      })
+    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+      'caption_captionHorizontalPadding', 'caption_captionFontSize', 'caption_captionFont',
+      'caption_captionFontColor', 'caption_captionFontBold')
+  }, ],
+  captionFont: [{
+      label: 'Font Size',
+      inputFieldType: "range",
+      min: '6',
+      max: '72',
+      value: '',
+      placeholder: '14',
+      id: 'caption_captionFontSize',
+      note: '',
+      defaultActive: '1'
+    },
     {
+      label: 'Font Style',
+      inputFieldType: "text",
+      value: '',
+      placeholder: 'Arial',
+      id: 'caption_captionFont',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Color',
+      inputFieldType: "color",
+      value: '',
+      placeholder: '#dddddd',
+      id: 'caption_captionFontColor',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Bold',
+      inputFieldType: "checkbox",
+      value: '',
+      id: 'caption_captionFontBold',
+      note: '',
+      defaultActive: '1'
+    },
+  ]
+}
+const subCaption = {
+  subCaptionText: [{
+    label: 'Sub-Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Sub Heading',
+    value: '',
+    id: 'caption_subCaption',
+    note: '',
+    defaultActive: '1',
+    willActivate: function () {
+      document.getElementById(this.id).addEventListener('change', () => {
+
+      })
+    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+      'caption_captionHorizontalPadding', 'caption_subCaptionFontSize', 'caption_subCaptionFont',
+      'caption_subCaptionFontColor', 'caption_subCaptionFontBold')
+  }, ],
+  subCaptionFont: [{
+      label: 'Font Size',
+      inputFieldType: "range",
+      min: '6',
+      max: '72',
+      value: '',
+      placeholder: '14',
+      id: 'caption_subCaptionFontSize',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Style',
+      inputFieldType: "text",
+      value: '',
+      placeholder: 'Arial',
+      id: 'caption_subCaptionFont',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Color',
+      inputFieldType: "color",
+      value: '',
+      placeholder: '#dddddd',
+      id: 'caption_subCaptionFontColor',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Bold',
+      inputFieldType: "checkbox",
+      value: '',
+      id: 'caption_subCaptionFontBold',
+      note: '',
+      defaultActive: '1'
+    },
+  ]
+}
+const chartDS = {
+  "animation": [{
       "label": "Enable",
-      "inputfieldType": "check",
-      "placeHolder": "",
+      "inputFieldType": "check",
+      "placeholder": "",
       "value": "",
       "id": "animation_animation",
       "note": "",
       "defaultActive": "1",
-      "willActivate": ()=> {
+      "willActivate": () => {
         //enable Animation Duration
       }
     },
     {
       "label": "Time",
-      "inputfieldType": "number",
-      "placeHolder": "1",
+      "inputFieldType": "number",
+      "placeholder": "1",
       "value": "",
       "id": "animation_animationDuration",
       "note": "Time in seconds taken to draw the chart in Animation",
@@ -355,8 +879,8 @@ const chart = {
 
     {
       "label": "Padding",
-      "inputfieldType": "number",
-      "placeHolder": "5",
+      "inputFieldType": "number",
+      "placeholder": "5",
       "value": "",
       "id": "padding_chartPadding",
       "note": "",
@@ -365,8 +889,8 @@ const chart = {
   ],
   "margin": [{
     "label": "Margin",
-    "inputfieldType": "number",
-    "placeHolder": "0",
+    "inputFieldType": "number",
+    "placeholder": "0",
     "value": "",
     "id": "margin_chartMargin",
     "note": "",
@@ -374,20 +898,20 @@ const chart = {
   }, ],
   "ChartColors": [{
       "label": "Combination",
-      "inputfieldType": "select",
+      "inputFieldType": "select",
       "selectValues": ["1", "2", "3", "4", "5"],
-      "placeHolder": "2",
       "value": "",
       "id": "ChartColors_palette",
       "note": "each set has different combination of colors for elementation",
       "defaultActive": "1",
+      'location': 'chart'
     },
 
   ],
   "background": [{
       "label": "Color",
-      "inputfieldType": "color",
-      "placeHolder": "pick a color or give a Hexcode",
+      "inputFieldType": "color",
+      "placeholder": "pick a color or give a Hexcode",
       "value": "",
       "id": "background_bgColor",
       "note": "",
@@ -397,12 +921,12 @@ const chart = {
       }
 
     },
-     {
+    {
       "label": " ColorOpacity",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "0 to 100",
+      "placeholder": "0 to 100",
       "value": "",
       "id": "background_bgAlpha",
       "note": "",
@@ -411,8 +935,8 @@ const chart = {
     },
     {
       "label": " GradientColorRatio",
-      "inputfieldType": "text",
-      "placeHolder": "40,60",
+      "inputFieldType": "text",
+      "placeholder": "40,60",
       "value": "",
       "id": "background_bgAlpha",
       "note": "comma separated Value ",
@@ -420,10 +944,10 @@ const chart = {
     },
     {
       "label": " ColorOrientation",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": "0",
       "max": "360",
-      "placeHolder": "select angle",
+      "placeholder": "select angle",
       "value": "",
       "id": "background_bgAngle",
       "note": "angle value to change orienatation of background",
@@ -432,8 +956,8 @@ const chart = {
     },
     {
       "label": "Image",
-      "inputfieldType": "url",
-      "placeHolder": "paset the url to the image ",
+      "inputFieldType": "url",
+      "placeholder": "paset the url to the image ",
       "value": "",
       "id": "background_bgImage",
       "note": "",
@@ -445,10 +969,10 @@ const chart = {
 
     {
       "label": "ImageOpacity",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "select a value",
+      "placeholder": "select a value",
       "value": "",
       "id": "background_bgImageAlpha",
       "note": "",
@@ -457,9 +981,9 @@ const chart = {
     },
     {
       "label": "ImageFit",
-      "inputfieldType": "select",
-      "selectArray": ["fit", "fill", "tile", "center", "none"],
-      "placeHolder": "fit",
+      "inputFieldType": "select",
+      "selectValues": ["fit", "fill", "tile", "center", "none"],
+      "placeholder": "fit",
       "value": "",
       "id": "background_bgImageDisplayMode",
       "note": "",
@@ -468,9 +992,9 @@ const chart = {
     },
     {
       "label": "ImageVerticalAlignment",
-      "inputfieldType": "select",
-      "selectArray": ["top", "middle", "center"],
-      "placeHolder": "middle",
+      "inputFieldType": "select",
+      "selectValues": ["top", "middle", "center"],
+      "placeholder": "middle",
       "value": "",
       "id": "background_bgImageVAlign",
       "note": "",
@@ -479,9 +1003,9 @@ const chart = {
     },
     {
       "label": "ImageHorizontalAlignment",
-      "inputfieldType": "select",
-      "selectArray": ["left", "middle", "right"],
-      "placeHolder": "middle",
+      "inputFieldType": "select",
+      "selectValues": ["left", "middle", "right"],
+      "placeholder": "middle",
       "value": "",
       "id": "background_bgImageHAlign",
       "note": "",
@@ -490,10 +1014,10 @@ const chart = {
     },
     {
       "label": "Image Size scale",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": "1",
       "max": "300",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "background_bgImageScale",
       "note": "works only if background image Fit set to tile,center or none",
@@ -504,8 +1028,8 @@ const chart = {
   ],
   "GeneralFont": [{
       "label": "GeneralFont",
-      "inputfieldType": "text",
-      "placeHolder": "write Fontname",
+      "inputFieldType": "text",
+      "placeholder": "write Fontname",
       "value": "",
       "id": "baseFont_baseFont",
       "note": "",
@@ -514,10 +1038,10 @@ const chart = {
     },
     {
       "label": "FontSize",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": 4,
       "max": 72,
-      "placeHolder": "Eg 4-72",
+      "placeholder": "Eg 4-72",
       "value": "",
       "id": "baseFont_baseFontSize",
       "note": "",
@@ -525,8 +1049,8 @@ const chart = {
     },
     {
       "label": "FontColor",
-      "inputfieldType": "color",
-      "placeHolder": "pick a color",
+      "inputFieldType": "color",
+      "placeholder": "pick a color",
       "value": "",
       "id": "baseFont_baseFontColor",
       "note": "",
@@ -538,8 +1062,8 @@ const chart = {
   ],
   "chartBorder": [{
       "label": "BorderActive",
-      "inputfieldType": "checkbox",
-      "placeHolder": "",
+      "inputFieldType": "checkbox",
+      "placeholder": "",
       "value": "",
       "id": "chartBorder_showborder",
       "note": "",
@@ -551,8 +1075,8 @@ const chart = {
     },
     {
       "label": "Color",
-      "inputfieldType": "color",
-      "placeHolder": "",
+      "inputFieldType": "color",
+      "placeholder": "",
       "value": "",
       "id": "chartBorder_borderColor",
       "note": "",
@@ -561,8 +1085,8 @@ const chart = {
     },
     {
       "label": "Thickness",
-      "inputfieldType": "number",
-      "placeHolder": "eg: 5",
+      "inputFieldType": "number",
+      "placeholder": "eg: 5",
       "value": "",
       "id": "chartBorder_borderThickness",
       "note": "",
@@ -570,10 +1094,10 @@ const chart = {
     },
     {
       "label": "Opacity",
-      "inputfieldType": "range",
+      "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "eg 50",
+      "placeholder": "eg 50",
       "value": "",
       "id": "chartBorder_borderAlpha",
       "note": "",
@@ -582,20 +1106,20 @@ const chart = {
   ],
   captionAlignment: [{
       label: 'Alignment',
-      inputfieldType: "select",
-      selectArray: ["left", "center", "right"],
+      inputFieldType: "select",
+      selectValues: ["left", "center", "right"],
       placeholder: 'center',
       value: '',
       id: 'caption_captionAlignment',
       note: '',
       defaultActive: '1',
       willActivate: function () {
-        document.getElementById(this.id).addEventListener('change', () => {})
-      }.bind(null, 'caption_captionHorizontalPadding')
+        // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
+      }
     },
     {
       label: 'Alignment wrt Plot Area',
-      inputfieldType: "checkbox",
+      inputFieldType: "checkbox",
       value: '',
       id: 'caption_alignCaptionWithCanvas',
       note: 'Align heading with plot area or with the whole chart area',
@@ -604,7 +1128,7 @@ const chart = {
   ],
   captionPosition: [{
     label: 'Position',
-    inputfieldType: "checkbox",
+    inputFieldType: "checkbox",
     value: '',
     id: 'caption_captionOnTop',
     note: '',
@@ -612,18 +1136,17 @@ const chart = {
   }, ],
   captionPadding: [{
     label: 'Padding',
-    inputfieldType: "number",
+    inputFieldType: "number",
     placeholder: '30',
     value: '',
     id: 'caption_captionHorizontalPadding',
     note: 'Applicable only for left and right alignment',
     defaultActive: '1',
-  }, 
-  ],
+  }, ],
   "logo": [{
       "label": "SourceLink",
-      "inputfieldType": "url",
-      "placeHolder": "",
+      "inputFieldType": "url",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoURL",
       "note": "",
@@ -635,8 +1158,8 @@ const chart = {
     },
     {
       "label": "LeftMargin",
-      "inputfieldType": "number",
-      "placeHolder": "eg 5",
+      "inputFieldType": "number",
+      "placeholder": "eg 5",
       "value": "",
       "id": "logo_logoLeftMargin",
       "note": "",
@@ -644,8 +1167,8 @@ const chart = {
     },
     {
       "label": "RightMargin",
-      "inputfieldType": "number",
-      "placeHolder": "eg 6",
+      "inputFieldType": "number",
+      "placeholder": "eg 6",
       "value": "",
       "id": "logo_logoRightMargin",
       "note": "",
@@ -653,9 +1176,15 @@ const chart = {
     },
     {
       "label": "Position",
-      "inputfieldType": "select",
-      "selectValues":{"Top-Left":"TL","Top-Right":"TR","Bottom-Left":"BL","Bottom-Right":"BR","Center":"CC"},
-      "placeHolder": "TL",
+      "inputFieldType": "select",
+      "selectValues": {
+        "Top-Left": "TL",
+        "Top-Right": "TR",
+        "Bottom-Left": "BL",
+        "Bottom-Right": "BR",
+        "Center": "CC"
+      },
+      "placeholder": "TL",
       "value": "",
       "id": "logo_logoPosition",
       "note": "",
@@ -663,10 +1192,10 @@ const chart = {
     },
     {
       "label": "Opacity",
-      "inputfieldType": "range",
-      "min":"0",
-      "max":"1",
-      "placeHolder": "Select",
+      "inputFieldType": "range",
+      "min": "0",
+      "max": "1",
+      "placeholder": "Select",
       "value": "",
       "id": "logo_logoAlpha",
       "note": "",
@@ -674,8 +1203,8 @@ const chart = {
     },
     {
       "label": "LinkOnClick",
-      "inputfieldType": "url",
-      "placeHolder": "",
+      "inputFieldType": "url",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoLink",
       "note": "",
@@ -683,10 +1212,10 @@ const chart = {
     },
     {
       "label": "Scale",
-      "inputfieldType": "range",
-      "min":"1",
-      "max":"300",
-      "placeHolder": "",
+      "inputFieldType": "range",
+      "min": "1",
+      "max": "300",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoScale",
       "note": "",
@@ -694,11 +1223,10 @@ const chart = {
     },
 
   ],
-  "rightToLeftText": [
-    {
+  "rightToLeftText": [{
       "label": "isLanguageHavingRightTOLeftText",
-      "inputfieldType": "check",
-      "placeHolder": "",
+      "inputFieldType": "check",
+      "placeholder": "",
       "value": "",
       "id": "rightToLeftText_chartPadding",
       "note": "for Urdu, arabic and Japanese Text",
@@ -707,31 +1235,112 @@ const chart = {
 
   ],
 
-  "Export": [
-    {
+  "Export": [{
       "label": "Enable",
-      "inputfieldType": "check",
-      "placeHolder": "",
+      "inputFieldType": "check",
+      "placeholder": "",
       "value": "",
       "id": "Export_exportEnable",
       "note": "",
       "defaultActive": "1",
-      
+
     }
 
   ],
-  "PrintMenu": [
-    {
+  "PrintMenu": [{
       "label": "Enable",
-      "inputfieldType": "check",
-      "placeHolder": "",
+      "inputFieldType": "check",
+      "placeholder": "",
       "value": "",
       "id": "PrintMenu_showPrintMenuItem",
       "note": "",
       "defaultActive": "1",
-      
+
     }
 
   ]
 
+}
+
+const column2d = {
+  'canvas': {
+    'name': 'Plot Area',
+    'properties': {
+      'padding': canvas['padding'],
+      'margin': canvas['margin'],
+      'backgroundColor': canvas['backgroundColor'],
+      'border': canvas['border'],
+      'outsidePlotArea': canvas['outsidePlotArea']
+    }
+  },
+  'dataplot': {
+    'name': 'DataPlot',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background']
+    }
+  }, 
+  'plotValue': {
+    'name': 'DataValue',
+    'properties': {
+      'features': plotValue['features'],
+      'font': plotValue['font'],
+      'border': plotValue['border'],
+      'background': plotValue['background']
+    }
+  },
+  'caption': {
+    'name': 'Caption',
+    'properties': {
+      'captionText': caption['captionText'],
+      'captionFont': caption['captionFont']
+    }
+  },
+  'subcaption': {
+    'name': 'Sub Caption',
+    'properties': {
+      'subCaptionText': subCaption['subCaptionText'],
+      'subCaptionFont': subCaption['subCaptionFont']
+    }
+  },
+  'chartDS': {
+    'name': 'Chart',
+    'properties': {
+      'animtion': chartDS['animation'],
+      'padding': chartDS['padding'],
+      'margin': chartDS['margin'],
+      'ChartColors': chartDS['ChartColors'],
+      'background': chartDS['background'],
+      'GeneralFont': chartDS['GeneralFont'],
+      'chartBorder': chartDS['chartBorder'],
+      'captionAlignment': chartDS['captionAlignment'],
+      'captionPosition': chartDS['captionPosition'],
+      'captionPadding': chartDS['captionPadding'],
+      'logo': chartDS['logo'],
+      'rightToLeftText': chartDS['rightToLeftText'],
+      'Export': chartDS['Export'],
+      'PrintMenu': chartDS['PrintMenu']
+
+    }
+  }
+}
+const area2d = {
+  'canvas': column2d['canvas']
+}
+
+const bar2d = {
+  'canvas': column2d['canvas']
+}
+
+const line = {
+  'canvas': column2d['canvas']
+}
+const pie2d = {
+  'canvas': {
+    'name': 'Plot Area',
+    'margin': canvas['margin']
+  }
 }

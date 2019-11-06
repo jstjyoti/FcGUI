@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Step 1 - Include the fusioncharts core library -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!-- Step 2 - Include the fusion theme -->
+    <style>
+        body {
+            display: flex;
+            flex-flow: row;
+        }
+
+        body div {
+            display: inline-block;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart-container"></div>
+    <div id="test-container"></div>
+    <script>
+        var chart = {
+            "caption": "Monthly {br}revenue for last year",
+            "subCaption": "Harry's SuperMart",
+            "xAxisName": "Month",
+            "yAxisName": "Revenues (In USD)",
+            "numberPrefix": "$",
+            "theme": "fusion",
+            "showAlternateHGridColor": "1",
+            "alternateHGridColor": "#00FFAA",
+            "alternateHGridAlpha":"20"
+        }
+        var singleSeries = [{
+                "label": "Jan",
+                "value": "420000",
+                "showValue": 0
+            },
+            {
+                "label": "Feb",
+                "value": "810000"
+            },
+            {
+                "label": "Mar",
+                "value": "720000"
+            },
+            {
+                "label": "Apr",
+                "value": "550000"
+            },
+            {
+                "label": "May",
+                "value": "910000"
+            },
+            {
+                "label": "Jun",
+                "value": "510000"
+            },
+            {
+                "label": "Jul",
+                "value": "680000"
+            },
+            {
+                "label": "Aug",
+                "value": "620000"
+            },
+            {
+                "label": "Sep",
+                "value": "610000"
+            },
+            {
+                "label": "Oct",
+                "value": "490000"
+            },
+            {
+                "label": "Nov",
+                "value": "900000"
+            },
+            {
+                "label": "Dec",
+                "value": "730000"
+            }
+        ]
+        var state = 0
+        function handleClicks(e, parent) {
+            if (parent) {
+                console.log(e.type)
+                state = 1
+            } else if (e.target.tagName === 'tspan' || e.target.tagName === 'text' && state===0) {
+                let outputString
+                const tagName = e.target.tagName
+                if (tagName.toLowerCase() === 'tspan') {
+                    const parent = e.target.parentElement
+                    const children = Array.from(parent.children)
+                    let finalString = ''
+                    for (let child of children) {
+                        finalString += ' ' + child.innerHTML
+                    }
+                    outputString = finalString
+                } else if (tagName.toLowerCase() === 'text') {
+                    outputString = e.target.innerHTML
+                }
+                if (outputString) {
+                    console.log(outputString.trim())
+                }
+            } else {
+                for (let node of e.path) {
+                    // 1. if class name is canvas
+                    if (node.classList && node.classList.value.includes('-canvas')) {
+                        console.log('canvas')
+                        return
+                    }
+                    // 2. if class name is axisReferenceVisualsMiddle
+                    if (node.classList && node.classList.value.includes('-axisReferenceVisualsMiddle')) {
+                        console.log('TrendZone')
+                        return
+                    }
+                    if (node.classList && node.classList.value.includes('-axisReferenceVisualsFloor')) {
+                        console.log('Alternate')
+                        return
+                    }
+                    if (node.classList && node.classList.value.includes('-parentgroup')) {
+                        if (state === 0) {
+                            console.log('chart')
+                        } else {
+                            state = 0
+                        }
+                        return
+                    }
+                }
+            }
+        }
+        FusionCharts.ready(function () {
+            let parent
+            window.revenueChart = new FusionCharts({
+                type: 'column2d',
+                renderAt: 'chart-container',
+                width: '600',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    'chart': chart,
+                    'data': singleSeries,
+                    "trendlines": [{
+                        "line": [{
+                            "startvalue": "700000",
+                            "valueOnRight": "1",
+                            "isTrendZone": "1",
+                            "endvalue": "600000",
+                            "displayvalue": "Monthly Target"
+                        }]
+                    }]
+                },
+                events: {
+                    'dataLabelClick': function(e) {
+                        handleClicks(e, parent)
+                    },
+                    'dataPlotClick': function (e) {
+                        handleClicks(e, parent)
+                    },
+                    'legendItemClicked': function(e) {
+                      handleClicks(e, parent)  
+                    },
+                    'drawComplete': function (e, d) {
+                        parent = document.getElementById('chart-container')
+                        parent.addEventListener('click', handleClicks)
+                        //     const locations = [
+                        //         '-dataset-Name-group',
+                        //         '-dataset-Label-group',
+                        //         '-datalabel',
+                        //         '-caption',
+                        //         '-axistop',
+                        //         '-plots'
+                        //     ]
+                        //     const bfs_queue = []
+                        //     const parent = document.getElementById('chart-container')
+                        //     bfs_queue.push(parent)
+                        //     // 1. check for all children their class name
+                        //     // 2. if they match add an eventlistener to them
+                        //     while(bfs_queue.length !== 0) {
+                        //         let node = bfs_queue.shift()
+                        //         bfs_queue.push(...Array.from(node.children))
+                        //         for(let location of locations) {
+                        //             if (node.classList.value.includes(location)) {
+                        //                 node.addEventListener('click', (e) => {
+                        //                     let outputString
+                        //                     const tagName = e.target.tagName
+                        //                     if (tagName.toLowerCase() === 'tspan') {
+                        //                         const parent = e.target.parentElement
+                        //                         const children = Array.from(parent.children)
+                        //                         let finalString = '' 
+                        //                         for (let child of children) {
+                        //                             finalString += ' ' + child.innerHTML
+                        //                         }
+                        //                         outputString = finalString
+                        //                     } else if (tagName.toLowerCase() === 'text') {
+                        //                         outputString = e.target.innerHTML
+                        //                     }
+                        //                     console.log(outputString.trim())
+                        //                     e.stopPropagation()
+                        //                 })
+                        //                 break
+                        //             }
+                        //         }
+                        //     }
+                    }
+                }
+            }).render()
+        });
+    </script>
+</body>
+
+</html>
