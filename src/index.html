@@ -8,16 +8,31 @@
   <!-- Step 1 - Include the fusioncharts core library -->
   <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
   <!-- Step 2 - Include the fusion theme -->
-  <script type="text/javascript"
-    src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+  <!--  <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script> -->
+  <link href="assets/styles/main.css" rel="stylesheet" type="text/css">
   <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="assets/styles/main.css" rel="stylesheet" type="text/css">
+
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> -->
+
+
+
+
+
+  <style>
+    select{
+      /* height:50px; */
+      width:250px;
+    }
+   
+  </style>
+ 
   <title>FusionCharts GUI</title>
 </head>
 
-<body>
+<body id="body">
   <header id="header">
 
   </header>
@@ -37,6 +52,11 @@
   <footer id="footer">
 
   </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> -->
+
+  <script src="assets/js/dataSource.js"></script>
   <script src="assets/js/sample.js"></script>
   <script src="assets/js/render.js"></script>
   <script src="assets/js/header.js"></script>

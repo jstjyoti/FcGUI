@@ -105,16 +105,16 @@
     });
     //}
 }
-
-
 function nav() {
   const skeleton = {
       'parent': {
           'name': 'div',
           'property': {
 
+
               'class': 'navbar-container',
               'id':'navbar-container'
+
 
           },
       },
@@ -207,4 +207,3 @@ function nav() {
   nav.appendChild(render(skeleton))
 }
 
- 
