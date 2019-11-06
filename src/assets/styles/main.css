@@ -36,7 +36,7 @@ ul {
 
 }
 .head-container > ul{
-<<<<<<< HEAD
+
 
         
         left: 0;
@@ -68,9 +68,6 @@ ul {
 }
 .button{
     padding:10px ;
-    
-=======
-
         
         left: 0;
         top: 0;
@@ -111,7 +108,7 @@ ul {
     z-index: -1;
     border: 1px solid #efefef;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
->>>>>>> 1e92cc821d73bf9b560bb70a71f4a237233ea7a1
+
 }
 #aside {
     max-width: 50vw;
@@ -233,7 +230,7 @@ ul {
     color: #fff;
     text-align: center;
 }
-<<<<<<< HEAD
+
 .json-textarea {
     overflow: auto;
     background-color: rgb(37, 34, 34);
@@ -243,7 +240,7 @@ ul {
     line-height: 1.8;
     resize: none;
 }
-=======
+
 #fileButton{
     padding: 10px;
     color:#000;
@@ -257,4 +254,4 @@ ul {
     color:#aaa;
     
 }
->>>>>>> 1e92cc821d73bf9b560bb70a71f4a237233ea7a1
+
