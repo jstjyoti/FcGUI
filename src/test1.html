@@ -12,16 +12,17 @@
   <title>Document</title>
 </head>
 <body>
-  
+
 <select class="selectpicker" multiple data-live-search="true">
   <option>Mustard</option>
   <option>Ketchup</option>
   <option>Relish</option>
 </select>
 <script>
-  this.addEventListener("change",function(e){
-    console.log(e)
-  })
+  $(document).on('change', 'select', function(){
+      var selected = $(this).val();
+      
+});
 </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
- var data;
+ var data,selectedY;
+ var selectedX;
  function fileClick(e) {
 
      document.getElementById('fileUpload').click();
@@ -17,7 +18,8 @@
             return lines.split(',');
             })
             resolve(function(){
-                    CreateSelects()
+                    createXSelect();
+                    createYSelect();
             }
             )
             
@@ -34,7 +36,34 @@
     reader.readAsText(path.files[0])
       
  }
- function CreateSelects(){
+ function createYSelect(){
+    const optD=document.createElement('option');
+    optD.innerHTML="Select Y axis";
+    optD.selected=true;
+    optD.disabled=true;
+    const selectY=document.createElement('select');
+     selectY.setAttribute('class',"selectpicker");
+     selectY.setAttribute('id','yAxis');
+    selectY.setAttribute('data-live-search',"true");
+    selectY.multiple=true;
+    selectY.appendChild(optD);
+    // selectY.setAttribute('style',"{display:block!important}");
+    for (j=0;j<data[0].length;j++){
+        //console.log(i,opt);
+       const opt= document.createElement('option');
+       opt.setAttribute('value',data[0][j]);
+     opt.innerHTML=data[0][j];
+       opt.setAttribute("style","padding:5px")
+       selectY.appendChild(opt);
+       
+    }
+    document.getElementById('navbar-container').appendChild(selectY);
+    document.getElementById('yAxis').addEventListener('change', function(){
+        selectedY = $(this).val();
+    });
+ }
+
+ function createXSelect(){
     
     // if(document.getElementById('xAxis'))
     // {
@@ -43,38 +72,36 @@
     //         document.getElementById('yAxis').removeChild(document.getElementById('yAxis').lastChild)
     //     }
     // }
-    
-        const selectX=document.createElement('select');
-        const selectY=document.createElement('select');
+    const opt=document.createElement('option');
+    opt.innerHTML="Select X axis";
+    opt.selected=true;
+    opt.disabled=true;
+    const selectX=document.createElement('select');
+        
     //selectX.setAttribute('class','selectpicker');
-        selectX.setAttribute('id','xAxis');
-        selectY.setAttribute('class','selectpicker');
-        selectY.setAttribute('id','selectpicker');
-        selectY.setAttribute('multiple',"1");
-        selectY.setAttribute('data-live-search',"true");
-        selectY.setAttribute("multiple","multiple");
+    selectX.setAttribute('id','xAxis');
+    selectX.appendChild(opt);
     for (j=0;j<data[0].length;j++){
         //console.log(i,opt);
-        const opt= document.createElement('option');
-        opt.setAttribute('value',data[0][j]);
-        opt.innerHTML=data[0][j];
+        const opt1= document.createElement('option');
+        opt1.setAttribute('value',data[0][j]);
+        opt1.innerHTML=data[0][j];
         
-        selectX.appendChild(opt);
-        
-    }
+        selectX.appendChild(opt1);
+       
+    }   
     
-    for (j=0;j<data[0].length;j++){
-        //console.log(i,opt);
-       const opt= document.createElement('option');
-       opt.setAttribute('value',data[0][j]);
-       opt.setAttribute('text',data[0][j]);
-       
-       selectY.appendChild(opt);
-       
-    }
+   
     //if(!document.getElementById('xAxis').hasChildNodes()){
+        
         document.getElementById('selectx-container').appendChild(selectX);
-        document.getElementById('selecty-container').appendChild(selectY);
+       
+        document.getElementById('xAxis').addEventListener('change', function(){
+           selectedX = $(this).val();
+            //console.log(selectedX);
+            //selectedX=selected;
+        
+    });
     //}
 }
 
@@ -84,14 +111,16 @@ function nav() {
       'parent': {
           'name': 'div',
           'property': {
-              'class': 'navbar-container'
+              'class': 'navbar-container',
+              'id':'navbar-container'
           },
       },
       'children': [{
           'parent': {
               'name': 'ul',
               'property': {
-                  'class': 'navbar-nav'
+                  'class': 'navbar-nav',
+                  
               }
           },
           'children': [
@@ -166,21 +195,12 @@ function nav() {
                 'id':'selectx-container',
             }
         }
-    },
-    {
-        'parent':{
-            'name':'div',
-            'property':{
-                
-                'id':'selecty-container',
-                
-
-            }
-        }
     }
+   
 ]
   }
 
   const nav = document.getElementById('nav')
   nav.appendChild(render(skeleton))
 }
+

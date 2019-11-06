@@ -543,3 +543,4 @@ function customize() {
     }
     document.querySelector('.aside-detail').appendChild(render(skeleton))
 }
+
