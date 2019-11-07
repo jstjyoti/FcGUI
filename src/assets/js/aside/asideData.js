@@ -116,7 +116,7 @@ const canvas = {
         'defaultActive': '1',
         'note': 'Turn off theme to see changes',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             var self = this
             new Promise(function (resolve, reject) {
                 setTimeout(() => {
@@ -130,9 +130,9 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF,DDDDDD',
         'value': '',
         'id': 'backgroundColor_canvasBgColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             const self = this
             new Promise(function (resolve, reject) {
                 setTimeout(() => {
@@ -146,7 +146,7 @@ const canvas = {
         'placeholder': 'Eg:- 30,40,30',
         'value': '',
         'id': 'backgroundColor_canvasBgRatio',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Gradient Color Orientation',
@@ -155,7 +155,7 @@ const canvas = {
         'max': '360',
         'value': '',
         'id': 'backgroundColor_canvasBgAngle',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Opacity',
@@ -174,7 +174,7 @@ const canvas = {
         'id': 'border_showCanvasBorder',
         'defaultActive': '1',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             // will add a event listener
             const self = this
             new Promise(function (resolve, reject) {
@@ -190,7 +190,7 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF',
         'value': '',
         'id': 'border_canvasBorderColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Opacity',
@@ -199,7 +199,7 @@ const canvas = {
         'max': '100',
         'value': '',
         'id': 'border_canvasBorderAlpha',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Thickness',
@@ -207,7 +207,7 @@ const canvas = {
         'placeholder': 'Eg:- 5',
         'value': '',
         'id': 'border_canvasBorderThickness',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }],
     'outsidePlotArea': [{
@@ -805,14 +805,7 @@ const caption = {
     id: 'caption_caption',
     note: '',
     defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
-
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_captionFontSize', 'caption_captionFont',
-      'caption_captionFontColor', 'caption_captionFontBold')
-  }, ],
+  }],
   captionFont: [{
       label: 'Font Size',
       inputFieldType: "range",
@@ -860,14 +853,7 @@ const subCaption = {
     value: '',
     id: 'caption_subCaption',
     note: '',
-    defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
-
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_subCaptionFontSize', 'caption_subCaptionFont',
-      'caption_subCaptionFontColor', 'caption_subCaptionFontBold')
+    defaultActive: '1'
   }, ],
   subCaptionFont: [{
       label: 'Font Size',
