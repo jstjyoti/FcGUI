@@ -1,5 +1,5 @@
-var chartObject = chart.getJSONData()
-var cloneChart = chart.clone()
+var chartObject; 
+var cloneChart ;
 function filterLink() {
     let modifiedObject = JSON.stringify(chartObject)
     modifiedObject = JSON.parse(modifiedObject)

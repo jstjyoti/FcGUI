@@ -129,9 +129,9 @@ function csvJSONMultiSeries(csv){
 
 function createDataSource(){
   const dataset=json;
+  
   const chartobj={
-    "caption":"Heading",
-    "subcaption":"sub-Heading",
+   
     "xaxisname":selectedX,
     "yaxisname":selectedY[selectedY.length-1],
 
@@ -152,8 +152,19 @@ function createDataSource(){
     };
   }
   
-  chart.chartType(type);
-  chart.setJSONData(datasource);
+  if(chartObject && chartObject["chart"]["caption"])
+  {
+    datasource["chart"]["caption"]=chartObject["chart"]["caption"];
+  
+  }
+  if(chartObject && chartObject["chart"]["subcaption"])
+  {
+    datasource["chart"]["subcaption"]=chartObject["chart"]["subcaption"];
+  }
+  //chart.chartType(type);
+  chartObject = datasource;
+  chart.setJSONData(filterLink())
+  // chart.setJSONData(datasource);
   
 }
 

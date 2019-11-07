@@ -38,7 +38,7 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-
+    debugger
     const value = arguments[0]
     const event = arguments[1]
     function setAttr(label, value) {
