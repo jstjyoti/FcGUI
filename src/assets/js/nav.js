@@ -43,8 +43,8 @@ var data,datacsv,selectedX="";
                             parent = document.getElementById('main')
                             parent.addEventListener('click', handleClicks)
                         },
-                        'rendred': function(e, d){
-                            chartObject=chart.getJSONData();
+                        'rendered': function(e, d){
+                            chartObject = chart.getJSONData();
                             cloneChart = chart.clone();
                         }
                     }
