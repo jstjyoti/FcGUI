@@ -24,7 +24,7 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-    debugger
+    
     const value = arguments[0]
     const event = arguments[1]
     if (value['location'] === 'chart') {
@@ -169,7 +169,7 @@ function inputDropDown(value) {
                         return skeleton
                     })(),
                     'event': function() {
-                        debugger
+                        
                         this.addEventListener('input', handleChartChanges.bind(null, value))
                     }
                 },

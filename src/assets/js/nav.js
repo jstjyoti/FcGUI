@@ -1,6 +1,6 @@
 
- var data,selectedY;
- var selectedX;
+var data,datacsv,selectedX="";
+ var selectedY=[];
  function fileClick(e) {
 
      document.getElementById('fileUpload').click();
@@ -8,17 +8,21 @@
     //console.log(fileList);
  }
  function savePath(e){
+     selectedX=undefined;
+     selectedY=[];
      const path=document.getElementById('fileUpload');
      const fileText=document.getElementById('fileText');
     const reader = new FileReader();
     reader.onload = function(){
         let lines;
         var p = new Promise(function(resolve,reject){
+            datacsv=reader.result;
             lines = reader.result.split("\n").map(function(lines)
             {
             return lines.split(',');
             })
             resolve(function(){
+
                     createXSelect();
                     createYSelect();
             }
@@ -27,52 +31,59 @@
         })
         p.then(function(val) {
             val();
-        console.log(lines);
+        //console.log(datacsv);
 
         })
         data=lines;
         fileText.innerHTML=path.files[0].name;
+       // console.log(data);
 
     }
     reader.readAsText(path.files[0])
       
  }
  function createYSelect(){
+    if(document.getElementById('selecty-container').hasChildNodes())
+    {
+        document.getElementById('selecty-container').removeChild(document.getElementById("yAxis"))      
+        //delete the select and then create again i.e.,  it should be deleting if already exist
+    }
     const optD=document.createElement('option');
     optD.innerHTML="Select Y axis";
     optD.selected=true;
     optD.disabled=true;
     const selectY=document.createElement('select');
-     selectY.setAttribute('class',"selectpicker");
-     selectY.setAttribute('id','yAxis');
+    selectY.setAttribute('class',"selectpicker");   
+    selectY.setAttribute('id','yAxis');
     selectY.setAttribute('data-live-search',"true");
     selectY.multiple=true;
     selectY.appendChild(optD);
-    // selectY.setAttribute('style',"{display:block!important}");
-    for (j=0;j<data[0].length;j++){
-        //console.log(i,opt);
-       const opt= document.createElement('option');
-       opt.setAttribute('value',data[0][j]);
-     opt.innerHTML=data[0][j];
-       opt.setAttribute("style","padding:5px")
-       selectY.appendChild(opt);
+// selectY.setAttribute('style',"{display:block!important}");
+for (j=0;j<data[0].length;j++){
+    //console.log(i,opt);
+
+    const opt= document.createElement('option');
+    opt.setAttribute('value',data[0][j]);
+    opt.innerHTML=data[0][j];
+    opt.setAttribute("style","padding:5px")
+    
+    selectY.appendChild(opt);
        
     }
-    document.getElementById('navbar-container').appendChild(selectY);
-    document.getElementById('yAxis').addEventListener('change', function(){
+    document.getElementById('selecty-container').appendChild(selectY);
+    document.getElementById('yAxis').addEventListener('input', function(){
         selectedY = $(this).val();
+        // csvJSONSingleSeries(datacsv);
+        canHaveJson(selectedX,selectedY);
     });
  }
 
  function createXSelect(){
     
-    // if(document.getElementById('xAxis'))
-    // {
-    //     while(document.getElementById('xAxis').hasChildNodes()) {
-    //         document.getElementById('xAxis').removeChild(document.getElementById('xAxis').lastChild);
-    //         document.getElementById('yAxis').removeChild(document.getElementById('yAxis').lastChild)
-    //     }
-    // }
+    if(document.getElementById('selectx-container').hasChildNodes())
+    {
+        document.getElementById('selectx-container').removeChild(document.getElementById("xAxis"))      //delete the select and then create again i.e.,  it should be deleting if already exist
+    }
     const opt=document.createElement('option');
     opt.innerHTML="Select X axis";
     opt.selected=true;
@@ -89,6 +100,7 @@
         opt1.innerHTML=data[0][j];
         
         selectX.appendChild(opt1);
+        
        
     }   
     
@@ -97,12 +109,13 @@
         
         document.getElementById('selectx-container').appendChild(selectX);
        
-        document.getElementById('xAxis').addEventListener('change', function(){
+        document.getElementById('xAxis').addEventListener('input', function(){
            selectedX = $(this).val();
+           canHaveJson(selectedX,selectedY);
+        //    csvJSONSingleSeries(datacsv); 
             //console.log(selectedX);
             //selectedX=selected;
-        
-    });
+     }); 
     //}
 }
 function nav() {
@@ -198,7 +211,16 @@ function nav() {
                 'id':'selectx-container',
             }
         }
-    }
+    },
+    {
+        'parent':{
+            'name':'div',
+            'property':{
+                
+                'id':'selecty-container',
+            }
+        }
+    },
    
 ]
   }

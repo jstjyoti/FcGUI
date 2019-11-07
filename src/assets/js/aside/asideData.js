@@ -130,7 +130,7 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF,DDDDDD',
         'value': '',
         'id': 'backgroundColor_canvasBgColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart',
         'willActivate': function () {
             const self = this
@@ -146,7 +146,7 @@ const canvas = {
         'placeholder': 'Eg:- 30,40,30',
         'value': '',
         'id': 'backgroundColor_canvasBgRatio',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Gradient Color Orientation',
@@ -155,7 +155,7 @@ const canvas = {
         'max': '360',
         'value': '',
         'id': 'backgroundColor_canvasBgAngle',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Opacity',
@@ -190,7 +190,7 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF',
         'value': '',
         'id': 'border_canvasBorderColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Opacity',
@@ -199,7 +199,7 @@ const canvas = {
         'max': '100',
         'value': '',
         'id': 'border_canvasBorderAlpha',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Thickness',
@@ -207,7 +207,7 @@ const canvas = {
         'placeholder': 'Eg:- 5',
         'value': '',
         'id': 'border_canvasBorderThickness',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }],
     'outsidePlotArea': [{
@@ -255,7 +255,7 @@ const dataplot = {
     value: '',
     id: 'features_useRoundEdges',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Shadow',
@@ -264,7 +264,7 @@ const dataplot = {
     value: '',
     id: 'features_showShadow',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Max Column Width',
@@ -273,7 +273,7 @@ const dataplot = {
     value: '',
     id: 'features_maxColWidth',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }],
 
@@ -284,18 +284,18 @@ const dataplot = {
     value: '',
     id: 'border_showPlotBorder',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
+    defaultActive: '1',
+    // willActivate: function () {
       
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
-            }, 0)
-        })
+    //     var self = this
+    //     new Promise(function (resolve, reject) {
+    //         setTimeout(() => {
+    //             document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
+    //         }, 0)
+    //     })
     
-      //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
-    }
+    //   //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
+    // }
   }, {
     label: 'Border Color',
     inputFieldType: 'color',
@@ -303,7 +303,7 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Border Thickness',
@@ -312,7 +312,7 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderThickness',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Border opacity',
@@ -323,7 +323,7 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Border dashed',
@@ -332,16 +332,16 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderDashed',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
-          }, 0)
-      })
-      //background_plotBorderDashLen,background_plotBorderDashGap
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
+    //       }, 0)
+    //   })
+    //   //background_plotBorderDashLen,background_plotBorderDashGap
+    // }
   }, {
     label: 'Border dashed length',
     inputFieldType: 'number',
@@ -349,7 +349,7 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderDashLen',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
 
   }, {
     label: 'Border dashed gap',
@@ -358,7 +358,7 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderDashGap',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }],
 
   gradient: [{
@@ -368,16 +368,16 @@ const dataplot = {
     value: '',
     id: 'gradient_usePlotGradientColor',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
-          }, 0)
-      })
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
+    //       }, 0)
+    //   })
       // 'gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle'
-    }
+    //}
   }, {
     label: 'Color',
     inputFieldType: 'color',
@@ -385,7 +385,7 @@ const dataplot = {
     value: '',
     id: 'gradient_plotGradientColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Opacity',
     inputFieldType: 'range',
@@ -395,7 +395,7 @@ const dataplot = {
     value: '',
     id: 'gradient_plotFillAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Color ratio',
     inputFieldType: 'text',
@@ -403,7 +403,7 @@ const dataplot = {
     value: '',
     id: 'gradient_plotFillRatio',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Color orientation',
     inputFieldType: 'range',
@@ -413,7 +413,7 @@ const dataplot = {
     value: '',
     id: 'gradient_plotFillAngle',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }],
 
   hover: [{
@@ -423,16 +423,16 @@ const dataplot = {
     value: '',
     id: 'hover_showHoverEffect',
     note: 'Remove theme to apply this',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-          }, 0)
-      })
-      //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+    //       }, 0)
+    //   })
+    //   //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
+    // }
   }, {
     label: 'Hover data plots',
     inputFieldType: 'checkbox',
@@ -440,16 +440,16 @@ const dataplot = {
     value: '',
     id: 'hover_plotHoverEffect',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-          }, 0)
-      })
-      //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+    //       }, 0)
+    //   })
+    //   //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
+    // }
   }, {
     label: 'Color',
     inputFieldType: 'color',
@@ -457,7 +457,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotFillHoverColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Color opacity',
     inputFieldType: 'range',
@@ -467,7 +467,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotFillHoverAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Border color',
     inputFieldType: 'color',
@@ -475,7 +475,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Border color opacity',
     inputFieldType: 'range',
@@ -485,7 +485,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Border thickness',
     inputFieldType: 'number',
@@ -493,7 +493,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverThickness',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Border dashed',
     inputFieldType: 'checkbox',
@@ -501,16 +501,16 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashed',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
-          }, 0)
-      })
-      //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
+    //       }, 0)
+    //   })
+    //   //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
+    // }
   }, {
     label: 'Border dashed length',
     inputFieldType: 'number',
@@ -518,7 +518,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashLen',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Border dashed gap',
     inputFieldType: 'number',
@@ -526,7 +526,7 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashGap',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }],
 
 
@@ -538,15 +538,15 @@ const dataplot = {
     id: 'background_drawCrossLine',
     note: '',
     defaultActive: '1',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_crossLineColor' ,'background_crossLineAlpha', 'background_crossLineAnimation', 'background_crossLineAnimationDuration' ,'background_drawCrossLineOnTop']))
-          }, 0)
-      })
-      //background_crossLineColor ,background_crossLineAlpha,background_crossLineAnimation,background_crossLineAnimationDuration,background_drawCrossLineOnTop
-    }
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_crossLineColor' ,'background_crossLineAlpha', 'background_crossLineAnimation', 'background_crossLineAnimationDuration' ,'background_drawCrossLineOnTop']))
+    //       }, 0)
+    //   })
+    //   //background_crossLineColor ,background_crossLineAlpha,background_crossLineAnimation,background_crossLineAnimationDuration,background_drawCrossLineOnTop
+    // }
   }, {
     label: 'Color',
     inputFieldType: 'color',
@@ -588,7 +588,7 @@ const dataplot = {
     value: '',
     id: 'background_drawCrossLineOnTop',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }]
 }
 
@@ -600,16 +600,16 @@ const plotValue = {
     value: '',
     id: 'features_showValues',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['features_rotateValues','features_placeValuesInside', 'font-properties']))
-          }, 0)
-      })
-      //features_rotateValues,features_placeValuesInside, font-properties
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['features_rotateValues','features_placeValuesInside', 'font-properties']))
+    //       }, 0)
+    //   })
+    //   //features_rotateValues,features_placeValuesInside, font-properties
+    // }
   }, {
     label: 'Rotate values',
     inputFieldType: 'checkbox',
@@ -617,7 +617,7 @@ const plotValue = {
     value: '',
     id: 'features_rotateValues',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Values inside',
     inputFieldType: 'checkbox',
@@ -635,7 +635,7 @@ const plotValue = {
     value: '',
     id: 'border_valueAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }],
 
   font: [{
@@ -661,7 +661,7 @@ const plotValue = {
     value: '',
     id: 'font_valueFontBold',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Italic',
     inputFieldType: 'checkbox',
@@ -669,7 +669,7 @@ const plotValue = {
     value: '',
     id: 'font_valueFontItalic',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Style',
     inputFieldType: 'text',
@@ -685,7 +685,7 @@ const plotValue = {
     value: '',
     id: 'font_textOutline',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Opacity',
     inputFieldType: 'range',
@@ -705,7 +705,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Dashed',
     inputFieldType: 'checkbox',
@@ -713,16 +713,16 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderDashed',
     note: '',
-    defaultActive: '0',
-    willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_valueBorderDashLen', 'border_valueBorderDashGap']))
-          }, 0)
-      })
-      //border_valueBorderDashLen, border_valueBorderDashGap
-    }
+    defaultActive: '1',
+    // willActivate: function () {
+    //   var self = this
+    //   new Promise(function (resolve, reject) {
+    //       setTimeout(() => {
+    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_valueBorderDashLen', 'border_valueBorderDashGap']))
+    //       }, 0)
+    //   })
+    //   //border_valueBorderDashLen, border_valueBorderDashGap
+    // }
   }, {
     label: 'Dashed length',
     inputFieldType: 'number',
@@ -730,7 +730,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderDashLen',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Dashed gap',
     inputFieldType: 'number',
@@ -738,7 +738,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderDashGap',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Opacity',
     inputFieldType: 'range',
@@ -748,7 +748,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Thickness',
     inputFieldType: 'number',
@@ -756,7 +756,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderThickness',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Padding',
     inputFieldType: 'number',
@@ -764,7 +764,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderPadding',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Radius',
     inputFieldType: 'number',
@@ -772,7 +772,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBorderRadius',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }],
 
   background: [{
@@ -782,7 +782,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBgColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }, {
     label: 'Opacity',
     inputFieldType: 'range',
@@ -792,7 +792,7 @@ const plotValue = {
     value: '',
     id: 'border_valueBgAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
   }]
 }
 
@@ -805,13 +805,13 @@ const caption = {
     id: 'caption_caption',
     note: '',
     defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
+    // willActivate: function () {
+    //   document.getElementById(this.id).addEventListener('change', () => {
 
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_captionFontSize', 'caption_captionFont',
-      'caption_captionFontColor', 'caption_captionFontBold')
+    //   })
+    // }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+    //   'caption_captionHorizontalPadding', 'caption_captionFontSize', 'caption_captionFont',
+    //   'caption_captionFontColor', 'caption_captionFontBold')
   }, ],
   captionFont: [{
       label: 'Font Size',
@@ -861,13 +861,13 @@ const subCaption = {
     id: 'caption_subCaption',
     note: '',
     defaultActive: '1',
-    willActivate: function () {
-      document.getElementById(this.id).addEventListener('change', () => {
+    // willActivate: function () {
+    //   document.getElementById(this.id).addEventListener('change', () => {
 
-      })
-    }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
-      'caption_captionHorizontalPadding', 'caption_subCaptionFontSize', 'caption_subCaptionFont',
-      'caption_subCaptionFontColor', 'caption_subCaptionFontBold')
+    //   })
+    // }.bind(null, 'caption_captionAlignment', 'caption_alignCaptionWithCanvas', 'caption_captionOnTop',
+    //   'caption_captionHorizontalPadding', 'caption_subCaptionFontSize', 'caption_subCaptionFont',
+    //   'caption_subCaptionFontColor', 'caption_subCaptionFontBold')
   }, ],
   subCaptionFont: [{
       label: 'Font Size',
@@ -917,17 +917,17 @@ const chartDS = {
       "id": "animation_animation",
       "note": "",
       "defaultActive": "1",
-      "willActivate": () => {
-        var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['animation_animationDuration']))
-          }, 0)
-      })
+      // "willActivate": () => {
+      //   var self = this
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['animation_animationDuration']))
+      //     }, 0)
+      // })
       
     
-        //enable Animation Duration
-      }
+      //   //enable Animation Duration
+      // }
     },
     {
       "label": "Time",
@@ -980,15 +980,15 @@ const chartDS = {
       "id": "background_bgColor",
       "note": "",
       "defaultActive": "1",
-      "willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgAlpha","background_bgRatio","background_bgAngle"]))
-            }, 0)
-        })
+      // "willActivate": () => {
+      //   var self = this
+      //   new Promise(function (resolve, reject) {
+      //       setTimeout(() => {
+      //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgAlpha","background_bgRatio","background_bgAngle"]))
+      //       }, 0)
+      //   })
         
-      }
+      // }
 
     },
     {
@@ -1032,15 +1032,15 @@ const chartDS = {
       "id": "background_bgImage",
       "note": "",
       "defaultActive": "1",
-      "willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgImageAlpha","background_bgImageDisplayMode","background_bgImageVAlign","background_bgImageHAlign","background_bgImageScale"]))
-            }, 0)
-        })
+      // "willActivate": () => {
+      //   var self = this
+      //   new Promise(function (resolve, reject) {
+      //       setTimeout(() => {
+      //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgImageAlpha","background_bgImageDisplayMode","background_bgImageVAlign","background_bgImageHAlign","background_bgImageScale"]))
+      //       }, 0)
+      //   })
         
-      }
+      // }
       
     },
 
@@ -1145,16 +1145,16 @@ const chartDS = {
       "id": "chartBorder_showborder",
       "note": "",
       "defaultActive": "1",
-      "willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["chartBorder_borderColor","chartBorder_borderThickness","chartBorder_borderAlpha"]))
-            }, 0)
-        })
+      // "willActivate": () => {
+      //   var self = this
+      //   new Promise(function (resolve, reject) {
+      //       setTimeout(() => {
+      //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["chartBorder_borderColor","chartBorder_borderThickness","chartBorder_borderAlpha"]))
+      //       }, 0)
+      //   })
         
       
-      }
+      // }
 
     },
     {
@@ -1197,9 +1197,9 @@ const chartDS = {
       id: 'caption_captionAlignment',
       note: '',
       defaultActive: '1',
-      willActivate: function () {
-        // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
-      }
+      // willActivate: function () {
+      //   // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
+      // }
     },
     {
       label: 'Alignment wrt Plot Area',
@@ -1235,15 +1235,15 @@ const chartDS = {
       "id": "logo_logoURL",
       "note": "",
       "defaultActive": "1",
-      "willActivate": () => {
+      // "willActivate": () => {
   
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["logo_logoLeftMargin","logo_logoRightMargin","logo_logoPosition","logo_logoAlpha","logo_logoLink","logo_logoScale"]))
-            }, 0)
-        })
-      }
+      //   var self = this
+      //   new Promise(function (resolve, reject) {
+      //       setTimeout(() => {
+      //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["logo_logoLeftMargin","logo_logoRightMargin","logo_logoPosition","logo_logoAlpha","logo_logoLink","logo_logoScale"]))
+      //       }, 0)
+      //   })
+      // }
 
     },
     {
