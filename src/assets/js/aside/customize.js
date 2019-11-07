@@ -24,14 +24,19 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-    
+
     const value = arguments[0]
     const event = arguments[1]
+    function setAttr(label, value) {
+        cloneChart.setChartAttribute(label, value)
+        chartObject = cloneChart.getJSONData()
+        chart.setJSONData(filterLink())
+    }
     if (value['location'] === 'chart') {
         if (value['inputFieldType'] === 'checkbox') {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.checked ? '1' : '0')
+            setAttr(value['id'].split('_')[1], event.target.checked ? '1' : '0')
         } else {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.value)
+            setAttr(value['id'].split('_')[1], event.target.value)
         }
     } else if (typeof value['location'] === 'object') {
 
@@ -169,7 +174,7 @@ function inputDropDown(value) {
                         return skeleton
                     })(),
                     'event': function() {
-                        
+
                         this.addEventListener('input', handleChartChanges.bind(null, value))
                     }
                 },
@@ -538,7 +543,7 @@ function customize() {
                         'parent': {
                             'name': 'li',
                             'property': {
-                                'class': 'customize-item'
+                                'class': 'customize-item ' + part
                             },
                             'text': type[part]['name'],
                             'event': function () {

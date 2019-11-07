@@ -13,7 +13,7 @@ function exportHTML(e) {
         'width: "700",'+
         'height: "400",'+
         'dataFormat: "json",'+
-        'dataSource:'+JSON.stringify(chart.getJSONData())+
+        'dataSource:'+JSON.stringify(chartObject)+
         '}).render()'+
     '})'+
     '</script>\

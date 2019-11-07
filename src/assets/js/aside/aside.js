@@ -116,7 +116,7 @@ function aside() {
                 'parent': {
                     'name': 'li',
                     'property': {
-                        'class': 'aside-link-container'
+                        'class': 'aside-link-container customize'
                     },
                     'event': function () {
                         // onclick will open aside-detail tab, each tab
