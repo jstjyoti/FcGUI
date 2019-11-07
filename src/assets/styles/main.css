@@ -9,9 +9,10 @@
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
+    height: 100vh;
     display: flex;
     flex-flow: column;
     background: linear-gradient(270deg, #0e5058, #009688);
@@ -22,7 +23,7 @@ body {
     display: flex;
     margin:0!important;
     padding:0!important;
-    height: 100vh;
+    height: 100%;
     flex-flow: row nowrap;
 }
 ul {
@@ -149,6 +150,7 @@ ul {
 
 .aside-customize {
     display: flex;
+    /* height: 80%; */
     flex-flow: row nowrap;
 }
 .aside-nav > li:hover {
@@ -201,12 +203,13 @@ ul {
 
 .customize-input-field {
     overflow-y: scroll;
-    height: 80vh;
+    height: 500px;
     /* border: 1px solid #00826e; */
     box-shadow: -2px 2px 5px #00ffdc;
     border-radius: 10px;
-    margin-top: 20px;
-    margin-right: 20px;
+    /* margin-top: 20px;
+    margin-right: 20px; */
+    margin: 20px 20px 20px 0;
 }
 .customize-input-field>li {
     margin: 10px;
