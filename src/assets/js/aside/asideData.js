@@ -116,7 +116,7 @@ const canvas = {
         'defaultActive': '1',
         'note': 'Turn off theme to see changes',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             var self = this
             new Promise(function (resolve, reject) {
                 setTimeout(() => {
@@ -130,9 +130,9 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF,DDDDDD',
         'value': '',
         'id': 'backgroundColor_canvasBgColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             const self = this
             new Promise(function (resolve, reject) {
                 setTimeout(() => {
@@ -146,7 +146,7 @@ const canvas = {
         'placeholder': 'Eg:- 30,40,30',
         'value': '',
         'id': 'backgroundColor_canvasBgRatio',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Gradient Color Orientation',
@@ -155,7 +155,7 @@ const canvas = {
         'max': '360',
         'value': '',
         'id': 'backgroundColor_canvasBgAngle',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Opacity',
@@ -174,7 +174,7 @@ const canvas = {
         'id': 'border_showCanvasBorder',
         'defaultActive': '1',
         'location': 'chart',
-        'willActivate': function () {
+        '_willActivate': function () {
             // will add a event listener
             const self = this
             new Promise(function (resolve, reject) {
@@ -190,7 +190,7 @@ const canvas = {
         'placeholder': 'Eg:- FFCCFF',
         'value': '',
         'id': 'border_canvasBorderColor',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Opacity',
@@ -199,7 +199,7 @@ const canvas = {
         'max': '100',
         'value': '',
         'id': 'border_canvasBorderAlpha',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }, {
         'label': 'Border Thickness',
@@ -207,7 +207,7 @@ const canvas = {
         'placeholder': 'Eg:- 5',
         'value': '',
         'id': 'border_canvasBorderThickness',
-        'defaultActive': '0',
+        'defaultActive': '1',
         'location': 'chart'
     }],
     'outsidePlotArea': [{
@@ -796,6 +796,7 @@ const plotValue = {
   }]
 }
 
+<<<<<<< HEAD
 
 const column2d = {
   'canvas': {
@@ -833,11 +834,111 @@ const pie2d = {
 // const subCaption = {
   
 // }
+=======
+const caption = {
+  captionText: [{
+    label: 'Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Heading',
+    value: '',
+    id: 'caption_caption',
+    note: '',
+    defaultActive: '1',
+  }],
+  captionFont: [{
+      label: 'Font Size',
+      inputFieldType: "range",
+      min: '6',
+      max: '72',
+      value: '',
+      placeholder: '14',
+      id: 'caption_captionFontSize',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Style',
+      inputFieldType: "text",
+      value: '',
+      placeholder: 'Arial',
+      id: 'caption_captionFont',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Color',
+      inputFieldType: "color",
+      value: '',
+      placeholder: '#dddddd',
+      id: 'caption_captionFontColor',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Bold',
+      inputFieldType: "checkbox",
+      value: '',
+      id: 'caption_captionFontBold',
+      note: '',
+      defaultActive: '1'
+    },
+  ]
+}
+const subCaption = {
+  subCaptionText: [{
+    label: 'Sub-Heading',
+    inputFieldType: 'text',
+    placeholder: 'My Sub Heading',
+    value: '',
+    id: 'caption_subCaption',
+    note: '',
+    defaultActive: '1'
+  }, ],
+  subCaptionFont: [{
+      label: 'Font Size',
+      inputFieldType: "range",
+      min: '6',
+      max: '72',
+      value: '',
+      placeholder: '14',
+      id: 'caption_subCaptionFontSize',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Style',
+      inputFieldType: "text",
+      value: '',
+      placeholder: 'Arial',
+      id: 'caption_subCaptionFont',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Color',
+      inputFieldType: "color",
+      value: '',
+      placeholder: '#dddddd',
+      id: 'caption_subCaptionFontColor',
+      note: '',
+      defaultActive: '1'
+    },
+    {
+      label: 'Font Bold',
+      inputFieldType: "checkbox",
+      value: '',
+      id: 'caption_subCaptionFontBold',
+      note: '',
+      defaultActive: '1'
+    },
+  ]
+}
+>>>>>>> 7a6c995b2c840551a7c7464cf9be3f35182cd694
 const chartDS = {
   "animation": [{
       "label": "Enable",
       "inputFieldType": "check",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "animation_animation",
       "note": "",
@@ -857,7 +958,7 @@ const chartDS = {
     {
       "label": "Time",
       "inputFieldType": "number",
-      "placeHolder": "1",
+      "placeholder": "1",
       "value": "",
       "id": "animation_animationDuration",
       "note": "Time in seconds taken to draw the chart in Animation",
@@ -869,7 +970,7 @@ const chartDS = {
     {
       "label": "Padding",
       "inputFieldType": "number",
-      "placeHolder": "5",
+      "placeholder": "5",
       "value": "",
       "id": "padding_chartPadding",
       "note": "",
@@ -879,7 +980,7 @@ const chartDS = {
   "margin": [{
     "label": "Margin",
     "inputFieldType": "number",
-    "placeHolder": "0",
+    "placeholder": "0",
     "value": "",
     "id": "margin_chartMargin",
     "note": "",
@@ -889,18 +990,18 @@ const chartDS = {
       "label": "Combination",
       "inputFieldType": "select",
       "selectValues": ["1", "2", "3", "4", "5"],
-      "placeHolder": "2",
       "value": "",
       "id": "ChartColors_palette",
       "note": "each set has different combination of colors for elementation",
       "defaultActive": "1",
+      'location': 'chart'
     },
 
   ],
   "background": [{
       "label": "Color",
       "inputFieldType": "color",
-      "placeHolder": "pick a color or give a Hexcode",
+      "placeholder": "pick a color or give a Hexcode",
       "value": "",
       "id": "background_bgColor",
       "note": "",
@@ -921,7 +1022,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "0 to 100",
+      "placeholder": "0 to 100",
       "value": "",
       "id": "background_bgAlpha",
       "note": "",
@@ -931,7 +1032,7 @@ const chartDS = {
     {
       "label": " GradientColorRatio",
       "inputFieldType": "text",
-      "placeHolder": "40,60",
+      "placeholder": "40,60",
       "value": "",
       "id": "background_bgRatio",
       "note": "comma separated Value ",
@@ -942,7 +1043,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "0",
       "max": "360",
-      "placeHolder": "select angle",
+      "placeholder": "select angle",
       "value": "",
       "id": "background_bgAngle",
       "note": "angle value to change orienatation of background",
@@ -952,7 +1053,7 @@ const chartDS = {
     {
       "label": "Image",
       "inputFieldType": "url",
-      "placeHolder": "paset the url to the image ",
+      "placeholder": "paset the url to the image ",
       "value": "",
       "id": "background_bgImage",
       "note": "",
@@ -974,7 +1075,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "select a value",
+      "placeholder": "select a value",
       "value": "",
       "id": "background_bgImageAlpha",
       "note": "",
@@ -984,8 +1085,8 @@ const chartDS = {
     {
       "label": "ImageFit",
       "inputFieldType": "select",
-      "selectArray": ["fit", "fill", "tile", "center", "none"],
-      "placeHolder": "fit",
+      "selectValues": ["fit", "fill", "tile", "center", "none"],
+      "placeholder": "fit",
       "value": "",
       "id": "background_bgImageDisplayMode",
       "note": "",
@@ -995,8 +1096,8 @@ const chartDS = {
     {
       "label": "ImageVerticalAlignment",
       "inputFieldType": "select",
-      "selectArray": ["top", "middle", "center"],
-      "placeHolder": "middle",
+      "selectValues": ["top", "middle", "center"],
+      "placeholder": "middle",
       "value": "",
       "id": "background_bgImageVAlign",
       "note": "",
@@ -1006,8 +1107,8 @@ const chartDS = {
     {
       "label": "ImageHorizontalAlignment",
       "inputFieldType": "select",
-      "selectArray": ["left", "middle", "right"],
-      "placeHolder": "middle",
+      "selectValues": ["left", "middle", "right"],
+      "placeholder": "middle",
       "value": "",
       "id": "background_bgImageHAlign",
       "note": "",
@@ -1019,7 +1120,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "1",
       "max": "300",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "background_bgImageScale",
       "note": "works only if background image Fit set to tile,center or none",
@@ -1031,7 +1132,7 @@ const chartDS = {
   "GeneralFont": [{
       "label": "GeneralFont",
       "inputFieldType": "text",
-      "placeHolder": "write Fontname",
+      "placeholder": "write Fontname",
       "value": "",
       "id": "baseFont_baseFont",
       "note": "",
@@ -1043,7 +1144,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": 4,
       "max": 72,
-      "placeHolder": "Eg 4-72",
+      "placeholder": "Eg 4-72",
       "value": "",
       "id": "baseFont_baseFontSize",
       "note": "",
@@ -1052,7 +1153,7 @@ const chartDS = {
     {
       "label": "FontColor",
       "inputFieldType": "color",
-      "placeHolder": "pick a color",
+      "placeholder": "pick a color",
       "value": "",
       "id": "baseFont_baseFontColor",
       "note": "",
@@ -1065,7 +1166,7 @@ const chartDS = {
   "chartBorder": [{
       "label": "BorderActive",
       "inputFieldType": "checkbox",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "chartBorder_showborder",
       "note": "",
@@ -1085,7 +1186,7 @@ const chartDS = {
     {
       "label": "Color",
       "inputFieldType": "color",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "chartBorder_borderColor",
       "note": "",
@@ -1095,7 +1196,7 @@ const chartDS = {
     {
       "label": "Thickness",
       "inputFieldType": "number",
-      "placeHolder": "eg: 5",
+      "placeholder": "eg: 5",
       "value": "",
       "id": "chartBorder_borderThickness",
       "note": "",
@@ -1106,7 +1207,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "0",
       "max": "100",
-      "placeHolder": "eg 50",
+      "placeholder": "eg 50",
       "value": "",
       "id": "chartBorder_borderAlpha",
       "note": "",
@@ -1236,13 +1337,14 @@ const chartDS = {
   captionAlignment: [{
       label: 'Alignment',
       inputFieldType: "select",
-      selectArray: ["left", "center", "right"],
+      selectValues: ["left", "center", "right"],
       placeholder: 'center',
       value: '',
       id: 'caption_captionAlignment',
       note: '',
       defaultActive: '1',
       willActivate: function () {
+<<<<<<< HEAD
         var self = this
         new Promise(function (resolve, reject) {
             setTimeout(() => {
@@ -1254,6 +1356,10 @@ const chartDS = {
         })
         // 'caption_captionHorizontalPadding',  will get activated only when captionAlignment is other than 'center'
       },
+=======
+        // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
+      }
+>>>>>>> 7a6c995b2c840551a7c7464cf9be3f35182cd694
     },
     {
       label: 'Alignment wrt Plot Area',
@@ -1284,7 +1390,7 @@ const chartDS = {
   "logo": [{
       "label": "SourceLink",
       "inputFieldType": "url",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoURL",
       "note": "",
@@ -1303,7 +1409,7 @@ const chartDS = {
     {
       "label": "LeftMargin",
       "inputFieldType": "number",
-      "placeHolder": "eg 5",
+      "placeholder": "eg 5",
       "value": "",
       "id": "logo_logoLeftMargin",
       "note": "",
@@ -1312,7 +1418,7 @@ const chartDS = {
     {
       "label": "RightMargin",
       "inputFieldType": "number",
-      "placeHolder": "eg 6",
+      "placeholder": "eg 6",
       "value": "",
       "id": "logo_logoRightMargin",
       "note": "",
@@ -1328,7 +1434,7 @@ const chartDS = {
         "Bottom-Right": "BR",
         "Center": "CC"
       },
-      "placeHolder": "TL",
+      "placeholder": "TL",
       "value": "",
       "id": "logo_logoPosition",
       "note": "",
@@ -1339,7 +1445,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "0",
       "max": "1",
-      "placeHolder": "Select",
+      "placeholder": "Select",
       "value": "",
       "id": "logo_logoAlpha",
       "note": "",
@@ -1348,7 +1454,7 @@ const chartDS = {
     {
       "label": "LinkOnClick",
       "inputFieldType": "url",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoLink",
       "note": "",
@@ -1359,7 +1465,7 @@ const chartDS = {
       "inputFieldType": "range",
       "min": "1",
       "max": "300",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "logo_logoScale",
       "note": "",
@@ -1370,7 +1476,7 @@ const chartDS = {
   "rightToLeftText": [{
       "label": "isLanguageHavingRightTOLeftText",
       "inputFieldType": "check",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "rightToLeftText_chartPadding",
       "note": "for Urdu, arabic and Japanese Text",
@@ -1382,7 +1488,7 @@ const chartDS = {
   "Export": [{
       "label": "Enable",
       "inputFieldType": "check",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "Export_exportEnable",
       "note": "",
@@ -1394,7 +1500,7 @@ const chartDS = {
   "PrintMenu": [{
       "label": "Enable",
       "inputFieldType": "check",
-      "placeHolder": "",
+      "placeholder": "",
       "value": "",
       "id": "PrintMenu_showPrintMenuItem",
       "note": "",
@@ -1404,4 +1510,87 @@ const chartDS = {
 
   ]
 
+}
+
+const column2d = {
+  'canvas': {
+    'name': 'Plot Area',
+    'properties': {
+      'padding': canvas['padding'],
+      'margin': canvas['margin'],
+      'backgroundColor': canvas['backgroundColor'],
+      'border': canvas['border'],
+      'outsidePlotArea': canvas['outsidePlotArea']
+    }
+  },
+  'dataplot': {
+    'name': 'DataPlot',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background']
+    }
+  }, 
+  'plotValue': {
+    'name': 'DataValue',
+    'properties': {
+      'features': plotValue['features'],
+      'font': plotValue['font'],
+      'border': plotValue['border'],
+      'background': plotValue['background']
+    }
+  },
+  'caption': {
+    'name': 'Caption',
+    'properties': {
+      'captionText': caption['captionText'],
+      'captionFont': caption['captionFont']
+    }
+  },
+  'subcaption': {
+    'name': 'Sub Caption',
+    'properties': {
+      'subCaptionText': subCaption['subCaptionText'],
+      'subCaptionFont': subCaption['subCaptionFont']
+    }
+  },
+  'chartDS': {
+    'name': 'Chart',
+    'properties': {
+      'animtion': chartDS['animation'],
+      'padding': chartDS['padding'],
+      'margin': chartDS['margin'],
+      'ChartColors': chartDS['ChartColors'],
+      'background': chartDS['background'],
+      'GeneralFont': chartDS['GeneralFont'],
+      'chartBorder': chartDS['chartBorder'],
+      'captionAlignment': chartDS['captionAlignment'],
+      'captionPosition': chartDS['captionPosition'],
+      'captionPadding': chartDS['captionPadding'],
+      'logo': chartDS['logo'],
+      'rightToLeftText': chartDS['rightToLeftText'],
+      'Export': chartDS['Export'],
+      'PrintMenu': chartDS['PrintMenu']
+
+    }
+  }
+}
+const area2d = {
+  'canvas': column2d['canvas']
+}
+
+const bar2d = {
+  'canvas': column2d['canvas']
+}
+
+const line = {
+  'canvas': column2d['canvas']
+}
+const pie2d = {
+  'canvas': {
+    'name': 'Plot Area',
+    'margin': canvas['margin']
+  }
 }
