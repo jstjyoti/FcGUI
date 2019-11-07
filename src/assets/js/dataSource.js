@@ -152,7 +152,7 @@ function createDataSource(){
     };
   }
   
-  chart.chartType(type);
+  //chart.chartType(type);
   chart.setJSONData(datasource);
   
 }
