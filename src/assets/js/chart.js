@@ -83,32 +83,11 @@ function handleClicks(e, parent) {
 }
 const asideContainer = document.getElementById('aside')
 let prevWidth = asideContainer.offsetWidth
-const chart = new FusionCharts({
-    type: 'column2d',
-    'width': '500',
-    'height': '400',
-    renderAt: 'main',
-    dataFormat: 'json',
-    dataSource: sample_column2d,
-    events: {
-        'dataLabelClick': function (e) {
-            handleClicks(e, parent)
-        },
-        'dataPlotClick': function (e) {
-            handleClicks(e, parent)
-        },
-        'legendItemClicked': function (e) {
-            handleClicks(e, parent)
-        },
-        'drawComplete': function (e, d) {
-            parent = document.getElementById('main')
-            parent.addEventListener('click', handleClicks)
-        }
-    }
-}).render()
+var chart ;
 setInterval(() => {
     if (asideContainer.offsetWidth !== prevWidth) {
-        prevWidth = asideContainer.offsetWidth
-        chart.resizeTo(0.9 * (window.innerWidth - prevWidth), 400)
+        prevWidth = asideContainer.offsetWidth;
+        if(chart)
+            chart.resizeTo(0.9 * (window.innerWidth - prevWidth), 400)
     }
 }, 100)
