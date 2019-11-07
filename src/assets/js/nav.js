@@ -22,7 +22,30 @@ var data,datacsv,selectedX="";
             return lines.split(',');
             })
             resolve(function(){
-
+                chart = new FusionCharts({
+                    type: 'column2d',
+                    'width': '500',
+                    'height': '400',
+                    renderAt: 'main',
+                    dataFormat: 'json',
+                    
+                    events: {
+                        'dataLabelClick': function (e) {
+                            handleClicks(e, parent)
+                        },
+                        'dataPlotClick': function (e) {
+                            handleClicks(e, parent)
+                        },
+                        'legendItemClicked': function (e) {
+                            handleClicks(e, parent)
+                        },
+                        'drawComplete': function (e, d) {
+                            parent = document.getElementById('main')
+                            parent.addEventListener('click', handleClicks)
+                        }
+                    }
+                }).render()
+                    createChartSelect();
                     createXSelect();
                     createYSelect();
             }
@@ -41,6 +64,36 @@ var data,datacsv,selectedX="";
     }
     reader.readAsText(path.files[0])
       
+ }
+ function createChartSelect(){
+    if(document.getElementById('selectChart-container').hasChildNodes())
+    {
+        document.getElementById('selectChart-container').removeChild(document.getElementById("chartType"))      
+        //delete the select and then create again i.e.,  it should be deleting if already exist
+    }
+    const opt=document.createElement('option');
+    opt.innerHTML="Select Chart Type";
+    opt.selected=true;
+    opt.disabled=true;
+    const select=document.createElement('select');
+    select.setAttribute('id','chartType');
+    select.appendChild(opt)
+    const chartType=["line","area2d","pie2d","pie3d","column2d","column3d","bar2d","bar3d","mscolumn2d","mscolumn3d","msbar2d","msbar3d"]
+    for(var i of chartType){
+        const opt1= document.createElement('option');
+        opt1.setAttribute('value',i);
+        opt1.innerHTML=i;
+        select.appendChild(opt1);
+        
+    }
+    document.getElementById('selectChart-container').appendChild(select);
+    document.getElementById('chartType').addEventListener('input', function(){
+        type = $(this).val();
+        // csvJSONSingleSeries(datacsv);
+        chart.chartType(type);
+    });
+
+    
  }
  function createYSelect(){
     if(document.getElementById('selecty-container').hasChildNodes())
@@ -103,20 +156,13 @@ for (j=0;j<data[0].length;j++){
         
        
     }   
-    
-   
-    //if(!document.getElementById('xAxis').hasChildNodes()){
         
         document.getElementById('selectx-container').appendChild(selectX);
        
         document.getElementById('xAxis').addEventListener('input', function(){
            selectedX = $(this).val();
            canHaveJson(selectedX,selectedY);
-        //    csvJSONSingleSeries(datacsv); 
-            //console.log(selectedX);
-            //selectedX=selected;
      }); 
-    //}
 }
 function nav() {
   const skeleton = {
@@ -202,6 +248,15 @@ function nav() {
             },
            
           ],
+    },
+    {
+        'parent':{
+            'name':'div',
+            'property':{
+                
+                'id':'selectChart-container',
+            }
+        }
     },
     {
         'parent':{

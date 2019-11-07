@@ -601,15 +601,7 @@ const plotValue = {
     id: 'features_showValues',
     note: '',
     defaultActive: '1',
-    // willActivate: function () {
-    //   var self = this
-    //   new Promise(function (resolve, reject) {
-    //       setTimeout(() => {
-    //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['features_rotateValues','features_placeValuesInside', 'font-properties']))
-    //       }, 0)
-    //   })
-    //   //features_rotateValues,features_placeValuesInside, font-properties
-    // }
+
   }, {
     label: 'Rotate values',
     inputFieldType: 'checkbox',
@@ -898,6 +890,7 @@ const subCaption = {
 const chartDS = {
   "animation": [{
       "label": "Enable",
+      "location":"chart",
       "inputFieldType": "check",
       "placeholder": "",
       "value": "",
@@ -918,18 +911,20 @@ const chartDS = {
     },
     {
       "label": "Time",
+      "location":"chart",
       "inputFieldType": "number",
       "placeholder": "1",
       "value": "",
       "id": "animation_animationDuration",
       "note": "Time in seconds taken to draw the chart in Animation",
-      "defaultActive": "0",
+      "defaultActive": "1"
     }
   ],
   "padding": [
 
     {
       "label": "Padding",
+      "location":"chart",
       "inputFieldType": "number",
       "placeholder": "5",
       "value": "",
@@ -940,6 +935,7 @@ const chartDS = {
   ],
   "margin": [{
     "label": "Margin",
+    "location":"chart",
     "inputFieldType": "number",
     "placeholder": "0",
     "value": "",
@@ -949,6 +945,7 @@ const chartDS = {
   }, ],
   "ChartColors": [{
       "label": "Combination",
+      "location":"chart",
       "inputFieldType": "select",
       "selectValues": ["1", "2", "3", "4", "5"],
       "value": "",
@@ -961,6 +958,7 @@ const chartDS = {
   ],
   "background": [{
       "label": "Color",
+      "location":"chart",
       "inputFieldType": "color",
       "placeholder": "pick a color or give a Hexcode",
       "value": "",
@@ -980,6 +978,7 @@ const chartDS = {
     },
     {
       "label": " ColorOpacity",
+      "location":"chart",
       "inputFieldType": "range",
       "min": "0",
       "max": "100",
@@ -987,7 +986,7 @@ const chartDS = {
       "value": "",
       "id": "background_bgAlpha",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
 
     },
     {
@@ -997,7 +996,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgRatio",
       "note": "comma separated Value ",
-      "defaultActive": "0"
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": " ColorOrientation",
@@ -1008,7 +1008,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgAngle",
       "note": "angle value to change orienatation of background",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
 
     },
     {
@@ -1019,6 +1020,7 @@ const chartDS = {
       "id": "background_bgImage",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
       // "willActivate": () => {
       //   var self = this
       //   new Promise(function (resolve, reject) {
@@ -1040,7 +1042,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgImageAlpha",
       "note": "",
-      "defaultActive": "0",
+      "location":"chart",
+      "defaultActive": "1",
 
     },
     {
@@ -1051,8 +1054,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgImageDisplayMode",
       "note": "",
-      "defaultActive": "0",
-
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "ImageVerticalAlignment",
@@ -1062,7 +1065,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgImageVAlign",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
 
     },
     {
@@ -1073,7 +1077,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgImageHAlign",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
 
     },
     {
@@ -1085,8 +1090,8 @@ const chartDS = {
       "value": "",
       "id": "background_bgImageScale",
       "note": "works only if background image Fit set to tile,center or none",
-      "defaultActive": "0",
-
+      "defaultActive": "1",
+      "location":"chart",
     },
 
   ],
@@ -1098,6 +1103,7 @@ const chartDS = {
       "id": "baseFont_baseFont",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
 
     },
     {
@@ -1109,6 +1115,7 @@ const chartDS = {
       "value": "",
       "id": "baseFont_baseFontSize",
       "note": "",
+      "location":"chart",
 
     },
     {
@@ -1119,6 +1126,7 @@ const chartDS = {
       "id": "baseFont_baseFontColor",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
 
 
     },
@@ -1132,6 +1140,7 @@ const chartDS = {
       "id": "chartBorder_showborder",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
       // "willActivate": () => {
       //   var self = this
       //   new Promise(function (resolve, reject) {
@@ -1151,7 +1160,8 @@ const chartDS = {
       "value": "",
       "id": "chartBorder_borderColor",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
 
     },
     {
@@ -1161,7 +1171,8 @@ const chartDS = {
       "value": "",
       "id": "chartBorder_borderThickness",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "Opacity",
@@ -1172,7 +1183,7 @@ const chartDS = {
       "value": "",
       "id": "chartBorder_borderAlpha",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
     },
   ],
   captionAlignment: [{
@@ -1222,6 +1233,7 @@ const chartDS = {
       "id": "logo_logoURL",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
       // "willActivate": () => {
   
       //   var self = this
@@ -1240,7 +1252,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoLeftMargin",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "RightMargin",
@@ -1249,7 +1262,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoRightMargin",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "Position",
@@ -1265,7 +1279,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoPosition",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "Opacity",
@@ -1276,7 +1291,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoAlpha",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "LinkOnClick",
@@ -1285,7 +1301,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoLink",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
     {
       "label": "Scale",
@@ -1296,7 +1313,8 @@ const chartDS = {
       "value": "",
       "id": "logo_logoScale",
       "note": "",
-      "defaultActive": "0",
+      "defaultActive": "1",
+      "location":"chart",
     },
 
   ],
@@ -1308,6 +1326,7 @@ const chartDS = {
       "id": "rightToLeftText_chartPadding",
       "note": "for Urdu, arabic and Japanese Text",
       "defaultActive": "1",
+      "location":"chart",
     }
 
   ],
@@ -1320,6 +1339,7 @@ const chartDS = {
       "id": "Export_exportEnable",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
 
     }
 
@@ -1332,6 +1352,7 @@ const chartDS = {
       "id": "PrintMenu_showPrintMenuItem",
       "note": "",
       "defaultActive": "1",
+      "location":"chart",
 
     }
 

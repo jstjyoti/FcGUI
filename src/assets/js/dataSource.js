@@ -4,7 +4,7 @@
   //chart object configuration under fusioncharts datasource
   //categories object configuration for charts type
   //dataset object configuration for chart type based on x axis and y axis selected 
- var type="mscolumn2d";
+ var type;
 var json,datasource,newchart,categories;
 var dataformat="json";
 var axis;
