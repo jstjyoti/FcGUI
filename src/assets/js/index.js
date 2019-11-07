@@ -1,7 +1,9 @@
 (function index() {
-    // header()
-    // nav()
+    header()
+
+   nav()
     aside()
+    
     // chart()
     // footer()
 })()

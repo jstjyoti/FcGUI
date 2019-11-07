@@ -17,6 +17,8 @@ body {
 }
 .container {
     display: flex;
+    margin:0!important;
+    padding:0!important;
     height: 100vh;
     flex-flow: row nowrap;
 }
@@ -25,7 +27,89 @@ ul {
     padding: 0;
     margin: 0;
 }
+#head{
+   background: #fff; 
+}
+.head-container{
+    display: flex;
+    flex-wrap: column;
 
+}
+.head-container > ul{
+
+
+        
+        left: 0;
+        top: 0;
+        z-index: 999;
+        background-color: #fff;
+        height: 44.25px;
+        width: 100%;
+        padding: 0 3%;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+    
+    display:flex !important;
+    
+}
+.head-container > ul :after{
+    clear: both;
+}
+.head-logo-container{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.head-logo{
+    max-width: 100%;
+    height: 20px;
+    cursor: pointer;
+}
+.button{
+    padding:10px ;
+        
+        left: 0;
+        top: 0;
+        z-index: 999;
+        background-color: #fff;
+        height: 44.25px;
+        width: 100%;
+        padding: 0 3%;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+    
+    display:flex !important;
+    
+}
+.head-container > ul :after{
+    clear: both;
+}
+.head-logo-container{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.head-logo{
+    max-width: 100%;
+    height: 25px;
+    cursor: pointer;
+}
+
+.navbar-container{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 2rem;
+    top: 37px;
+    z-index: -1;
+    border: 1px solid #efefef;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+
+}
 #aside {
     max-width: 50vw;
     background-color: rgba(87, 87, 87, 0.199);
@@ -146,3 +230,28 @@ ul {
     color: #fff;
     text-align: center;
 }
+
+.json-textarea {
+    overflow: auto;
+    background-color: rgb(37, 34, 34);
+    color: #00ff00;
+    height: 400px;
+    word-spacing: 2px;
+    line-height: 1.8;
+    resize: none;
+}
+
+#fileButton{
+    padding: 10px;
+    color:#000;
+    background-color: #ddd;
+    border:1px solid  #000;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#fileText{
+    margin-left: 10px;
+    color:#aaa;
+    
+}
+

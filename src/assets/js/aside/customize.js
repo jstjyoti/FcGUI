@@ -38,6 +38,7 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
+
     const value = arguments[0]
     const event = arguments[1]
     function setAttr(label, value) {
@@ -76,9 +77,9 @@ function handleChartChanges() {
         }
         chart.setJSONData(chartData)
         if (value['inputFieldType'] === 'checkbox') {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.checked ? '1' : '0')
+            setAttr(value['id'].split('_')[1], event.target.checked ? '1' : '0')
         } else {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.value)
+            setAttr(value['id'].split('_')[1], event.target.value)
         }
     } else if (value['location'] === 'data') {
         //take json data
@@ -244,9 +245,6 @@ function inputDropDown(value) {
                         const skeleton = {
                             'class': 'input-select'
                         }
-                        if (value['placeholder'].length !== 0) {
-                            skeleton['placeholder'] = value['placeholder']
-                        }
                         if (value['value'] === 0) {
                             // skeleton['value'] = will either have current value or will have 
                             // default value
@@ -258,21 +256,41 @@ function inputDropDown(value) {
                             value.willActivate()
                         }
                         return skeleton
-                    })()
+                    })(),
+                    'event': function() {
+
+                        this.addEventListener('input', handleChartChanges.bind(null, value))
+                    }
                 },
                 'children': (() => {
                     const children = []
-                    for (var option of value['selectValues']) {
-                        children.push({
-                            'parent': {
-                                'name': 'option',
-                                'property': {
-                                    'class': 'input-option',
-                                    'value': option
-                                },
-                                'text': option
-                            }
-                        })
+                    if (Array.isArray(value['selectValues'])) {
+                        for (var option of value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': option
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
+                    } else {
+                        // if it is an object
+                        for(var option in value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': value['selectValues'][option]
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
                     }
                     return children
                 })(),
@@ -607,7 +625,7 @@ function customize() {
             },
             'children': (() => {
                 const children = []
-                for (var part in type) {
+                for (let part in type) {
                     const dom = {
                         'parent': {
                             'name': 'li',
