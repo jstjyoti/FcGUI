@@ -608,7 +608,7 @@ function plotArea(type, part) {
 }
 
 function customize() {
-    const type = mscolumn2d
+    const type = column2d
     const skeleton = {
         'parent': {
             'name': 'div',

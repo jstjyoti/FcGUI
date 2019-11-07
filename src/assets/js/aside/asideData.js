@@ -1015,23 +1015,6 @@ const plotValue = {
   }]
 }
 
-
-const column2d = {
-  'dataplot': {
-    'name': 'Data Plots',
-    'properties': {
-      'features': dataplot['features'],
-      'border': dataplot['border'],
-      'gradient': dataplot['gradient'],
-      'hover': dataplot['hover'],
-      'background': dataplot['background'],
-      'chart': dataplot['chart'],
-      'data': dataplot['data'],
-      'series': dataplot['series']
-    }
-  }
-}
-
 const mscolumn2d = {
   'dataplot': {
     'name': 'Data Plots',
@@ -1048,23 +1031,7 @@ const mscolumn2d = {
   }
 }
 
-const area2d = {
-  'canvas': column2d['canvas']
-}
 
-const bar2d = {
-  'canvas': column2d['canvas']
-}
-
-const line = {
-  'canvas': column2d['canvas']
-}
-const pie2d = {
-  'canvas': {
-    'name': 'Plot Area',
-    'margin': canvas['margin']
-  }
-}
 
 const caption = {
   captionText: [{
@@ -1654,11 +1621,9 @@ const column2d = {
   'dataplot': {
     'name': 'DataPlot',
     'properties': {
-      'features': dataplot['features'],
-      'border': dataplot['border'],
-      'gradient': dataplot['gradient'],
-      'hover': dataplot['hover'],
-      'background': dataplot['background']
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series'],
     }
   }, 
   'plotValue': {

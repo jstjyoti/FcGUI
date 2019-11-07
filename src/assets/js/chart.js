@@ -84,12 +84,12 @@ function handleClicks(e, parent) {
 const asideContainer = document.getElementById('aside')
 let prevWidth = asideContainer.offsetWidth
 const chart = new FusionCharts({
-    type: 'mscolumn2d',
+    type: 'column2d',
     'width': '500',
     'height': '400',
     renderAt: 'main',
     dataFormat: 'json',
-    dataSource: sample_mscolumn2d,
+    dataSource: sample_column2d,
     events: {
         'dataLabelClick': function (e) {
             handleClicks(e, parent)
