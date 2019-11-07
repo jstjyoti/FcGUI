@@ -1,10 +1,4 @@
-//csv to json 
-//fusioncharts constructor 
-//fusioncharts datasource
-  //chart object configuration under fusioncharts datasource
-  //categories object configuration for charts type
-  //dataset object configuration for chart type based on x axis and y axis selected 
- var type;
+var type;
 var json,datasource,newchart,categories;
 var dataformat="json";
 var axis;
@@ -13,12 +7,6 @@ String.prototype.trimRight = function(charlist) {
     charlist = "\s";
 
   return this.replace(new RegExp("[" + charlist + "]+$"), "");
-};
-String.prototype.trimLeft = function(charlist) {
-  if (charlist === undefined)
-    charlist = "\s";
-
-  return this.replace(new RegExp("^[" + charlist + "]+"), "");
 };
 
 function canHaveJson(selectedX,selectedY){
@@ -67,11 +55,8 @@ function csvJSONSingleSeries(csv){
 
   }
   
-  //return result; //JavaScript object
-  
   json=JSON.parse(JSON.stringify(result)); //JSON
   createDataSource();
-
 }
 
 function csvJSONMultiSeries(csv){
@@ -97,9 +82,7 @@ function csvJSONMultiSeries(csv){
     obj["label"] = currentline[headers.indexOf(axis[0])];
     category.push(obj);
    
-  }
-  //console.log(category);
-  
+  } 
   categories.push({
     "category" : category
   });
@@ -155,7 +138,6 @@ function createDataSource(){
   if(chartObject && chartObject["chart"]["caption"])
   {
     datasource["chart"]["caption"]=chartObject["chart"]["caption"];
-  
   }
   if(chartObject && chartObject["chart"]["subcaption"])
   {
@@ -165,7 +147,4 @@ function createDataSource(){
   chartObject = datasource;
   chart.setJSONData(filterLink())
   // chart.setJSONData(datasource);
-  
 }
-
-

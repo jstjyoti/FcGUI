@@ -740,6 +740,8 @@ function plotLevelArea(){
 }
 
 function createFeaturesBox(part, level){
+    console.log(part)
+
     const values = part['properties'][level]
     const skeleton = {
         'parent': {

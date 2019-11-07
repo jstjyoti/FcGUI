@@ -51,8 +51,7 @@ var data,datacsv,selectedX="";
                 }).render()
 
                     createChartSelect();
-                    createXSelect();
-                    createYSelect();
+                    
             }
             )
             
@@ -96,6 +95,8 @@ var data,datacsv,selectedX="";
         type = $(this).val();
         // csvJSONSingleSeries(datacsv);
         chart.chartType(type);
+        createXSelect();
+        createYSelect();
     });
 
     
