@@ -1247,7 +1247,7 @@ const chartDS = {
   "animation": [{
       "label": "Enable",
       "location":"chart",
-      "inputFieldType": "check",
+      "inputFieldType": "checkbox",
       "placeholder": "",
       "value": "",
       "id": "animation_animation",

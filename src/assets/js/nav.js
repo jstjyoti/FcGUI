@@ -66,7 +66,11 @@ var data,datacsv,selectedX="";
        // console.log(data);
 
     }
-    reader.readAsText(path.files[0])
+    if(path.files.length>0)
+    {
+        reader.readAsText(path.files[0])
+    }
+       
       
  }
  function createChartSelect(){
