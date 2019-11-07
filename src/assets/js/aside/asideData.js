@@ -1376,7 +1376,7 @@ const chartDS = {
     },
     {
       "label": "Image",
-      "inputFieldType": "url",
+      "inputFieldType": "text",//url
       "placeholder": "paset the url to the image ",
       "value": "",
       "id": "background_bgImage",
@@ -1689,7 +1689,7 @@ const chartDS = {
   ],
   "rightToLeftText": [{
       "label": "isLanguageHavingRightTOLeftText",
-      "inputFieldType": "check",
+      "inputFieldType": "checkbox",
       "placeholder": "",
       "value": "",
       "id": "rightToLeftText_chartPadding",
@@ -1702,7 +1702,7 @@ const chartDS = {
 
   "Export": [{
       "label": "Enable",
-      "inputFieldType": "check",
+      "inputFieldType": "checkbox",
       "placeholder": "",
       "value": "",
       "id": "Export_exportEnable",
@@ -1715,7 +1715,7 @@ const chartDS = {
   ],
   "PrintMenu": [{
       "label": "Enable",
-      "inputFieldType": "check",
+      "inputFieldType": "checkbox",
       "placeholder": "",
       "value": "",
       "id": "PrintMenu_showPrintMenuItem",
