@@ -1,5 +1,6 @@
 
 function showHideDetail(e) {
+    // console.log(e)
     let dom = e.target
     const sideNav = document.querySelector('.aside-detail')
 
@@ -116,7 +117,7 @@ function aside() {
                 'parent': {
                     'name': 'li',
                     'property': {
-                        'class': 'aside-link-container'
+                        'class': 'aside-link-container customize'
                     },
                     'event': function () {
                         // onclick will open aside-detail tab, each tab
@@ -124,7 +125,7 @@ function aside() {
                         // will add class
                         this.addEventListener('click', (e) => {
                             if (showHideDetail(e) === 1) {
-                                customize()
+                                customize(e)
                             }
                         })
                     }
@@ -226,4 +227,3 @@ function aside() {
     const aside = document.getElementById('aside')
     aside.appendChild(render(skeleton))
 }
-

@@ -1,3 +1,17 @@
+var parentEvent ;
+
+function getConflictingAttributes(currentLevel, attribute, lowerLevel){
+    var dict = {
+        chart: ['paletteColors', 'plotFillAlpha', 'plotBorderDashed','plotFillRatio','plotFillHoverColor','plotFillHoverAlpha', 'plotHoverGradientColor', 'plotHoverRatio', 'plotHoverAngle'],
+        series: ['color', 'alpha', 'dashed','ratio','hoverColor','hoverAlpha', 'hoverGradientColor', 'hoverRatio', 'hoverAngle'],
+        data: ['color', 'alpha', 'dashed','ratio','hoverColor','hoverAlpha', 'hoverGradientColor', 'hoverRatio', 'hoverAngle']
+    }
+
+    let levelArr = dict[currentLevel]
+    let index = levelArr.indexOf(attribute)
+    return dict[lowerLevel][index]
+}
+
 function addNote(value, skeleton) {
     if (value['note']) {
         skeleton['children'].push({
@@ -24,17 +38,92 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-    debugger
+
     const value = arguments[0]
     const event = arguments[1]
+    function setAttr(label, value) {
+        cloneChart.setChartAttribute(label, value)
+        chartObject = cloneChart.getJSONData()
+        chart.setJSONData(filterLink())
+    }
     if (value['location'] === 'chart') {
-        if (value['inputFieldType'] === 'checkbox') {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.checked ? '1' : '0')
-        } else {
-            chart.setChartAttribute(value['id'].split('_')[1], event.target.value)
-        }
-    } else if (typeof value['location'] === 'object') {
+        let chartData = chart.getJSONData()
+        //remove series and data level dependencies
+        if(chartData.dataset){  // multiseries
 
+            // find data and series level attribute
+            let data_attr = getConflictingAttributes('chart', value['id'].split('_')[1], 'data')
+            let series_attr = getConflictingAttributes('chart', value['id'].split('_')[1], 'series')
+
+            // loop over chartdata.dataset , remove seriesAttr
+
+            for(let i = 0;i < chartData.dataset.length; i++){
+                delete chartData.dataset[i][series_attr]
+                // loop over chartdata.dataset[index].data
+                for(let j = 0;j < chartData.dataset[i].data.length; j++){
+                    // remove dataattr
+                    delete chartData.dataset[i].data[j][data_attr]
+                }
+            }
+        }else{
+            // find conflicting attribute
+            let data_attr = getConflictingAttributes('chart', value['id'].split('_')[1], 'data')
+            // loop over chartData.data 
+            for(let i = 0;i < chartData.data.length; i++){
+                //remove dataAttr
+                delete chartData.data[i][data_attr]
+
+            }
+        }
+        chart.setJSONData(chartData)
+        if (value['inputFieldType'] === 'checkbox') {
+            setAttr(value['id'].split('_')[1], event.target.checked ? '1' : '0')
+        } else {
+            setAttr(value['id'].split('_')[1], event.target.value)
+        }
+    } else if (value['location'] === 'data') {
+        //take json data
+        //update JSON data
+        //set chart data to updated JSON
+        let chartData = chart.getJSONData()
+        let data_index = parentEvent.data.dataIndex
+        let dataset_index = parentEvent.data.datasetIndex
+        let data_property = value['id'].split('_')[1]
+        if(value['inputFieldType'] === 'checkbox'){
+            if(chartData.dataset)
+            chartData.dataset[dataset_index].data[data_index][data_property] = (event.target.checked ? '1' : '0')
+            else
+            chartData.data[data_index][data_property] = (event.target.checked ? '1' : '0')
+        }
+        else{
+            if(chartData.dataset)
+            chartData.dataset[dataset_index].data[data_index][data_property] = event.target.value
+            else
+            chartData.data[data_index][data_property] = event.target.value
+        } 
+        chart.setJSONData(chartData)
+    }
+    else if (value['location'] === 'series'){
+        let chartData = chart.getJSONData()
+
+        //remove data related conflicting attributes
+        let data_attr = getConflictingAttributes('series', value['id'].split('_')[1], 'data')
+        let dataset_index = parentEvent.data.datasetIndex
+        let data_index = parentEvent.data.dataIndex
+        //loop over chartData.data
+        for(let i = 0;i < chartData.dataset[dataset_index].data.length; i++){
+            //remove chartdata.data[index].dataAttr
+            delete chartData.dataset[dataset_index].data[i][data_attr]
+        }
+       
+        let data_property = value['id'].split('_')[1]
+        if(value['inputFieldType'] === 'checkbox')
+        chartData.dataset[dataset_index][data_property] = (event.target.checked ? '1' : '0')
+        else
+        chartData.dataset[dataset_index][data_property]  = event.target.value 
+        chart.setJSONData(chartData)
+    }else{
+        console.log('please specify location')
     }
 }
 
@@ -169,7 +258,7 @@ function inputDropDown(value) {
                         return skeleton
                     })(),
                     'event': function() {
-                        debugger
+
                         this.addEventListener('input', handleChartChanges.bind(null, value))
                     }
                 },
@@ -204,7 +293,10 @@ function inputDropDown(value) {
                         }
                     }
                     return children
-                })()
+                })(),
+
+                //adding event listener to dropdown
+                
             }]
         }]
     }
@@ -538,10 +630,14 @@ function customize() {
                         'parent': {
                             'name': 'li',
                             'property': {
-                                'class': 'customize-item'
+                                'class': 'customize-item ' + part 
                             },
                             'text': type[part]['name'],
                             'event': function () {
+                                 //if part=dataplot, then call other function in event listener
+                                if(part === 'dataplot')
+                                this.addEventListener('click', levelDropdown.bind(null, type, type[part]))
+                                else
                                 this.addEventListener('click', plotArea.bind(null, type, part))
                             }
                         }
@@ -561,3 +657,125 @@ function customize() {
     }
     document.querySelector('.aside-detail').appendChild(render(skeleton))
 }
+
+function levelDropdown(type, part){
+    const value = {
+        label: 'Level',
+        inputFieldType: 'select',
+        placeholder: 'chart',
+        value: '',
+        id: '',
+        note: '',
+        defaultActive: '1',
+        location: '',
+        selectValues : ['chart', 'data', 'series'],  
+    }
+    const dom = document.querySelector('.customize-input-field')
+    while (dom.hasChildNodes()) {
+        dom.removeChild(dom.lastChild)
+    }
+
+    //prepare skeleton for level select
+    const skeleton = inputDropDown(value)
+
+    skeleton.children[0].children[1]['event'] = function(){
+        this.addEventListener('change', plotLevelArea.bind(null, part))
+    }()
+    
+    dom.appendChild(render(skeleton))
+
+    //add default features of 'chart' level
+
+    const featuresBoxSkeleton = createFeaturesBox(part, 'chart')
+    dom.appendChild(render(featuresBoxSkeleton))
+    
+}
+
+function plotLevelArea(){
+    // console.log(arguments)
+    const part = arguments[0]
+    // const parentEvent = arguments[1]
+    const event = arguments[1]
+
+    if(!parentEvent){
+        if(event.target.value === 'data' || event.target.value === 'series'){
+            // add a note 
+            let dom = document.getElementsByClassName('features-box')
+            while (dom[0].hasChildNodes()) {
+                dom[0].removeChild(dom[0].lastChild)
+            }
+
+            if(event.target.value === 'data')
+            text = 'Note: Please click on data plot to see the changes'
+            else
+            text = 'Note: Please click on series to see the changes'
+            const note = {
+                'parent': {
+                    'name': 'div',
+                    'text': text
+
+                },            }
+            dom[0].appendChild(render(note))
+        }else{
+            addFeatures()
+        }
+    }else{
+        addFeatures()
+    }
+
+    function addFeatures(){
+        const skeleton = createFeaturesBox(part, event.target.value)
+
+        //add it to customize-input-field
+        const dom = document.querySelector('.customize-input-field')
+
+        //remove previous added features of different level
+
+        let elements = document.getElementsByClassName('features-box')
+        for(elem of elements){
+            dom.removeChild(elem)
+        }
+        dom.appendChild(render(skeleton))
+    }
+}
+
+function createFeaturesBox(part, level){
+    const values = part['properties'][level]
+    const skeleton = {
+        'parent': {
+            'name': 'li',
+            'property': {
+                'class': 'features-box'
+            }
+        },
+        'children': [
+            {
+                'parent': {
+                    'name': 'ul'
+                },
+                'children': (() => {
+                    const children = []
+                    // const values = type[part]['properties'][property]
+                    for (var value of values) {
+                        if (value['inputFieldType'].toLowerCase() === 'text') {
+                            children.push(inputText(value))
+                        } else if (value['inputFieldType'].toLowerCase() === 'number') {
+                            children.push(inputNumber(value))
+                        } else if (value['inputFieldType'].toLowerCase() === 'select') {
+                            children.push(inputDropDown(value))
+                        } else if (value['inputFieldType'].toLowerCase() === 'range') {
+                            children.push(inputRange(value))
+                        } else if (value['inputFieldType'].toLowerCase() === 'color') {
+                            children.push(inputColor(value))
+                        } else if (value['inputFieldType'].toLowerCase() === 'checkbox') {
+                            children.push(inputCheckBox(value))
+                        }
+                    }
+                    return children
+                })()
+            }
+        ]
+    }
+    return skeleton
+}
+

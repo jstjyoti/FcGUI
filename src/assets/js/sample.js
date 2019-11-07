@@ -70,7 +70,7 @@ const sample_bar2d = {
 }
 const sample_column2d = {
     "chart": {
-        "caption": "Monthly revenue for last year",
+        "caption": "www.google.com",
         "subCaption": "Harry's SuperMart",
         "xAxisName": "Month",
         "yAxisName": "Revenues (In USD)",

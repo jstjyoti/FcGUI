@@ -15,9 +15,18 @@ function editJson() {
                     'cols': '70'
                 },
                 'event': function() {
-                    this.value = JSON.stringify(chart.getJSONData(), null, 2)
+                    // this.value = JSON.stringify(chart.getJSONData(), null, 2)
+                    // this.addEventListener('input', (e) => {
+                    //     chart.setJSONData(JSON.parse(e.target.value))
+                    // })
+                    this.value = JSON.stringify(chartObject, null, 2)
                     this.addEventListener('input', (e) => {
-                        chart.setJSONData(JSON.parse(e.target.value))
+                        try {
+                            chartObject = JSON.parse(e.target.value)
+                            chart.setJSONData(filterLink())
+                        }catch(e) {
+                            console.error('')
+                        }
                     })
                 }
             }
