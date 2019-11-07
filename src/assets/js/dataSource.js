@@ -23,7 +23,10 @@ String.prototype.trimLeft = function(charlist) {
 
 function canHaveJson(selectedX,selectedY){
   //if selected y is selected in x then show message and deselect Y
-  if(selectedX&&selectedY.length>0)
+  if(selectedY==null){
+    alert("select some columns in y axis")
+  }
+  else if(selectedX&&selectedY.length>0)
   {
     if((type.indexOf("ms")!=-1)&&(selectedY.length>1))
      csvJSONMultiSeries(datacsv);
