@@ -239,82 +239,94 @@ const canvas = {
 }
 
 const dataplot = {
-  features: [{
-    label: 'Colors',
+  chart: [{
+    label: 'Color',
     inputFieldType: 'color',
     placeholder: '#0000ff',
     value: '',
-    id: 'features_paletteColors',
+    id: 'chart_paletteColors',
     note: '',
     defaultActive: '1',
-
-  }, {
+    location: 'chart'
+  },{
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '20',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'features_plotFillAlpha',
+    note: '',
+    defaultActive: '1',
+    location: 'chart'
+  },{
     label: 'Round edge',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'features_useRoundEdges',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart'
 
-  }, {
+  },{
     label: 'Shadow',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'features_showShadow',
     note: '',
-    defaultActive: '0',
-
-  }, {
+    defaultActive: '1',
+    location: 'chart'
+  },{
     label: 'Max Column Width',
     inputFieldType: 'number',
     placeholder: '10',
     value: '',
     id: 'features_maxColWidth',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart'
 
-  }],
-
-  border: [{
+  },{
     label: 'Show Border',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'border_showPlotBorder',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
     willActivate: function () {
-      
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
-            }, 0)
-        })
+        // var self = this
+        // new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
+        //     }, 0)
+        // })
     
       //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
     }
-  }, {
+  },{
     label: 'Border Color',
     inputFieldType: 'color',
     placeholder: '#0000ff',
     value: '',
     id: 'border_plotBorderColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart'
 
-  }, {
+  },{
     label: 'Border Thickness',
     inputFieldType: 'number',
     placeholder: 'eg-4',
     value: '',
     id: 'border_plotBorderThickness',
     note: '',
-    defaultActive: '0',
-
-  }, {
+    defaultActive: '1',
+    location: 'chart'
+  },{
     label: 'Border opacity',
     inputFieldType: 'range',
     min: '0',
@@ -323,33 +335,35 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderAlpha',
     note: '',
-    defaultActive: '0',
-
-  }, {
+    defaultActive: '1',
+    location: 'chart'
+  },{
     label: 'Border dashed',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'border_plotBorderDashed',
-    note: '',
-    defaultActive: '0',
+    note: 'Applicable when show border is checked',
+    defaultActive: '1',
+    location: 'chart',
     willActivate: function () {
       var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
-          }, 0)
-      })
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
+      //     }, 0)
+      // })
       //background_plotBorderDashLen,background_plotBorderDashGap
     }
-  }, {
+  },{
     label: 'Border dashed length',
     inputFieldType: 'number',
     placeholder: 'eg-5',
     value: '',
     id: 'border_plotBorderDashLen',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
 
   }, {
     label: 'Border dashed gap',
@@ -358,53 +372,46 @@ const dataplot = {
     value: '',
     id: 'border_plotBorderDashGap',
     note: '',
-    defaultActive: '0',
-  }],
-
-  gradient: [{
+    defaultActive: '1',
+    location: 'chart',
+  },{
     label: 'Show gradient',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'gradient_usePlotGradientColor',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
     willActivate: function () {
       var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
-          }, 0)
-      })
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
+      //     }, 0)
+      // })
       // 'gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle'
     }
   }, {
-    label: 'Color',
+    label: 'Gradient Color',
     inputFieldType: 'color',
     placeholder: '#ffffff',
     value: '',
     id: 'gradient_plotGradientColor',
     note: '',
-    defaultActive: '0',
-  }, {
-    label: 'Opacity',
-    inputFieldType: 'range',
-    placeholder: '20',
-    min: '0',
-    max: '100',
-    value: '',
-    id: 'gradient_plotFillAlpha',
-    note: '',
-    defaultActive: '0',
-  }, {
-    label: 'Color ratio',
+    defaultActive: '1',
+    location: 'chart',
+
+  },{
+    label: 'Gradient Color ratio',
     inputFieldType: 'text',
     placeholder: 'eg-40,60',
     value: '',
     id: 'gradient_plotFillRatio',
     note: '',
-    defaultActive: '0',
-  }, {
+    defaultActive: '1',
+    location: 'chart',
+  },{
     label: 'Color orientation',
     inputFieldType: 'range',
     placeholder: '',
@@ -413,52 +420,56 @@ const dataplot = {
     value: '',
     id: 'gradient_plotFillAngle',
     note: '',
-    defaultActive: '0',
-  }],
-
-  hover: [{
+    defaultActive: '1',
+    location: 'chart',
+  },{
     label: 'Hover all elements',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'hover_showHoverEffect',
     note: 'Remove theme to apply this',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
     willActivate: function () {
       var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-          }, 0)
-      })
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+      //     }, 0)
+      // })
       //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
     }
-  }, {
+  },{
     label: 'Hover data plots',
     inputFieldType: 'checkbox',
     placeholder: '',
     value: '',
     id: 'hover_plotHoverEffect',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+
     willActivate: function () {
       var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-          }, 0)
-      })
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
+      //     }, 0)
+      // })
       //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
     }
-  }, {
-    label: 'Color',
+  },{
+    label: 'Hover Color',
     inputFieldType: 'color',
     placeholder: '#0000ff',
     value: '',
     id: 'hover_plotFillHoverColor',
     note: '',
-    defaultActive: '0',
-  }, {
+    defaultActive: '1',
+    location: 'chart',
+
+  },{
     label: 'Color opacity',
     inputFieldType: 'range',
     placeholder: '',
@@ -467,16 +478,20 @@ const dataplot = {
     value: '',
     id: 'hover_plotFillHoverAlpha',
     note: '',
-    defaultActive: '0',
-  }, {
-    label: 'Border color',
+    defaultActive: '1',
+    location: 'chart',
+
+  },{
+    label: 'Hover Border color',
     inputFieldType: 'color',
     placeholder: '#0000ff',
     value: '',
     id: 'hover_plotBorderHoverColor',
     note: '',
-    defaultActive: '0',
-  }, {
+    defaultActive: '1',
+    location: 'chart',
+
+  },{
     label: 'Border color opacity',
     inputFieldType: 'range',
     placeholder: '',
@@ -485,15 +500,162 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverAlpha',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+  }],
+
+  series: [{
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'series_color',
+    note: '',
+    defaultActive: '1',
+    location: 'series'
+  },{
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '20',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'features_alpha',
+    note: '',
+    defaultActive: '1',
+    location: 'series'
+  },{
+    label: 'Series border dashed',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'border_dashed',
+    note: 'Applicable when show border is checked',    
+    defaultActive: '1',
+    location: 'series',
+    willActivate: function () {
+      var self = this
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
+      //     }, 0)
+      // })
+      //background_plotBorderDashLen,background_plotBorderDashGap
+    }
+  },{
+    label: 'Series Color ratio',
+    inputFieldType: 'text',
+    placeholder: 'eg-40,60',
+    value: '',
+    id: 'gradient_ratio',
+    note: '',
+    defaultActive: '1',
+    location: 'series',
+  },{
+    label: 'Hover Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'hover_hoverColor',
+    note: '',
+    defaultActive: '1',
+    location: 'series',
+
+  },{
+    label: 'Series Color opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'hover_hoverAlpha',
+    note: '',
+    defaultActive: '1',
+    location: 'series',
+
+  }],
+
+  data: [{
+    label: 'Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'data_color',
+    note: '',
+    defaultActive: '1',
+    location: 'data'
+  },{
+    label: 'Opacity',
+    inputFieldType: 'range',
+    placeholder: '20',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'features_alpha',
+    note: '',
+    defaultActive: '1',
+    location: 'data'
+  },{
+    label: 'Data border dashed',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'border_dashed',
+    note: 'Applicable when show border is checked',
+    defaultActive: '1',
+    location: 'data',
+    willActivate: function () {
+      var self = this
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
+      //     }, 0)
+      // })
+      //background_plotBorderDashLen,background_plotBorderDashGap
+    }
+  },{
+    label: 'Data Color ratio',
+    inputFieldType: 'text',
+    placeholder: 'eg-40,60',
+    value: '',
+    id: 'gradient_ratio',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
   }, {
+    label: 'Hover Color',
+    inputFieldType: 'color',
+    placeholder: '#0000ff',
+    value: '',
+    id: 'hover_hoverColor',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  },{
+    label: 'Color opacity',
+    inputFieldType: 'range',
+    placeholder: '',
+    min: '0',
+    max: '100',
+    value: '',
+    id: 'hover_hoverAlpha',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  }],
+
+  hover: [{
     label: 'Border thickness',
     inputFieldType: 'number',
     placeholder: '5',
     value: '',
     id: 'hover_plotBorderHoverThickness',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+
   }, {
     label: 'Border dashed',
     inputFieldType: 'checkbox',
@@ -501,14 +663,16 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashed',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+
     willActivate: function () {
       var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
-          }, 0)
-      })
+      // new Promise(function (resolve, reject) {
+      //     setTimeout(() => {
+      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
+      //     }, 0)
+      // })
       //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
     }
   }, {
@@ -518,7 +682,9 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashLen',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+
   }, {
     label: 'Border dashed gap',
     inputFieldType: 'number',
@@ -526,7 +692,9 @@ const dataplot = {
     value: '',
     id: 'hover_plotBorderHoverDashGap',
     note: '',
-    defaultActive: '0',
+    defaultActive: '1',
+    location: 'chart',
+
   }],
 
 
@@ -538,6 +706,7 @@ const dataplot = {
     id: 'background_drawCrossLine',
     note: '',
     defaultActive: '1',
+    location: 'chart',
     willActivate: function () {
       var self = this
       new Promise(function (resolve, reject) {
@@ -555,6 +724,7 @@ const dataplot = {
     id: 'background_crossLineColor',
     note: '',
     defaultActive: '1',
+    location: 'chart',
   }, {
     label: 'Opacity',
     inputFieldType: 'range',
@@ -565,6 +735,7 @@ const dataplot = {
     id: 'background_crossLineAlpha',
     note: '',
     defaultActive: '1',
+    location: 'chart',
   }, {
     label: 'Animate',
     inputFieldType: 'checkbox',
@@ -573,6 +744,8 @@ const dataplot = {
     id: 'background_crossLineAnimation',
     note: '',
     defaultActive: '1',
+    location: 'chart',
+
   }, {
     label: 'Animation Duration',
     inputFieldType: 'number',
@@ -581,6 +754,8 @@ const dataplot = {
     id: 'background_crossLineAnimationDuration',
     note: '',
     defaultActive: '1',
+    location: 'chart',
+
   }, {
     label: 'Overlap',
     inputFieldType: 'checkbox',
@@ -588,8 +763,60 @@ const dataplot = {
     value: '',
     id: 'background_drawCrossLineOnTop',
     note: '',
-    defaultActive: '0',
-  }]
+    defaultActive: '1',
+    location: 'chart',
+
+  },{
+    label: 'Show value',
+    inputFieldType: 'checkbox',
+    placeholder: '',
+    value: '',
+    id: 'background_showValue',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  },{
+    label: 'Display value',
+    inputFieldType: 'text',
+    placeholder: '',
+    value: '',
+    id: 'background_displayValue',
+    note: 'If show value is checked',
+    defaultActive: '1',
+    location: 'data',
+
+  },{
+    label: 'Hover text',
+    inputFieldType: 'text',
+    placeholder: 'eg-data',
+    value: '',
+    id: 'background_toolText',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  },{
+    label: 'Data value',
+    inputFieldType: 'number',
+    placeholder: 'eg-200',
+    value: '',
+    id: 'background_value',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  },{
+    label: 'Link',
+    inputFieldType: 'text',
+    placeholder: '',
+    value: '',
+    id: 'background_link',
+    note: '',
+    defaultActive: '1',
+    location: 'data',
+
+  },]
 }
 
 const plotValue = {
@@ -798,17 +1025,37 @@ const plotValue = {
 
 
 const column2d = {
-  'canvas': {
-    'name': 'Plot Area',
+  'dataplot': {
+    'name': 'Data Plots',
     'properties': {
-      'padding': canvas['padding'],
-      'margin': canvas['margin'],
-      'backgroundColor': canvas['backgroundColor'],
-      'border': canvas['border'],
-      'outsidePlotArea': canvas['outsidePlotArea']
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background'],
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series']
     }
   }
 }
+
+const mscolumn2d = {
+  'dataplot': {
+    'name': 'Data Plots',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background'],
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series']
+    }
+  }
+}
+
 const area2d = {
   'canvas': column2d['canvas']
 }
@@ -948,6 +1195,7 @@ const chartDS = {
       "id": "animation_animation",
       "note": "",
       "defaultActive": "1",
+      "location": "chart",
       "willActivate": () => {
         var self = this
       new Promise(function (resolve, reject) {
@@ -980,6 +1228,8 @@ const chartDS = {
       "id": "padding_chartPadding",
       "note": "",
       "defaultActive": "1",
+      "location": "chart",
+
     },
   ],
   "margin": [{
