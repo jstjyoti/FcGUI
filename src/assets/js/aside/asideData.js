@@ -297,7 +297,7 @@ const dataplot = {
     //     })
     
     //   //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
-    // }
+    }
   }, {
     label: 'Border Color',
     inputFieldType: 'color',
@@ -381,6 +381,7 @@ const dataplot = {
               document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
           }, 0)
       })
+    }
 
   }, {
     label: 'Color',
@@ -987,7 +988,7 @@ const chartDS = {
       
     
       //   //enable Animation Duration
-      // }
+       }
     },
     {
       "label": "Time",
@@ -1055,7 +1056,7 @@ const chartDS = {
         })
 
         
-      // }
+      }
 
     },
     {
@@ -1112,7 +1113,7 @@ const chartDS = {
         })
 
         
-      // }
+      }
       
     },
 
@@ -1233,7 +1234,7 @@ const chartDS = {
         })
 
       
-      // }
+      }
 
     },
     {
@@ -1318,10 +1319,10 @@ const chartDS = {
       "id": "logo_logoURL",
       "note": "",
       "defaultActive": "1",
-
+      "location":"chart",
       "_willActivate": () => {
 
-      "location":"chart",
+      
       // "willActivate": () => {
 
   
@@ -1330,8 +1331,8 @@ const chartDS = {
       //       setTimeout(() => {
       //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["logo_logoLeftMargin","logo_logoRightMargin","logo_logoPosition","logo_logoAlpha","logo_logoLink","logo_logoScale"]))
       //       }, 0)
-      //   })
-      // }
+        // })
+      }
 
     },
     {

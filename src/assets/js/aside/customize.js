@@ -24,13 +24,13 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-    debugger
+    // debugger
     const value = arguments[0]
     const event = arguments[1]
     function setAttr(label, value) {
-        cloneChart.setChartAttribute(label, value)
-        chartObject = cloneChart.getJSONData()
-        chart.setJSONData(filterLink())
+        chart.setChartAttribute(label, value)
+        chartObject = chart.getJSONData()
+        //chart.setJSONData(filterLink())
     }
     if (value['location'] === 'chart') {
         if (value['inputFieldType'] === 'checkbox') {
