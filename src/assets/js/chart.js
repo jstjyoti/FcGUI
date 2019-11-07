@@ -86,8 +86,9 @@ let prevWidth = asideContainer.offsetWidth
 var chart ;
 setInterval(() => {
     if (asideContainer.offsetWidth !== prevWidth) {
-        prevWidth = asideContainer.offsetWidth
-        chart.resizeTo(0.9 * (window.innerWidth - prevWidth), 400)
+        prevWidth = asideContainer.offsetWidth;
+        if(chart)
+            chart.resizeTo(0.9 * (window.innerWidth - prevWidth), 400)
     }
 }, 100)
 

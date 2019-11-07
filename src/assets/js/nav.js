@@ -42,9 +42,14 @@ var data,datacsv,selectedX="";
                         'drawComplete': function (e, d) {
                             parent = document.getElementById('main')
                             parent.addEventListener('click', handleClicks)
+                        },
+                        'rendred': function(e, d){
+                            chartObject=chart.getJSONData();
+                            cloneChart = chart.clone();
                         }
                     }
                 }).render()
+
                     createChartSelect();
                     createXSelect();
                     createYSelect();
