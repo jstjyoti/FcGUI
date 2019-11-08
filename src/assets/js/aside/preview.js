@@ -76,7 +76,6 @@ function _fillTable(tbl, csv) {
 
       line.forEach((col, colIdx) => {
           td = document.createElement(cellTag);
-          console.log(selectedX, selectedY, colIdx);
           if(lineNo === 0){
               dictIdx.push(col);
           }

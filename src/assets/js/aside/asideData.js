@@ -1538,7 +1538,7 @@ const chartDS = {
     "inputFieldType": "checkbox",
     "placeholder": "",
     "value": "",
-    "id": "Export_exportEnable",
+    "id": "Export_exportEnabled",
     "note": "",
     "defaultActive": "1",
     "location":"chart",
@@ -1565,7 +1565,7 @@ const chartDS = {
 
 const column2d = {
 'canvas': {
-  'name': 'Plot Area',
+  'name': 'Plot Area (aka Canvas)',
   'properties': {
     'padding': canvas['padding'],
     'margin': canvas['margin'],
@@ -1575,7 +1575,7 @@ const column2d = {
   }
 },
 'dataplot': {
-  'name': 'DataPlot',
+  'name': 'Measure Figure(aka DataPlot)',
   'properties': {
     'chart': dataplot['chart'],
     'data': dataplot['data'],
@@ -1583,7 +1583,7 @@ const column2d = {
   }
 }, 
 'plotValue': {
-  'name': 'DataValue',
+  'name': 'Measure Value (aka DataPlotValue)',
   'properties': {
     'features': plotValue['features'],
     'font': plotValue['font'],
@@ -1592,20 +1592,20 @@ const column2d = {
   }
 },
 'caption': {
-  'name': 'Caption',
+  'name': 'Heading (aka Caption)',
   'properties': {
-    'captionText': caption['captionText'],
-    'captionFont': caption['captionFont'],
-    'captionAlignment': caption['captionAlignment'],
-    'captionPosition': caption['captionPosition'],
-    'captionPadding': caption['captionPadding'],
+    'Heading': caption['captionText'],
+    'Heading Font': caption['captionFont'],
+    'Heading Alignment': caption['captionAlignment'],
+    'Heading Position': caption['captionPosition'],
+    'Heading Padding': caption['captionPadding'],
   }
 },
 'subcaption': {
-  'name': 'Sub Caption',
+  'name': 'Sub Heading (aka SubCaption)',
   'properties': {
-    'subCaptionText': subCaption['subCaptionText'],
-    'subCaptionFont': subCaption['subCaptionFont']
+    'Sub Heading': subCaption['subCaptionText'],
+    'Sub Heading Font': subCaption['subCaptionFont']
   }
 },
 'chartDS': {
