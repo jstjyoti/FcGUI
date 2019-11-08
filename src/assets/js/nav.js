@@ -35,6 +35,7 @@ var data,datacsv,selectedX="";
                         },
                         'dataPlotClick': function (e) {
                             handleClicks(e, parent)
+                            parentEvent = e
                         },
                         'legendItemClicked': function (e) {
                             handleClicks(e, parent)

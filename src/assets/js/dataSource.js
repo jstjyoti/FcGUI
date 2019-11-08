@@ -30,7 +30,7 @@ function csvJSONSingleSeries(csv){
 
   let result = [];
  axis=[];
-  var headers=lines[0].split(",");
+  var headers=lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); //ignore "," 
   axis.push(selectedX)
   for (i=0;i< selectedY.length;i++){
     axis.push(selectedY[i]);
@@ -38,7 +38,7 @@ function csvJSONSingleSeries(csv){
   for(var i=1;i<lines.length;i++){
 
 	  let obj = {};
-	  let currentline=lines[i].split(",");
+	  let currentline=lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
     
 	  for(var j=0;j< axis.length;j++ ){
       if(currentline[headers.indexOf(axis[j])].indexOf("\r")!=-1)
@@ -69,14 +69,14 @@ function csvJSONMultiSeries(csv){
     let data = [];
     var obj;
  axis=[];
-  var headers=lines[0].split(",");
+  var headers=lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
   axis.push(selectedX)
   for (var i=0;i< selectedY.length;i++){
     axis.push(selectedY[i]);
   }
   for(i=1;i<lines.length;i++){
      obj = { };
-    let currentline=lines[i].split(",");
+    let currentline=lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
     if(currentline[headers.indexOf(axis[0])].indexOf("\r")!=-1)
       currentline[headers.indexOf(axis[0])]=currentline[headers.indexOf(axis[0])].trimRight("\r")
     obj["label"] = currentline[headers.indexOf(axis[0])];

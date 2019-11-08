@@ -285,3 +285,117 @@ ul {
     
 }
 
+.spreadsheet-wraper{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom:0;
+}
+
+.spreadsheet-wraper .spreadsheet-container{
+    position: relative;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    height: 80%;
+    background-color: #fff;
+}
+
+.spreadsheet-wraper .spreadsheet-container .nav{
+    position: relative;
+}
+
+.spreadsheet-container .tbl-container{
+    overflow: auto;
+    width: 96%;
+    margin-left: 2%;
+    height: 90%;
+}
+
+
+.spreadsheet-container .nav .btn{
+    float:right;
+    padding: 7px 15px;
+    background: transparent;
+    border: 1px solid transparent;
+    font-size: large;
+    font-weight: lighter;
+}
+
+.spreadsheet-container .nav .btn:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.spreadsheet-container .tbl{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+}
+
+.spreadsheet-container .tbl th{
+    background-color: #43a363;
+    color: #fff;
+}
+
+.spreadsheet-container .tbl td, .spreadsheet-container .tbl th{
+    text-align: center;
+    padding: 3px 8px;
+    font-size: small;
+    border:  2px solid #08130b;
+}
+
+.spreadsheet-container .tbl tr td.selected-x{
+    background-color: #007bff36;
+}
+
+.spreadsheet-container .tbl tr td.selected-y-0{
+    background-color: #ff2d575d;
+}
+
+.spreadsheet-container .tbl tr td.selected-y-1{
+    background-color: #ffbc2d5d;
+}
+
+.spreadsheet-container .tbl tr td.selected-y-2{
+    background-color: #57ff2d2f;
+}
+
+.spreadsheet-container .pallets{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.spreadsheet-container .colorhint{
+    padding: 5px 7px;
+    font-size: xx-small;
+}
+
+.spreadsheet-container .nav .filename{
+    padding: 7px 15px 7px 15px;
+    display: inline-block;
+}
+
+
+.spreadsheet-container .tbl tr td.row-idx{
+    background-color: #eee;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+
+.btn.btn-close{
+    color: #ff2d57;
+}
+.active-customize {
+    background: linear-gradient(270deg, #080082, #7751b9);
+    color: #fff;
+}

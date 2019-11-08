@@ -12,6 +12,17 @@ function getConflictingAttributes(currentLevel, attribute, lowerLevel){
     return dict[lowerLevel][index]
 }
 
+function checkActive(e) {
+    const children = Array.from(e.target.parentElement.children)
+    for (let child of children) {
+        if (child.classList.contains('active-customize')) {
+            child.classList.remove('active-customize')
+            break
+        }
+    }
+    e.target.classList.add('active-customize')
+}
+
 function addNote(value, skeleton) {
     if (value['note']) {
         skeleton['children'].push({
@@ -38,16 +49,20 @@ function createLabel(value) {
 }
 
 function handleChartChanges() {
-    // debugger
     const value = arguments[0]
     const event = arguments[1]
     function setAttr(label, value) {
-        chart.setChartAttribute(label, value)
-        chartObject = chart.getJSONData()
+        /*chart.setChartAttribute(label, value)
+        chartObject = chart.getJSONData()*/
         //chart.setJSONData(filterLink())
+        chartObject['chart'][label] = value
+        if (label !== 'clickURL') {
+            chart.setChartAttribute(label, value)
+        }
     }
     if (value['location'] === 'chart') {
-        let chartData = chart.getJSONData()
+        let chartData = chartObject
+        // let chartData = chart.getJSONData()
         //remove series and data level dependencies
         if(chartData.dataset){  // multiseries
 
@@ -75,7 +90,7 @@ function handleChartChanges() {
 
             }
         }
-        chart.setJSONData(chartData)
+        chart.setJSONData(filterLink())
         if (value['inputFieldType'] === 'checkbox') {
             setAttr(value['id'].split('_')[1], event.target.checked ? '1' : '0')
         } else {
@@ -85,26 +100,29 @@ function handleChartChanges() {
         //take json data
         //update JSON data
         //set chart data to updated JSON
-        let chartData = chart.getJSONData()
+        let chartData = chartObject
         let data_index = parentEvent.data.dataIndex
         let dataset_index = parentEvent.data.datasetIndex
         let data_property = value['id'].split('_')[1]
+
         if(value['inputFieldType'] === 'checkbox'){
             if(chartData.dataset)
             chartData.dataset[dataset_index].data[data_index][data_property] = (event.target.checked ? '1' : '0')
             else
             chartData.data[data_index][data_property] = (event.target.checked ? '1' : '0')
         }
-        else{
+        else {
             if(chartData.dataset)
             chartData.dataset[dataset_index].data[data_index][data_property] = event.target.value
             else
             chartData.data[data_index][data_property] = event.target.value
         } 
-        chart.setJSONData(chartData)
+        // chart.setJSONData(chartData)
+        chart.setJSONData(filterLink()) 
+
     }
     else if (value['location'] === 'series'){
-        let chartData = chart.getJSONData()
+        let chartData = chartObject
 
         //remove data related conflicting attributes
         let data_attr = getConflictingAttributes('series', value['id'].split('_')[1], 'data')
@@ -121,8 +139,11 @@ function handleChartChanges() {
         chartData.dataset[dataset_index][data_property] = (event.target.checked ? '1' : '0')
         else
         chartData.dataset[dataset_index][data_property]  = event.target.value 
-        chart.setJSONData(chartData)
+        // chart.setJSONData(chartData)
+        chart.setJSONData(filterLink()) 
+
     }else{
+        // console.log(value)
         console.log('please specify location')
     }
 }
@@ -164,7 +185,7 @@ function inputCheckBox(value) {
                             return skeleton
                         })(),
                         'event': function () {
-                            this.addEventListener('input', handleChartChanges.bind(null, value))
+                            this.addEventListener('change', handleChartChanges.bind(null, value))
                         }
                     }
                 }
@@ -507,6 +528,55 @@ function inputRange(value) {
     addNote(value, skeleton)
     return skeleton
 }
+function inputURL(value){
+    const skeleton= {
+        'parent': {
+            'name': 'li',
+            'property': {
+                'class': 'input'
+            },
+        },
+        'children': [{
+            'parent': {
+                'name': 'div'
+            },
+            'children': [{
+                'parent': createLabel(value)
+            }, {
+                'parent': {
+                    'name': 'input',
+                    'property': (() => {
+                        const skeleton = {
+                            'class': 'input-text',
+                            'id': value['id'],
+                            'type': 'url'
+                        }
+                        if (value['placeholder'].length !== 0) {
+                            skeleton['placeholder'] = value['placeholder']
+                        }
+                        if (value['value'] === 0) {
+                            // skeleton['value'] = will either have current value or will have 
+                            // default value
+                        }
+                        if (+value['defaultActive'] === 0 && !skeleton['value']) {
+                            skeleton['disabled'] = ''
+                        }
+                        if (value['willActivate']) {
+                            value.willActivate()
+                        }
+                        return skeleton
+                    })(),
+                    'event': function () {
+                        //this.addEventListener('input', (e) =>console.log(e.target.value))
+                        this.addEventListener('input', handleChartChanges.bind(null, value))
+                    }
+                }
+            }]
+        }]
+    }
+    addNote(value, skeleton)
+    return skeleton
+}
 
 function inputNumber(value) {
     const skeleton = {
@@ -597,6 +667,9 @@ function plotArea(type, part) {
                             } else if (value['inputFieldType'].toLowerCase() === 'checkbox') {
                                 children.push(inputCheckBox(value))
                             }
+                            else if(value['inputFieldType'].toLowerCase() === 'url') {
+                                children.push(inputURL(value))
+                            }
                         }
                         return children
                     })()
@@ -607,8 +680,52 @@ function plotArea(type, part) {
     }
 }
 
+function checkActive(e) {
+    const children = Array.from(e.target.parentElement.children)
+    for(let child of children) {
+        if (child.classList.contains('active-customize')) {
+            child.classList.remove('active-customize')
+            break
+        }
+    }
+    e.target.classList.add('active-customize')
+}
 function customize() {
-    const type = column2d
+    const chartType = chart.chartType()
+    var type
+    if (chartType === 'column2d') {
+        type = column2d
+    } else if (chartType === 'line') {
+        type = line
+    } else if (chartType === 'area2d') {
+        type = area2d
+    } else if (chartType === 'bar2d') {
+        type = bar2d
+    } else if (chartType === 'pie2d') {
+        type = pie2d
+    }
+    else if (chartType === 'pie3d') {
+        type = pie3d
+    }
+    else if (chartType === 'column3d') {
+        type = column3d
+    }
+    else if(chartType==='mscolumn2d'){
+        type=mscolumn2d
+    }
+    else if(chartType==='msbar2d'){
+        type=msbar2d
+    }
+    else if(chartType==='msbar3d'){
+        type=msbar3d
+    }
+    else if(chartType==='mscolumn3d'){
+        type=mscolumn3d
+    }
+    else if(chartType==='bar3d'){
+        type=bar3d
+    }
+
     const skeleton = {
         'parent': {
             'name': 'div',
@@ -634,6 +751,7 @@ function customize() {
                             },
                             'text': type[part]['name'],
                             'event': function () {
+                                this.addEventListener('click', checkActive)
                                  //if part=dataplot, then call other function in event listener
                                 if(part === 'dataplot')
                                 this.addEventListener('click', levelDropdown.bind(null, type, type[part]))
@@ -676,17 +794,19 @@ function levelDropdown(type, part){
     }
 
     //prepare skeleton for level select
-    const skeleton = inputDropDown(value)
+    const skeleton = LevelinputDropDown(value, part)
 
-    skeleton.children[0].children[1]['event'] = function(){
-        this.addEventListener('change', plotLevelArea.bind(null, part))
-    }()
+    // skeleton.children[0].children[1]['event'] = function(){
+    //     this.addEventListener('change', plotLevelArea.bind(null, part))
+    // }()
     
     dom.appendChild(render(skeleton))
 
     //add default features of 'chart' level
 
     const featuresBoxSkeleton = createFeaturesBox(part, 'chart')
+    // console.log(featuresBoxSkeleton)
+
     dom.appendChild(render(featuresBoxSkeleton))
     
 }
@@ -724,7 +844,7 @@ function plotLevelArea(){
     }
 
     function addFeatures(){
-        const skeleton = createFeaturesBox(part, event.target.value)
+        const skeleton1 = createFeaturesBox(part, event.target.value)
 
         //add it to customize-input-field
         const dom = document.querySelector('.customize-input-field')
@@ -735,13 +855,12 @@ function plotLevelArea(){
         for(elem of elements){
             dom.removeChild(elem)
         }
-        dom.appendChild(render(skeleton))
+        dom.appendChild(render(skeleton1))
     }
 }
 
 function createFeaturesBox(part, level){
-    console.log(part)
-
+  
     const values = part['properties'][level]
     const skeleton = {
         'parent': {
@@ -772,6 +891,9 @@ function createFeaturesBox(part, level){
                         } else if (value['inputFieldType'].toLowerCase() === 'checkbox') {
                             children.push(inputCheckBox(value))
                         }
+                        else if(value['inputFieldType'].toLowerCase()==='url'){
+                            children.push(inputURL(value))
+                        }
                     }
                     return children
                 })()
@@ -781,3 +903,84 @@ function createFeaturesBox(part, level){
     return skeleton
 }
 
+
+function LevelinputDropDown(value, part) {
+    const skeleton = {
+        'parent': {
+            'name': 'li',
+            'property': {
+                'class': 'input'
+            },
+        },
+        'children': [{
+            'parent': {
+                'name': 'div'
+            },
+            'children': [{
+                'parent': createLabel(value)
+            }, {
+                'parent': {
+                    'name': 'select',
+                    'property': (() => {
+                        const skeleton = {
+                            'class': 'input-select'
+                        }
+                        if (value['value'] === 0) {
+                            // skeleton['value'] = will either have current value or will have 
+                            // default value
+                        }
+                        if (+value['defaultActive'] === 0 && !skeleton['value']) {
+                            skeleton['disabled'] = ''
+                        }
+                        if (value['willActivate']) {
+                            value.willActivate()
+                        }
+                        return skeleton
+                    })(),
+                    'event': function() {
+
+                        this.addEventListener('change', plotLevelArea.bind(null, part))
+                        
+                    }
+                },
+                'children': (() => {
+                    const children = []
+                    if (Array.isArray(value['selectValues'])) {
+                        for (var option of value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': option
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
+                    } else {
+                        // if it is an object
+                        for(var option in value['selectValues']) {
+                            children.push({
+                                'parent': {
+                                    'name': 'option',
+                                    'property': {
+                                        'class': 'input-option',
+                                        'value': value['selectValues'][option]
+                                    },
+                                    'text': option
+                                }
+                            })
+                        }
+                    }
+                    return children
+                })(),
+
+                //adding event listener to dropdown
+                
+            }]
+        }]
+    }
+    addNote(value, skeleton)
+    return skeleton
+}

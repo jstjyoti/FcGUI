@@ -78,42 +78,51 @@ function aside() {
                             'name': 'i',
                             'property': {
                                 'class': 'fa fa-table aside-icon'
+                            },
+                            'event': function(){
+                                
+                                this.addEventListener('click', function(e) {
+                                    previewCSV();
+                                });
                             }
+
                         }
                     }]
                 }]
-            }, {
-                'parent': {
-                    'name': 'li',
-                    'property': {
-                        'class': 'aside-link-container'
-                    },
-                    'event': function () {
-                        // onclick will open aside-detail tab, each tab
-                        // will open a different width
-                        // will add class
-                        this.addEventListener('click', function (e) {
-                            showHideDetail(e)
-                        })
-                    }
-                },
-                'children': [{
-                    'parent': {
-                        'name': 'a',
-                        'property': {
-                            'class': 'aside-link'
-                        }
-                    },
-                    'children': [{
-                        'parent': {
-                            'name': 'i',
-                            'property': {
-                                'class': 'fa fa-bar-chart aside-icon'
-                            }
-                        }
-                    }]
-                }]
-            }, {
+            }, 
+            //{
+            //     'parent': {
+            //         'name': 'li',
+            //         'property': {
+            //             'class': 'aside-link-container'
+            //         },
+            //         'event': function () {
+            //             // onclick will open aside-detail tab, each tab
+            //             // will open a different width
+            //             // will add class
+            //             this.addEventListener('click', function (e) {
+            //                 showHideDetail(e)
+            //             })
+            //         }
+            //     },
+            //     'children': [{
+            //         'parent': {
+            //             'name': 'a',
+            //             'property': {
+            //                 'class': 'aside-link'
+            //             }
+            //         },
+            //         'children': [{
+            //             'parent': {
+            //                 'name': 'i',
+            //                 'property': {
+            //                     'class': 'fa fa-bar-chart aside-icon'
+            //                 }
+            //             }
+            //         }]
+            //     }]
+            //},
+             {
                 'parent': {
                     'name': 'li',
                     'property': {
