@@ -78,6 +78,12 @@ function aside() {
                             'name': 'i',
                             'property': {
                                 'class': 'fa fa-table aside-icon'
+                            },
+                            'event': function(){
+                                
+                                this.addEventListener('click', function(e) {
+                                    previewCSV();
+                                });
                             }
                         }
                     }]
