@@ -116,14 +116,7 @@ const canvas = {
         'defaultActive': '1',
         'note': 'Turn off theme to see changes',
         'location': 'chart',
-        '__willActivate': function () {
-            var self = this
-            new Promise(function (resolve, reject) {
-                setTimeout(() => {
-                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['backgroundColor_canvasBgColor']))
-                }, 0)
-            })
-        }
+        
     }, {
         'label': 'Color',
         'inputFieldType': 'color',
@@ -132,14 +125,7 @@ const canvas = {
         'id': 'backgroundColor_canvasBgColor',
         'defaultActive': '1',
         'location': 'chart',
-        '__willActivate': function () {
-            const self = this
-            new Promise(function (resolve, reject) {
-                setTimeout(() => {
-                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['backgroundColor_canvasBgRatio', 'backgroundColor_canvasBgAngle']))
-                }, 0)
-            })
-        }
+        
     }, {
         'label': 'Gradient Color Ratio',
         'inputFieldType': 'text',
@@ -174,16 +160,7 @@ const canvas = {
         'id': 'border_showCanvasBorder',
         'defaultActive': '1',
         'location': 'chart',
-        '__willActivate': function () {
-            // will add a event listener
-            const self = this
-            new Promise(function (resolve, reject) {
-                setTimeout(() => {
-                    document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_canvasBorderColor', 'border_canvasBorderAlpha', 'border_canvasBorderThickness']))
-                }, 0)
-            })
-            // will activate bordercolor,borderalpha,borderthickness when checked
-        }
+        
     }, {
         'label': 'Border Color',
         'inputFieldType': 'color',
@@ -298,18 +275,7 @@ const dataplot = {
     defaultActive: '1',
 
     location: 'chart',
-    willActivate: function () {
-        // var self = this
-        // new Promise(function (resolve, reject) {
-        //     setTimeout(() => {
-        //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderColor', 'background_plotBorderThickness' ,'background_plotBorderAlpha','background_plotBorderDashed']))
-        //     }, 0)
-        // })
-
-    
-
-    //   //  background_plotBorderColor,background_plotBorderThickness,background_plotBorderAlpha,background_plotBorderDashed
-    }
+   
   }, {
 
     label: 'Border Color',
@@ -352,20 +318,9 @@ const dataplot = {
 
     location: 'chart',
     
-  },{
+  },
 
-
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
-          }, 0)
-      })
-      //background_plotBorderDashLen,background_plotBorderDashGap
-    }
-
-  }, {
+  {
 
     label: 'Border dashed length',
     inputFieldType: 'number',
@@ -395,17 +350,6 @@ const dataplot = {
     defaultActive: '1',
 
     location: 'chart',
-    
-
-
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['gradient_plotGradientColor' , 'gradient_plotFillAlpha' , 'gradient_plotFillRatio' ,'gradient_plotFillAngle']))
-          }, 0)
-      })
-    }
 
   }, {
     label: 'Gradient Color',
@@ -447,27 +391,6 @@ const dataplot = {
     defaultActive: '1',
 
     location: 'chart',
-    willActivate: function () {
-      var self = this
-      // new Promise(function (resolve, reject) {
-      //     setTimeout(() => {
-      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-      //     }, 0)
-      // })
-      //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
-    }
-  },{
-
-
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-          }, 0)
-      })
-      //'hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed'
-    }
 
   }, {
 
@@ -481,15 +404,6 @@ const dataplot = {
 
     location: 'chart',
 
-    willActivate: function () {
-      var self = this
-      // new Promise(function (resolve, reject) {
-      //     setTimeout(() => {
-      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotFillHoverColor', 'hover_plotFillHoverAlpha','hover_plotBorderHoverColor','hover_plotBorderHoverAlpha','hover_plotBorderHoverThickness','hover_plotBorderHoverDashed']))
-      //     }, 0)
-      // })
-      //hover_plotFillHoverColor, hover_plotFillHoverAlpha,hover_plotBorderHoverColor,hover_plotBorderHoverAlpha,hover_plotBorderHoverThickness,hover_plotBorderHoverDashed            
-    }
   },{
     label: 'Hover Color',
 
@@ -571,15 +485,6 @@ const dataplot = {
     note: 'Applicable when show border is checked',    
     defaultActive: '1',
     location: 'series',
-    willActivate: function () {
-      var self = this
-      // new Promise(function (resolve, reject) {
-      //     setTimeout(() => {
-      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
-      //     }, 0)
-      // })
-      //background_plotBorderDashLen,background_plotBorderDashGap
-    }
   },{
     label: 'Series Color ratio',
     inputFieldType: 'text',
@@ -642,15 +547,7 @@ const dataplot = {
     note: 'Applicable when show border is checked',
     defaultActive: '1',
     location: 'data',
-    willActivate: function () {
-      var self = this
-      // new Promise(function (resolve, reject) {
-      //     setTimeout(() => {
-      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_plotBorderDashLen', 'background_plotBorderDashGap']))
-      //     }, 0)
-      // })
-      //background_plotBorderDashLen,background_plotBorderDashGap
-    }
+  
   },{
     label: 'Data Color ratio',
     inputFieldType: 'text',
@@ -704,20 +601,6 @@ const dataplot = {
     defaultActive: '1',
 
     location: 'chart',
-
-
-
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['hover_plotBorderHoverDashLen','hover_plotBorderHoverDashGap']))
-          }, 0)
-      })
-      //hover_plotBorderHoverDashLen,hover_plotBorderHoverDashGap
-    }
-
-
   }, {
     label: 'Border dashed length',
     inputFieldType: 'number',
@@ -751,15 +634,6 @@ const dataplot = {
     defaultActive: '1',
 
     location: 'chart',
-    willActivate: function () {
-      // var self = this
-      // new Promise(function (resolve, reject) {
-      //     setTimeout(() => {
-      //         document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['background_crossLineColor' ,'background_crossLineAlpha', 'background_crossLineAnimation', 'background_crossLineAnimationDuration' ,'background_drawCrossLineOnTop']))
-      //     }, 0)
-      // })
-      //background_crossLineColor ,background_crossLineAlpha,background_crossLineAnimation,background_crossLineAnimationDuration,background_drawCrossLineOnTop
-    }
 
   }, {
     label: 'Color',
@@ -874,16 +748,6 @@ const plotValue = {
     note: '',
     defaultActive: '1',
 
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['features_rotateValues','features_placeValuesInside', 'font-properties']))
-          }, 0)
-      })
-      //features_rotateValues,features_placeValuesInside, font-properties
-    }
-
   }, {
     label: 'Rotate values',
     inputFieldType: 'checkbox',
@@ -989,16 +853,6 @@ const plotValue = {
     note: '',
     defaultActive: '1',
 
-    _willActivate: function () {
-      var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['border_valueBorderDashLen', 'border_valueBorderDashGap']))
-          }, 0)
-      })
-      //border_valueBorderDashLen, border_valueBorderDashGap
-    }
-
   }, {
     label: 'Dashed length',
     inputFieldType: 'number',
@@ -1072,21 +926,7 @@ const plotValue = {
   }]
 }
 
-const mscolumn2d = {
-  'dataplot': {
-    'name': 'Data Plots',
-    'properties': {
-      'features': dataplot['features'],
-      'border': dataplot['border'],
-      'gradient': dataplot['gradient'],
-      'hover': dataplot['hover'],
-      'background': dataplot['background'],
-      'chart': dataplot['chart'],
-      'data': dataplot['data'],
-      'series': dataplot['series']
-    }
-  }
-}
+
 
 
 
@@ -1153,9 +993,6 @@ const caption = {
     note: '',
     defaultActive: '1',
     location:'chart',
-    _willActivate: function () {
-      // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
-    }
   },
   {
     label: 'Alignment wrt Plot Area',
@@ -1254,18 +1091,6 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       
-      "_willActivate": () => {
-        var self = this
-      new Promise(function (resolve, reject) {
-          setTimeout(() => {
-              document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ['animation_animationDuration']))
-          }, 0)
-      })
-
-      
-    
-      //   //enable Animation Duration
-       }
     },
     {
       "label": "Time",
@@ -1326,17 +1151,6 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
 
-      "_willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgAlpha","background_bgRatio","background_bgAngle"]))
-            }, 0)
-        })
-
-        
-      }
-
     },
     {
       "label": " ColorOpacity",
@@ -1383,17 +1197,6 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
 
-      "_willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["background_bgImageAlpha","background_bgImageDisplayMode","background_bgImageVAlign","background_bgImageHAlign","background_bgImageScale"]))
-            }, 0)
-        })
-
-        
-      }
-      
     },
 
     {
@@ -1504,17 +1307,6 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
 
-      "_willActivate": () => {
-        var self = this
-        new Promise(function (resolve, reject) {
-            setTimeout(() => {
-                document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["chartBorder_borderColor","chartBorder_borderThickness","chartBorder_borderAlpha"]))
-            }, 0)
-        })
-
-      
-      }
-
     },
     {
       "label": "Color",
@@ -1559,17 +1351,16 @@ const chartDS = {
       id: 'caption_captionAlignment',
       note: '',
       defaultActive: '1',
-      // willActivate: function () {
-      //   // document.getElementById(this.id).addEventListener('change', handleInputs.bind(null, ['caption_captionHorizontalPadding']))
-      // }
+      location:"caption"
     },
     {
-      label: 'Alignment wrt Plot Area',
+      label: 'Alignment wrt Plot(datas) Area',
       inputFieldType: "checkbox",
       value: '',
       id: 'caption_alignCaptionWithCanvas',
       note: 'Align heading with plot area or with the whole chart area',
-      defaultActive: '1'
+      defaultActive: '1',
+      location:"caption"
     },
   ],
   captionPosition: [{
@@ -1578,7 +1369,8 @@ const chartDS = {
     value: '',
     id: 'caption_captionOnTop',
     note: '',
-    defaultActive: '1'
+    defaultActive: '1',
+    location:"chart"
   }, ],
   captionPadding: [{
     label: 'Padding',
@@ -1588,6 +1380,7 @@ const chartDS = {
     id: 'caption_captionHorizontalPadding',
     note: 'Applicable only for left and right alignment',
     defaultActive: '1',
+    location:"chart"
   }, ],
 
   "logo": [{
@@ -1599,19 +1392,7 @@ const chartDS = {
       "note": "",
       "defaultActive": "1",
       "location":"chart",
-      "_willActivate": () => {
-
       
-      // "willActivate": () => {
-
-  
-      //   var self = this
-      //   new Promise(function (resolve, reject) {
-      //       setTimeout(() => {
-      //           document.getElementById(self['id']).addEventListener('input', handleInputs.bind(null, ["logo_logoLeftMargin","logo_logoRightMargin","logo_logoPosition","logo_logoAlpha","logo_logoLink","logo_logoScale"]))
-      //       }, 0)
-        // })
-      }
 
     },
     {
@@ -1728,6 +1509,10 @@ const chartDS = {
   ]
 
 }
+const column3Dchart={
+  
+
+}
 
 const column2d = {
   'canvas': {
@@ -1797,7 +1582,9 @@ const area2d = {
 }
 
 const bar2d = {
-  'canvas': column2d['canvas']
+  'canvas': column2d['canvas'],
+  'dataplot':column2d['dataplot'],
+
 }
 
 const line = {
@@ -1808,4 +1595,201 @@ const pie2d = {
     'name': 'Plot Area',
     'margin': canvas['margin']
   }
+}
+const pie3d = {
+  'canvas': {
+    'name': 'Plot Area',
+    'margin': canvas['margin']
+  }
+}
+const mscolumn2d = {
+  'dataplot': {
+    'name': 'Data Plots',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background'],
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series']
+    }
+  },
+  'canvas':column2d['canvas'],
+  'plotValue':column2d['plotValue'],
+  'caption':column2d['plotValue'],
+  'subcaption':column2d['subcaption'],
+  'chartDS':column2d['chartDS'],
+  
+}
+const msbar2d={
+  'dataplot': {
+    'name': 'Data Plots',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background'],
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series']
+    }
+  },
+  'canvas':column2d['canvas'],
+  'plotValue':column2d['plotValue'],
+  'caption':column2d['plotValue'],
+  'subcaption':column2d['subcaption'],
+  'chartDS':column2d['chartDS'],
+
+}
+const mscolumn3d={
+  'dataplot': {
+    'name': 'Data Plots',
+    'properties': {
+      'features': dataplot['features'],
+      'border': dataplot['border'],
+      'gradient': dataplot['gradient'],
+      'hover': dataplot['hover'],
+      'background': dataplot['background'],
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series']
+    }
+  },
+  'canvas':column2d['canvas'],
+  'plotValue':column2d['plotValue'],
+  'caption':column2d['plotValue'],
+  'subcaption':column2d['subcaption'],
+  'chartDS':column2d['chartDS'],
+
+}
+
+const column3d={
+  'canvas': {
+    'name': 'Plot Area',
+    'properties': {
+      'padding': canvas['padding'],
+      'margin': canvas['margin'],
+      'backgroundColor': canvas['backgroundColor'],
+      'border': canvas['border'],
+      'outsidePlotArea': canvas['outsidePlotArea']
+    }
+  },
+  'dataplot': {
+    'name': 'DataPlot',
+    'properties': {
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series'],
+    }
+  }, 
+  'plotValue': {
+    'name': 'DataValue',
+    'properties': {
+      'features': plotValue['features'],
+      'font': plotValue['font'],
+      'border': plotValue['border'],
+      'background': plotValue['background']
+    }
+  },
+  'caption': {
+    'name': 'Caption',
+    'properties': {
+      'captionText': caption['captionText'],
+      'captionFont': caption['captionFont'],
+      'captionAlignment': caption['captionAlignment'],
+      'captionPosition': caption['captionPosition'],
+      'captionPadding': caption['captionPadding'],
+    }
+  },
+  'subcaption': {
+    'name': 'Sub Caption',
+    'properties': {
+      'subCaptionText': subCaption['subCaptionText'],
+      'subCaptionFont': subCaption['subCaptionFont']
+    }
+  },
+  'chartDS': {
+    'name': 'Chart',
+    'properties': {
+      'animtion': chartDS['animation'],
+      'padding': chartDS['padding'],
+      'margin': chartDS['margin'],
+      'ChartColors': chartDS['ChartColors'],
+      'background': chartDS['background'],
+      'GeneralFont': chartDS['GeneralFont'],
+      'chartBorder': chartDS['chartBorder'],
+      'logo': chartDS['logo'],
+      'rightToLeftText': chartDS['rightToLeftText'],
+      'Export': chartDS['Export'],
+      'PrintMenu': chartDS['PrintMenu']
+
+    }
+  }
+}
+const bar3d={
+  'canvas': {
+    'name': 'Plot Area',
+    'properties': {
+      'padding': canvas['padding'],
+      'margin': canvas['margin'],
+      'backgroundColor': canvas['backgroundColor'],
+      'border': canvas['border'],
+      'outsidePlotArea': canvas['outsidePlotArea']
+    }
+  },
+  'dataplot': {
+    'name': 'DataPlot',
+    'properties': {
+      'chart': dataplot['chart'],
+      'data': dataplot['data'],
+      'series': dataplot['series'],
+    }
+  }, 
+  'plotValue': {
+    'name': 'DataValue',
+    'properties': {
+      'features': plotValue['features'],
+      'font': plotValue['font'],
+      'border': plotValue['border'],
+      'background': plotValue['background']
+    }
+  },
+  'caption': {
+    'name': 'Caption',
+    'properties': {
+      'captionText': caption['captionText'],
+      'captionFont': caption['captionFont'],
+      'captionAlignment': caption['captionAlignment'],
+      'captionPosition': caption['captionPosition'],
+      'captionPadding': caption['captionPadding'],
+    }
+  },
+  'subcaption': {
+    'name': 'Sub Caption',
+    'properties': {
+      'subCaptionText': subCaption['subCaptionText'],
+      'subCaptionFont': subCaption['subCaptionFont']
+    }
+  },
+  'chartDS': {
+    'name': 'Chart',
+    'properties': {
+      'animtion': chartDS['animation'],
+      'padding': chartDS['padding'],
+      'margin': chartDS['margin'],
+      'ChartColors': chartDS['ChartColors'],
+      'background': chartDS['background'],
+      'GeneralFont': chartDS['GeneralFont'],
+      'chartBorder': chartDS['chartBorder'],
+      'logo': chartDS['logo'],
+      'rightToLeftText': chartDS['rightToLeftText'],
+      'Export': chartDS['Export'],
+      'PrintMenu': chartDS['PrintMenu']
+
+    }
+  }
+
 }
